@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<UserEvent>
 
-@* <button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event</button> *@
-<button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event Dynamic</button>
+ @* <button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event Dynamic</button> *@
+@*<button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event</button>
 <div class="container">
     <br />
     <div style="width:90%; margin:0 auto;">
         <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
             <thead>
                 <tr style="background: azure;">
-                    <td style="width:200px">Event Name</td>
+                    <td style="width:200px">Event Name---</td>
                     <td style="width:200px">Description</td>
                     <td style="width:200px">Start Date</td>
                     <td style="width:200px">EndDate</td>
@@ -35,10 +35,10 @@
                         <td style="width:200px"><img src="@obj.BrCodeURL" style="width: 100px;"></td>
                         <td style="width:300px"><a href="/Admin/UserDetail?EventId=@obj.Id">User List</a></td>
                         <td style="width:400px"><a href="https://localhost:5003/Admin/ViewCustomFields?EventId=@obj.Id">click here</a>
-                        
+
                         <td style="width:350px">
                             @*<button type="button" id="AddEventEdit" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action($"EditUser/{@obj.Id}")">Edit</button>*@
-                            <button type="button" id="AddEventEdit" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" onclick="EditEvent(@obj.Id)">Edit</button>
+@*  <button type="button" id="AddEventEdit" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" onclick="EditEvent(@obj.Id)">Edit</button>
                             <button name="DeleteItem" class="btn btn-danger m-1" onclick="Delete(@obj.Id)" data-id="@obj.Id">DELETE</button>
                         </td>
 
@@ -48,7 +48,57 @@
         </table>
     </div>
 </div>
-<div id="PalceHolderHere"></div>
+<div id="PalceHolderHere"></div> *@
+<div class="container-scroller mt-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Event List</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                            <thead>
+                                <tr>
+                              
+                                    <th style="width: 10%;"> Event Name </th>
+                                    <th style="width: 10%;"> Description </th>
+                                    <th style="width: 10%;"> Start Date </th>
+                                    <th style="width: 10%;"> End Date </th>
+                                    <th style="width: 10%;"> Location </th>
+                                    <th style="width: 10%;"> City </th>
+                                    <th style="width: 10%;"> Organizer Name </th>
+                                    <th style="width: 10%;"> QR Code </th>
+                                    <th style="width: 10%;"> User Link </th>
+                                    <th style="width: 10%;"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               @foreach( var obj in Model)
+                               {
+                                   <tr>
+                                        <td>@obj.EventName</td>
+                                        <td>@obj.Description</td>
+                                        <td>@obj.StartDate</td>
+                                       <td>@obj.EndDate</td>
+                                        <td>@obj.Location</td>
+                                       <td>@obj.City</td>
+                                       <td>@obj.OrganizerName</td>
+                                       <td>@obj.BrCodeURL</td>
+                                        <td><a href="https://localhost:5003/User/UserRegistration?EventId=@obj.Id"/></td>
+                                        <td></td>
+                                   </tr>
+                               }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+
 @section Scripts {
     <script>
         $(document).on('click', '#btnUserClose', function (e) {
@@ -63,7 +113,7 @@
                 $('#PalceHolderHere').find('.modal').modal('show');
             })
         });
-       
+
         function Delete(Id) {
             $.ajax({
                 type: "DELETE",
@@ -83,7 +133,7 @@
                 type: "POST",
                 url: "/Admin/EditUser",
                 data: { id: Id },
-                success: function(response) {
+                success: function (response) {
                     debugger
                     console.log(response);
                     $('#PalceHolderHere').html(response);
@@ -92,8 +142,8 @@
                 error: function (data) {
                     alert("Error: " + data.id);
                 }
-            });            
+            });
         }
-        
+
     </script>
 }

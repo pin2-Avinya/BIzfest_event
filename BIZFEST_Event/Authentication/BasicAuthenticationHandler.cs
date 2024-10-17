@@ -32,6 +32,8 @@ namespace BIZFEST_Event.Authentication
 
             if (!Request.Headers.ContainsKey("Authorization"))
             {
+                // Redirect to the login page if authorization header is missing
+                var properties = new AuthenticationProperties { RedirectUri = "/Login/Index" };
                 return await Task.FromResult(AuthenticateResult.Fail("Authorization header missing."));
             }
 

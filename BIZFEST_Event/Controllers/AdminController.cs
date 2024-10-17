@@ -25,7 +25,6 @@ namespace BIZFEST_Event.Controllers
             _configuration = configuration;
         }
         public IActionResult Index()
-        
         {
             var response = _IEventRepository.GetAllEvents();
             return View(response);
@@ -35,6 +34,16 @@ namespace BIZFEST_Event.Controllers
         {
             UserEvent Event = new UserEvent();
             return PartialView("_EventCreatePartial", Event);
+        }
+
+        public async Task<IActionResult> CreateEvent()
+        {
+            string? userName = HttpContext.Session.GetString("UserName");
+            int? userid = await GetUserId(userName);
+            var fields = _db.DynamicFields.ToList();
+            var custFields = _db.CustomFields.Where(u => u.UserID == userid).ToList();
+            ViewBag.Custom = custFields;
+            return View();
         }
 
         public async Task<IActionResult> DynamicCreate()

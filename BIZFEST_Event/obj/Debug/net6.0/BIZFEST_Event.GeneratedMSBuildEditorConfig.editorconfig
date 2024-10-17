@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\DELL\source\repos\BIzfest_event\BIZFEST_Event
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/CreateEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlRXZlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/CustomFieldList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3VzdG9tRmllbGRMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
