@@ -1,0 +1,509 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BIZFEST_Event.bundle.scp.css",
+      "PackagePath": "staticwebassets\\BIZFEST_Event.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\3.png",
+      "PackagePath": "staticwebassets\\3.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\4 (1).png",
+      "PackagePath": "staticwebassets\\4 (1).png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\BNI SPONSER HEADER.jpeg",
+      "PackagePath": "staticwebassets\\BNI SPONSER HEADER.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\BNI.jpeg",
+      "PackagePath": "staticwebassets\\BNI.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\BizconImg.jpg",
+      "PackagePath": "staticwebassets\\BizconImg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Foot.jpg",
+      "PackagePath": "staticwebassets\\Foot.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Footer.png",
+      "PackagePath": "staticwebassets\\Footer.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\167b1d2f-1a67-4363-b405-d4012d8d920d_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\167b1d2f-1a67-4363-b405-d4012d8d920d_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\19d304b9-f794-4387-bd7e-e38a7b0c7f1f_Picture1.png",
+      "PackagePath": "staticwebassets\\Image\\19d304b9-f794-4387-bd7e-e38a7b0c7f1f_Picture1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\1f461180-6cf2-4d22-a4ea-33d740fb539f_BizconImg.jpg",
+      "PackagePath": "staticwebassets\\Image\\1f461180-6cf2-4d22-a4ea-33d740fb539f_BizconImg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\20bc175e-1309-456e-85b2-5f7569a47575_2.jpg",
+      "PackagePath": "staticwebassets\\Image\\20bc175e-1309-456e-85b2-5f7569a47575_2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\3033d0a3-292a-4cbf-b75b-c0ecb864352a_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\3033d0a3-292a-4cbf-b75b-c0ecb864352a_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\39f21603-8c89-4824-81c8-5b5d7aa0ede6_silver-medal-badge-for-second-place-round-metal-vector-25245472-removebg-preview (1).png",
+      "PackagePath": "staticwebassets\\Image\\39f21603-8c89-4824-81c8-5b5d7aa0ede6_silver-medal-badge-for-second-place-round-metal-vector-25245472-removebg-preview (1).png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\3c839ad9-fb08-44c4-8fa5-9fcf6232c744_BizconImg.png",
+      "PackagePath": "staticwebassets\\Image\\3c839ad9-fb08-44c4-8fa5-9fcf6232c744_BizconImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\42e177b7-5201-449b-a53e-c6d9c4741802_HeaderImg.png",
+      "PackagePath": "staticwebassets\\Image\\42e177b7-5201-449b-a53e-c6d9c4741802_HeaderImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\5a494544-6b11-41b5-816d-87f19e9b766f_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\5a494544-6b11-41b5-816d-87f19e9b766f_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\6bfa8b3f-ff05-4a31-a1f5-b4e892fc98c0_BizconImg.png",
+      "PackagePath": "staticwebassets\\Image\\6bfa8b3f-ff05-4a31-a1f5-b4e892fc98c0_BizconImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\6e41b70d-91dc-4658-b2ba-90c2c3cf0fc7_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\6e41b70d-91dc-4658-b2ba-90c2c3cf0fc7_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\6f8782bc-5255-4c77-9b9c-c35bb1a9c5e6_Picture1.png",
+      "PackagePath": "staticwebassets\\Image\\6f8782bc-5255-4c77-9b9c-c35bb1a9c5e6_Picture1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\75e43d37-f78b-4df2-8eea-10ebfea2f04a_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\75e43d37-f78b-4df2-8eea-10ebfea2f04a_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\7735788a-ecc6-4f2d-ab08-c7cc48d0c999_BizconImg.png",
+      "PackagePath": "staticwebassets\\Image\\7735788a-ecc6-4f2d-ab08-c7cc48d0c999_BizconImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\af3e11f7-4040-4db4-880e-eae6fa897cab_Website Popup.png",
+      "PackagePath": "staticwebassets\\Image\\af3e11f7-4040-4db4-880e-eae6fa897cab_Website Popup.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\b5dbb8e1-b9d6-42d7-aab2-d75c115e75b4_Picture2.png",
+      "PackagePath": "staticwebassets\\Image\\b5dbb8e1-b9d6-42d7-aab2-d75c115e75b4_Picture2.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\b6970918-6a42-4c91-9066-00a8e599dbea_BizconImg.png",
+      "PackagePath": "staticwebassets\\Image\\b6970918-6a42-4c91-9066-00a8e599dbea_BizconImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\d6739ef9-2823-4600-b486-75663dcb3432_3.jpg",
+      "PackagePath": "staticwebassets\\Image\\d6739ef9-2823-4600-b486-75663dcb3432_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\ee913a81-e438-44b8-81ac-8689f95fba2d_BizconImg.jpg",
+      "PackagePath": "staticwebassets\\Image\\ee913a81-e438-44b8-81ac-8689f95fba2d_BizconImg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\ef2cf975-8399-4a58-9885-0812e74363be_BizconImg.png",
+      "PackagePath": "staticwebassets\\Image\\ef2cf975-8399-4a58-9885-0812e74363be_BizconImg.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Image\\f035f031-2545-4543-8c8a-c42a6e1a5a75_2.jpg",
+      "PackagePath": "staticwebassets\\Image\\f035f031-2545-4543-8c8a-c42a6e1a5a75_2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Logo.png",
+      "PackagePath": "staticwebassets\\Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Logo1.png",
+      "PackagePath": "staticwebassets\\Logo1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Logo7.png",
+      "PackagePath": "staticwebassets\\Logo7.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Main banner.jpg",
+      "PackagePath": "staticwebassets\\Main banner.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Organizer.png",
+      "PackagePath": "staticwebassets\\Organizer.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\PayPaytm.jpg",
+      "PackagePath": "staticwebassets\\PayPaytm.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Picture1.png",
+      "PackagePath": "staticwebassets\\Picture1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Picture2.png",
+      "PackagePath": "staticwebassets\\Picture2.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\SideImage.png",
+      "PackagePath": "staticwebassets\\SideImage.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Spon1.jpeg",
+      "PackagePath": "staticwebassets\\Spon1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Sponsor.jpg",
+      "PackagePath": "staticwebassets\\Sponsor.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\Sponsors1.jpeg",
+      "PackagePath": "staticwebassets\\Sponsors1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\WFC1.png",
+      "PackagePath": "staticwebassets\\WFC1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\css\\carousel.css",
+      "PackagePath": "staticwebassets\\css\\carousel.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\home-page.jpg",
+      "PackagePath": "staticwebassets\\home-page.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img1.png",
+      "PackagePath": "staticwebassets\\img1.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img2.png",
+      "PackagePath": "staticwebassets\\img2.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img3.png",
+      "PackagePath": "staticwebassets\\img3.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img4.png",
+      "PackagePath": "staticwebassets\\img4.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img5.png",
+      "PackagePath": "staticwebassets\\img5.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img6.png",
+      "PackagePath": "staticwebassets\\img6.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img7.png",
+      "PackagePath": "staticwebassets\\img7.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\img8.png",
+      "PackagePath": "staticwebassets\\img8.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\js\\holder.min.js",
+      "PackagePath": "staticwebassets\\js\\holder.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\js\\jquery-slim.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-slim.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\js\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\PayPaytm.jpg",
+      "PackagePath": "staticwebassets\\lib\\PayPaytm.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\lib\\man.png",
+      "PackagePath": "staticwebassets\\lib\\man.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\sponsored.png",
+      "PackagePath": "staticwebassets\\sponsored.png"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\stock.jpg",
+      "PackagePath": "staticwebassets\\stock.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\tree.jpg",
+      "PackagePath": "staticwebassets\\tree.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\wefound.jpeg",
+      "PackagePath": "staticwebassets\\wefound.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\wwwroot\\wfc-logo.png",
+      "PackagePath": "staticwebassets\\wfc-logo.png"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BIZFEST_Event.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.BIZFEST_Event.props",
+      "PackagePath": "build\\BIZFEST_Event.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.BIZFEST_Event.props",
+      "PackagePath": "buildMultiTargeting\\BIZFEST_Event.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.BIZFEST_Event.props",
+      "PackagePath": "buildTransitive\\BIZFEST_Event.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

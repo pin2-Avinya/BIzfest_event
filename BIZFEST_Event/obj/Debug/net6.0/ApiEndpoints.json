@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "BIZFEST_Event.Controllers.AttendedController",
+    "Method": "AttendedUser",
+    "RelativePath": "api/Attended",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "BIZFEST_Event.Models.UserAttended",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BIZFEST_Event.Models.ReturnStatus\u00601[[BIZFEST_Event.Models.UserAttended, BIZFEST_Event, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

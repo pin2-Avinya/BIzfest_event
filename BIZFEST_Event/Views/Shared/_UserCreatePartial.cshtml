@@ -1,0 +1,42 @@
+﻿@model UsersRegistration
+<div class="container">
+    <div class="title modal " tabindex="-1" id="UserRegistration"
+         data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add User</h2>
+                    <button id="btnUserClose" type="button" class="clsUserClose" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-controller="User" asp-action="AddUser">
+                        <input type="hidden" asp-for="@Model.Id"/>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Name" asp-for="@Model.Name" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Contact No" asp-for="@Model.ContactNo" />
+                        </div>
+
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Email Id" asp-for="@Model.EmailId" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Business Name" asp-for="@Model.BusinessName" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="City" asp-for="@Model.City" />
+                        </div>
+
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Business Category" asp-for="@Model.BusinessCategory" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

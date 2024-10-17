@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ResponsePayment>
+
+<div>
+    <center><h2>@ViewBag.EventName (@Model.Count())</h2></center>
+    <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+        <thead>
+            <tr style="background: azure;">
+                <td style="width:200px">Order Id</td>
+                <td style="width:200px">ResponsePayment Id</td>
+                <td style="width:200px">MobileNo</td>
+                <td style="width:200px">Payment Date</td>
+                <td style="width:200px">Amount</td>
+                <td style="width:200px">Status</td>
+                <td style="width:200px">SignatureId</td>
+                <td style="width:200px">Response Date</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td style="width:200px">@obj.OrderId</td>
+                    <td style="width:200px">@obj.ResponsePaymentId</td>
+                    <td style="width:200px">@obj.MobileNo</td>
+                    <td style="width:200px">@obj.PaymentDate</td>
+                    <td style="width:200px">@obj.Amount</td>
+                    <td style="width:200px">@obj.Status</td>
+                    <td style="width:200px">@obj.SignatureId</td>
+                    <td style="width:200px">@obj.ResponseDate</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Styles {
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts
+    {
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+
+    <script>
+        $(document).ready(function ()
+        {
+            $('#demoGrid').DataTable({
+                dom: 'lBfrtip',
+                buttons: [
+                    'excelHtml5',
+                    'csvHtml5'
+                ],
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50,100, "All"]],
+
+            });
+        });
+    </script>
+}

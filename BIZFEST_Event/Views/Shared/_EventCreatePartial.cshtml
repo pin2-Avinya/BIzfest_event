@@ -1,0 +1,84 @@
+﻿@model UserEvent
+<style>
+    .modal-body {
+        height: 465px;
+        display: block;
+        overflow: scroll;
+    }
+</style>
+<div class="container">
+    <div class="title modal " tabindex="-1" id="loginModal"
+         data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Event</h2>
+                    <button id="btnUserClose" type="button" class="clsUserClose">×</button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-controller="Admin" asp-action="AddEvent">
+                        <div class="form-group" style="padding-top: 20px">
+                            <input type="hidden" asp-for="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.BrCodeURL" />
+                            <input class="form-control" type="text" placeholder="EventName" asp-for="@Model.EventName" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="textare" placeholder="Description" asp-for="@Model.Description" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="date" placeholder="StartDate" asp-for="@Model.StartDate" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="date" placeholder="EndDate" asp-for="@Model.EndDate" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Location" asp-for="@Model.Location" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="City" asp-for="@Model.City" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Organizer Name" asp-for="@Model.OrganizerName" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="text" placeholder="Fees" asp-for="@Model.Fees" />
+                        </div>
+                        <div class="form-group" style="padding-top: 20px">
+                            <input class="form-control" type="textare" placeholder="Fees Description" asp-for="@Model.FeesDescription" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="html">Hide Other Field</label><br>
+                        </div>
+                        <div class="form-group">
+                            @if (@Model.IsHiddenField =="Yes")
+                            {
+                                <input type="radio" asp-for="@Model.IsHiddenField" value="Yes" checked>
+                            }
+                            else
+                            {
+                                <input type="radio" asp-for="@Model.IsHiddenField" value="Yes">
+                            }
+                            <label for="html">Yes</label>
+                            @if (@Model.IsHiddenField =="No")
+                            {
+                                <input type="radio" asp-for="@Model.IsHiddenField" value="No" checked>
+                            }
+                            else
+                            {
+                                <input type="radio" asp-for="@Model.IsHiddenField" value="No">
+                            }
+                            <label for="html">No</label><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

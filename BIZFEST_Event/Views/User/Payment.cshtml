@@ -1,0 +1,85 @@
+﻿@model RazorPayOptionModel
+@{
+     string test = "";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<head runat="server">
+    <title>Razorpay .Net Sample App</title>
+   
+    <form asp-action="Paymentresponse">
+        <input id="PaymentId" type="hidden" name="PaymentId" />
+        <input id="OrderId" type="hidden" name="OrderId" />
+        <input id="SignatureId" type="hidden" name="SignatureId" />
+        <input id="AfterPaymentSubmit" type="submit" name="AfterPaymentSubmit" hidden />
+    </form>
+</head>
+
+<body>
+    @if (TempData["Message"] != null && Convert.ToString(TempData["Message"]) != "")
+    {
+        <center>@TempData["Message"]</center>
+    }
+    else 
+    {
+        <center>We are redirecting on Payment, Please do not close window </center>
+    }
+   @* <button id="rzp-button1">Pay with Razorpay</button>*@
+    <input id="OrderIdModel" type="hidden" value="@Model.OrderId" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>       
+        var options = {
+            "name": '@Model.Name',
+            "description":'@Model.Dec',
+            "order_id": '@Model.OrderId' ,
+            "image": "https://bizfest.itfuturz.com/Logo7.png",
+            "prefill": {
+                "name": '@Model.Name',
+                "email": '@Model.Email',
+                "contact": '@Model.ContactNo',
+            },
+            "notes": {
+                "address": '@Model.Address'
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        }
+        // Boolean whether to show image inside a white frame. (default: true)
+        options.theme.image_padding = false;
+        options.handler = function (response) {
+            debugger
+            console.log(response)
+            document.getElementById('PaymentId').value = response.razorpay_payment_id;
+            document.getElementById('OrderId').value = response.razorpay_order_id;
+            document.getElementById('SignatureId').value = response.razorpay_signature;
+            $("#AfterPaymentSubmit").click();
+        };
+        options.modal = {
+            ondismiss: function () {
+                console.log("This code runs when the popup is closed");
+            },
+            // Boolean indicating whether pressing escape key
+            // should close the checkout form. (default: true)
+            escape: true,
+            // Boolean indicating whether clicking translucent blank
+            // space outside checkout form should close the form. (default: false)
+            backdropclose: false
+        };
+        var rzp = new Razorpay(options);
+        
+        window.addEventListener('load', (event) => {
+           
+            rzp.open();
+            e.preventDefault();
+        });
+       
+    </script>
+</body>
+</html>

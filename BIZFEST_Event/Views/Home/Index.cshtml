@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string eventName = "BUSINESS SUPPORT SERVICE LLP";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    @* <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>*@
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="first-slide" src="/banner.png" alt="@eventName">
+            <div class="container">
+                <div class="carousel-caption text-left">
+                    <h1>@eventName</h1>
+                    <p>@eventName is an initiative by BNI Greater Surat to create business opportunities and celebrate Entrepreneurship..</p>
+                    <p><a class="btn btn-lg btn-primary" href="/User/UserView" role="button">Register Now</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+ @*   <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>*@
+</div>
+
+
+<div class="container marketing">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">
+                @eventName
+                <span class="text-muted fs-5"><br />
+                    Initiative Of BNI Greater Surat.
+                </span>
+            </h2>
+            <p class="lead">
+                @eventName is an initiative by BNI Greater Surat to create business opportunities and celebrate Entrepreneurship.
+
+                It's an annual event by BNI Greater Surat where entrepreneurs accross India are invited to the diamond city Surat to exchange and foster business opportunities.
+
+                It is planned in a way to support BNI Members, share knowledge about business and provide ample opportunities for bright future.
+
+                Whether you are starting an enterprise handling multiple responsibilities within company or an experienced and seasoned entrepreneur, @eventName is an event you should not miss out.
+            </p>
+        </div>
+        <div class="col-md-5">           
+            <img class="featurette-image img-fluid mx-auto" src="~/home-page.jpg" alt="">
+        </div>
+    </div>
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+</div><!-- /.container -->
