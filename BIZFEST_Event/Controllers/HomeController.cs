@@ -15,14 +15,15 @@ namespace BIZFEST_Event.Controllers
 
         public IActionResult Index()
         {
-          
-            return View();
+
+            return RedirectToAction("UserView", "User");
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+       
         public IActionResult Terms()
         {
             return View();

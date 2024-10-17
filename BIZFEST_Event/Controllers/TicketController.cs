@@ -31,7 +31,7 @@ namespace BIZFEST_Event.Controllers
                 objUserDetail.BrCodeURL = User.BrCodeURL;
                 objUserDetail.EventName = Event.EventName;
                 objUserDetail.Email = User.EmailId;
-                objUserDetail.City = User.City;
+                //objUserDetail.City = User.City;
             }
 
             return View(objUserDetail);

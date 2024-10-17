@@ -1,0 +1,511 @@
+﻿@model UsersRegistration
+@{
+    IEnumerable<States>? State = ViewData["State"] as IEnumerable<States>;
+    IEnumerable<CategoryMaster>? CategoryMaster = ViewData["Category"] as IEnumerable<CategoryMaster>;
+    IEnumerable<UserEvent>? UserEvent = ViewData["Event"] as IEnumerable<UserEvent>;
+
+    Layout = null;
+}
+
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BUSINESS SUPPORT SERVICE LLP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BIZFEST_Event.styles.css" asp-append-version="true" />*@
+       <!-- Meta Pixel Code -->
+         <script>
+         !function(f,b,e,v,n,t,s)
+         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+         if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+         n.queue=[];t=b.createElement(e);t.async=!0;
+         t.src=v;s=b.getElementsByTagName(e)[0];
+         s.parentNode.insertBefore(t,s)}(window, document,'script',
+         'https://connect.facebook.net/en_US/fbevents.js');
+         fbq('init', '5813893548712110');
+         fbq('track', 'PageView');
+         </script>
+         <noscript><img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=5813893548712110&ev=PageView&noscript=1"
+         /></noscript>
+         <!-- End Meta Pixel Code -->
+</head>
+    <body>
+    
+    <div class="container">        
+        <div class="container" py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+             <header>
+       @* <nav class=" navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+           
+               <br />
+                <div>
+                    <img src="~/HeaderImg.png" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"  />
+                    @*<br />
+                    <br />
+                    <br />
+                    <img src="~/Picture2.png"  style="width: 200px;margin-bottom: -12;" />*@
+                    @*<p style="margin: 0;font-size: 13px;font-style: italic;">Presents</p>*@
+                </div>
+               @* <div class="d-flex justify-content-center">
+                    <div style="border-right: 0.5px solid grey;padding-right: 5px;"><img src="/wefound.jpeg" width="190"></div>
+                     <div style="padding-left: 5px;"><a href="/"><img src="/Logo7.png" width="190"></a> </div>
+                 </div>
+                
+                <div>
+                    <p style="margin: 0;margin-top: 6px;font-size: 13px;font-style: italic;">Powered By</p>
+                    <img src="~/CRMONELogo.png" style="width: 70px;margin-bottom: 8px;">
+                </div>              
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                </div>*@
+          
+        @*</nav>*@
+    </header>
+        <br />
+        <br />
+            <div class="title"><h3>Registration</h3></div>
+            <div class="content">
+               <form method="post" asp-controller="User" asp-action="AddUser" />
+                    <input type="hidden" value="0" asp-for="@Model.Fees" />
+                    @*<input type="hidden" value="@ViewBag.EventId" asp-for="@Model.EventId" />*@
+
+                    @if (TempData["Message"] != null && Convert.ToString(TempData["Message"]) != "")
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
+                      <div class="form-group">
+                        <span class="details">Event Name</span>
+                       @* <select asp-items="@(new SelectList(UserEvent,"Id","EventName","Fees"))" >
+                            <option disabled selected>-- Event Name --</option>
+                        </select>*@
+                       <select class="form-control" required asp-for="@Model.EventId"> 
+                            <option  value="" data-description="" data-hidden=""  fees="">-- select event --</option>    
+                                @foreach(var type in UserEvent) {       
+                                    <option selected value="@type.Id" data-description="@type.Description" data-hidden="@type.IsHiddenField"  Fees="@type.Fees">@type.EventName</option>               
+                              }
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label class="details"> Name</label>
+                        <input class="form-control" type="text" placeholder="Enter Name" asp-for="@Model.Name" required />
+                    </div>
+                    <div class="form-group">
+                        <span class="details">Mobile No</span>
+                        <input class="form-control" type="number" placeholder="Enter Mobile No" asp-for="@Model.ContactNo" required />
+                        <span id="mobileNumberError" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <span class="details">Email Address</span>
+                        <input class="form-control" type="email" placeholder="Email Id" asp-for="@Model.EmailId" required />
+                    </div>
+                    <div class="form-group">
+                        <span class="details">Hospital/Clinic/Firm Name</span>
+                        <input class="form-control" type="text" placeholder="Business Name" asp-for="@Model.BusinessName" required />
+                    </div>
+                    @*<div class="form-group">
+                        <label for="cars">State</label>
+                        <select  asp-items="@(new SelectList(State,"StateId","StateName"))" class="form-control clsState" asp-for="@Model.State">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cars">City</label>
+                        <select class="form-control" asp-for="@Model.City">
+                        </select>
+                    </div>*@
+                    <div class="form-group">
+                        <span class="details">Category/Speciality</span>
+                        <input class="form-control" type="text" placeholder="Speciality" asp-for=@Model.BusinessCategory  />
+                        @*<select asp-items="@(new SelectList(CategoryMaster,"Name","Name"))" class="form-control " asp-for="@Model.BusinessCategory">
+                            <option disabled selected>-- Business Category --</option>
+                        </select>*@
+                    </div> 
+                    <div class="form-group">
+                        <span class="details">Medical Council Registration Number</span>
+                        <input class="form-control" type="text" placeholder="Registration Number" asp-for=@Model.RegistrationNumber />
+                    </div>
+                     @*<div class="form-group">
+                         <span class="details">Are You Interested </span>
+                         <select onchange=Whynot() class="form-control " asp-for="@Model.Reason">
+                             <option disabled selected>--Select--</option>
+                             <option value="YES">YES</option>
+                              <option value="NO">NO</option>
+                         </select>
+                         <div class="form-group" id="Interested" style="display:none;">
+                         <span class="details">Reason</span>
+                          <input type="text" class="form-control" asp-for="@Model.Reason" />
+                        </div>
+                     </div>*@
+                     
+                    <div class="form-group">                
+                    <span class="details">From Where Do You Know About DOCBIZCON 2.0</span>
+                    <select onchange=showHide() class="form-control"  asp-for="@Model.WhereDoYouKnow">
+                        <option disabled selected>--Select--</option>
+                        <option value="referred">Referred</option>
+                        <option value="Media">Media</option>
+                        <option value="Friends">Friends</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="form-group" id="divDoctorName" style="display:none;">
+                            <span class="details">Doctor Name</span>
+                            <input type="text" class="form-control" asp-for="@Model.InvitedMemberName"  />
+                    </div>                           
+                </div>
+                        <div id="divChapter">
+                            <div class="form-group">
+
+                                <label for="html">Are You BNI Or Non BNI</label><br>
+                            </div>
+                            <div class="form-group" id="GetValue">
+                                <input type="radio"  asp-for="@Model.IsBNIMember" value="Yes"  required />
+                                <label for="html">Yes</label>
+                                <input type="radio"  asp-for="@Model.IsBNIMember" value="No"   />
+                                <label for="html">No</label><br>
+                                @* Selected Value: <input type="text" id="selvalue" />*@
+                            </div>
+                            <div class="form-group clsBNIChapter" style="display:none;">
+                                <label for="cars">Ask Chapter </label>
+                                <select id="ChapterDropDown" class="form-control" asp-for="@Model.ChapterName">
+                                    <option value="" selected>-- Select chapter--</option>
+                                    <option value="Alchemist">Alchemist</option>
+                                    <option value="Ashoka">Ashoka</option>
+                                    <option value="Benchmark">Benchmark</option>
+                                    <option value="Bahubali">Bahubali</option>
+                                    <option value="Chanakya">Chanakya</option>
+                                    <option value="Champions">Champions</option>
+                                    <option value="Diamond">Diamond</option>
+                                    <option value="Drona">Drona</option>
+                                    <option value="Elite">Elite</option>
+                                    <option value="Falcon">Falcon</option>
+                                    <option value="Gladiators">Gladiators</option>
+                                    <option value="Hallmark">Hallmark</option>
+                                    <option value="Icon">Icon</option>
+                                    <option value="Jupiter">Jupiter</option>
+                                    <option value="Karma">Karma</option>
+                                    <option value="Kuber">Kuber</option>
+                                    <option value="Marvel">Marvel</option>
+                                    <option value="Napoleon">Napoleon</option>
+                                    <option value="Passion">Passion</option>
+                                    <option value="Quantum">Quantum</option>
+                                    <option value="Royale">Royale</option>
+                                    <option value="Swastik">Swastik</option>
+                                    <option value="Swaraj">Swaraj</option>
+                                    <option value="Sardar">Sardar</option>
+                                    <option value="Titans">Titans</option>
+                                    <option value="Tata ">Tata</option>
+                                </select>
+                            </div>
+                            
+                           @* <div class="form-group clsInvitedByBNIMember" style="display:none;">
+                                <label for="html">Are you invited by bni member?</label><br>
+                            </div>
+                            <div class="form-group clsInvitedByBNIMember" id="InvitedByBNIMember" style="display:none;">
+                                <input type="radio" asp-for="@Model.IsInvitedByBNIMember" value="Yes">
+                                <label for="html">Yes</label>
+                                <input type="radio" asp-for="@Model.IsInvitedByBNIMember" value="No">
+                                <label for="html">No</label><br>
+                            </div>
+                            <div id="chapterMember" style="display: none">
+                                <div class="form-group">
+                                    <span class="details">Invited Member Name</span>
+                                    <input class="form-control" type="text" placeholder="Invited Member Name" asp-for="@Model.InvitedMemberName" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="cars">Invited By Chapter Name</label>
+                                    <select class="form-control" asp-for="@Model.InvitedByChapter">
+                                        <option value="" selected>-- Select chapter--</option>
+                                        <option value="Alchemist">Alchemist</option>
+                                        <option value="Ashoka">Ashoka</option>
+                                        <option value="Benchmark">Benchmark</option>
+                                        <option value="Bahubali">Bahubali</option>
+                                        <option value="Chanakya">Chanakya</option>
+                                        <option value="Champions">Champions</option>
+                                        <option value="Diamond">Diamond</option>
+                                        <option value="Drona">Drona</option>
+                                        <option value="Elite">Elite</option>
+                                        <option value="Falcon">Falcon</option>
+                                        <option value="Gladiators">Gladiators</option>
+                                        <option value="Hallmark">Hallmark</option>
+                                        <option value="Icon">Icon</option>
+                                        <option value="Jupiter">Jupiter</option>
+                                        <option value="Karma">Karma</option>
+                                        <option value="Kuber">Kuber</option>
+                                        <option value="Marvel">Marvel</option>
+                                        <option value="Napoleon">Napoleon</option>
+                                        <option value="Passion">Passion</option>
+                                        <option value="Quantum">Quantum</option>
+                                        <option value="Royale">Royale</option>
+                                        <option value="Swastik">Swastik</option>
+                                        <option value="Swaraj">Swaraj</option>
+                                        <option value="Sardar">Sardar</option>
+                                        <option value="Titans">Titans</option>
+                                        <option value="Tata ">Tata</option>
+                                    </select>
+                                </div>
+                            </div>*@
+                        </div>       
+                        
+
+                        <div id="divStudent">
+                            <div class="form-group">
+
+                                <label for="html">Are You Student ? </label><br>
+                            </div>
+                            <div class="form-group" id="GetValue1">
+                                <input type="radio"  asp-for="@Model.IsStudent" value="Yes"  required />
+                                <label for="html">Yes</label>
+                                <input type="radio"  asp-for="@Model.IsStudent" value="No"   />
+                                <label for="html">No</label><br>
+                                
+                            </div>
+                            <div class="form-group clsStudent" style="display:none;">
+                                <label for="cars">Select College </label>
+                                <select id="CollegeDropDown" class="form-control" asp-for="@Model.ChapterName">
+                                    <option value="" selected>-- Select College --</option>
+                                    <option value="college">KGK Academy Foundation</option>
+                                    <option value="college">SDJ International College</option>
+                                    <option value="college">SVNIT</option>
+                                    <option value="college">DRB</option>
+                                    <option value="college">KP</option>
+                                    <option value="college">MSU</option>
+                                    <option value="college">PARUL</option>
+                                    <option value="college">DDIT</option>
+                                    <option value="college">SVNIT</option>
+                                    <option value="college">LP SAVANI</option>
+                                    <option value="college">LJ</option>
+                                    <option value="college">LD</option>
+                                    <option value="college">NIRMA</option>
+                                    <option value="college">PDPU</option>
+                                </select>
+                            </div>
+                         
+                        </div>
+
+
+
+
+                            <div id="FeeDetail">
+                                <div  class="form-group" >                                   
+                                        <span id="SpanFee" style="display:none;"></span>                                                                      
+                                        <span id="SpanFeesDescription" onload=""> @*1200 + GST BNI.DOCTOR'S BIZCON 2.0 Event Presents By Sanghvi Wealth Management.*@</span>                                 
+                                    <br />
+                                    <span id="SpanTotalFee">Total: 1416</span>
+                                </div>
+                            </div>
+                
+                    <div class="form-group">
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Register">
+                    </div> 
+                    <br />
+                    <div>
+                         <footer>
+                             <img src="~/Footer.png" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" />
+                        </footer>
+                    </div>
+                    
+                    
+            </div>
+            <br />
+                 <nav class=" navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"></nav>              
+                <Center>
+                    <h7 class="page-title">
+
+                        <div style="margin-top:2px;">Developed By <a href="http://www.itfuturz.com/" target="_blank">itfuturz.com</a></div>
+                    </h7>
+                    <h7 class="page-title">
+
+                        <div style="margin-top:2px;">Contact us <a href="https://wa.me/919879208321" target="_blank">919879208321</a> </div>
+                    </h7>
+                 </center>
+            </div>
+        </div>
+    </div>
+   
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+
+        function OnPageLoad(){
+            document.getElementById("FeeDetail").style.display="inline block";
+        }
+
+        function showHide() {  
+            
+            if($("#WhereDoYouKnow").val() == 'referred'){
+                $("#divDoctorName").show();
+            }
+            else {
+                $("#divDoctorName").hide();
+            }
+        }
+
+        //function Chapter(required){
+        //    var dropdown = document.getElementById('ChapterDropDown');
+        //    dropdown.required=required;
+        //    if(required){
+        //        dropdown.style.display = 'block';
+        //    }
+        //    else{
+        //        dropdown.style.display = 'none';
+        //    }
+        //}
+
+        //$(document).ready(function(){
+        //    $('input[name="option"]').click(function(){
+        //        var selectedValue = $('#ChapterDropDown').val();
+        //        $('#selvalue').val(selectedValue);
+        //    });
+        //    $('#ChapterDropDown').change(function(){
+        //        debugger;
+        //        var selectedValue = $(this).val();
+        //        $('#selvalue').val(selectedValue);
+        //    });
+        //});
+
+
+        //$(document).ready(function(){
+        //    debugger
+        //    $('#GetValue').on('change',function(){
+        //        var selvalue = $("[type='radio']:checked").val();
+        //        $('#selvalue').val($("[type='radio']:checked").val());
+        //    });
+        //});
+        
+
+      
+
+        document.getElementById("ContactNo").addEventListener("input", function () {
+            validateMobileNumber();
+        });
+        function validateMobileNumber() {
+            const mobileNumber = document.getElementById("ContactNo").value;
+            const mobileNumberError = document.getElementById("mobileNumberError");
+
+            const regex = /^(\+?\d{1,2}[- ]?)?\d{10}$/;
+            const isValid = regex.test(mobileNumber);
+
+            if (!isValid) {
+                mobileNumberError.textContent = "Please enter a valid mobile number.";
+            } else {
+                mobileNumberError.textContent = "";
+            }
+
+            return isValid;
+        }
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            if (!validateMobileNumber()) {
+                event.preventDefault();
+            }
+        });
+        $(document).on('change', '.clsState', function (e) {
+            $.get("/User/GetCityList", { StateId: $('.clsState').find(":selected").val() }, function (data) {
+                $("#City").empty();
+                $.each(data, function (index, row) {
+                    $("#City").append("<option value='" + row.city + "'>" + row.city + "</option>")
+                });
+            });
+        });
+
+
+        $(document).on('change', '#IsStudent', function (e) {
+            if ($('input[name="IsStudent"]:checked').val() == "No") {
+                $(".clsStudent").css("display", "none");
+
+                $(".clsInvitedByStudent").css("display", "block");
+                if ($('input[name="clsInvitedByStudent"]:checked').val() == "Yes") {
+                    $("#chapterMember").css("display", "block");
+                }
+            }
+            else {
+                $(".clsStudent").css("display", "block");
+                $(".clsInvitedByStudent").css("display", "none");
+                $("#chapterMember").css("display", "none");               
+            }
+        });
+
+
+        $('#Save').submit(function () {
+            return true;
+        });
+
+
+
+        $(document).on('change', '#IsBNIMember', function (e) {
+            if ($('input[name="IsBNIMember"]:checked').val() == "No") {
+                $(".clsBNIChapter").css("display", "none");
+
+                $(".clsInvitedByBNIMember").css("display", "block");
+                if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "Yes") {
+                    $("#chapterMember").css("display", "block");
+                }
+                //if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
+                //    $("#FeeDetail").css("display", "block");
+                //}
+            }
+            else {
+                $(".clsBNIChapter").css("display", "block");
+                $(".clsInvitedByBNIMember").css("display", "none");
+                $("#chapterMember").css("display", "none");               
+            }
+        });
+
+        $(document).on('change', '#IsInvitedByBNIMember', function (e) {
+            if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
+                $("#chapterMember").css("display", "none");              
+
+            } else {
+                $("#chapterMember").css("display", "block");               
+            }
+        });
+
+
+        $(document).ready(function() {
+            debugger                                            // For Page Load// 
+            onEventChange();
+        });
+
+        function onEventChange() {
+            debugger
+            var ctrl = $("#EventId");
+            $("#FeeDetail").css("display", "block");
+            $("#SpanFee").html($('option:selected', $(ctrl)).attr('Fees') +" + GST");    
+            $("#Fees").val($('option:selected', $(ctrl)).attr('Fees'));                
+            $("#SpanFeesDescription").html($('option:selected', $(ctrl)).attr('data-description'));              
+           
+            //fees GST Count
+            var FeeS = parseFloat($('option:selected', $(ctrl)).attr('Fees'));
+            var TotalAmount = Math.round(FeeS + (FeeS * 18 / 100));
+            $("#SpanTotalFee").html("Total: "+TotalAmount)
+            debugger
+            //hidden field
+            if($('option:selected', $(ctrl)).attr('data-hidden') == "Yes")
+            {
+                 $("#divChapter").css("display","none");
+                
+            }else{
+               $("#divChapter").css("display","block");
+            }
+        }
+
+        $(document).on('change', '#EventId', function (e) {            
+           debugger;
+            onEventChange();
+            
+        });
+        
+        $(document).on('change','#Fee')
+
+    </script>
+
+</body>
+</html>

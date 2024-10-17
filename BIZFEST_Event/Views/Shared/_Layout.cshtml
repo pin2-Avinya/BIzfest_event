@@ -7,8 +7,31 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BIZFEST_Event.styles.css" asp-append-version="true" />
-    <link href="~/css/carousel.css" rel="stylesheet" />
+    @*<link href="~/css/carousel.css" rel="stylesheet" />*@
     @RenderSection("Styles", false)
+
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '5813893548712110');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=5813893548712110&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Meta Pixel Code -->
 
 </head>
 <body>
@@ -26,18 +49,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/ContactUs">Contact Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/CustomFields">Add Custom Field</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/ViewCustomFields">ViewCustom Fields</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
 
 @*    <div class="container">*@
-        <main role="main">
+        <main role="main" class="mt-5 custom-main">
             @RenderBody()
         </main>
     @*</div>
 *@
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted">
         <div class="container">
             &copy; 2023 - BUSINESS SUPPORT SERVICE LLP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             &middot; <a asp-area="" asp-controller="Home" asp-action="Terms">Terms & Conditions</a>

@@ -9,111 +9,143 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BIZFEST_Event
 build_property.RootNamespace = BIZFEST_Event
-build_property.ProjectDir = C:\Users\DELL\Source\Repos\BIzfest_event\BIZFEST_Event\
+build_property.ProjectDir = C:\Users\DELL\source\repos\BIzfest_event\BIZFEST_Event\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\DELL\Source\Repos\BIzfest_event\BIZFEST_Event
+build_property.MSBuildProjectDirectory = C:\Users\DELL\source\repos\BIzfest_event\BIZFEST_Event
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Admin/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/CustomFieldList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3VzdG9tRmllbGRMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/CustomFields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3VzdG9tRmllbGRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Admin/PaymentHistory.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/PaymentHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGF5bWVudEhpc3RvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Admin/UserDetail.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/UserDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlckRldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Home/Cancellation.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Admin/ViewCustomFields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0N1c3RvbUZpZWxkcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Home/Cancellation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYW5jZWxsYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Home/ContactUs.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Home/ContactUs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0VXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Home/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Home/Privacy.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Home/Terms.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Home/Terms.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXJtcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Login/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Payment/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Payment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Shared/Error.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Shared/_EventCreatePartial.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_DynamicPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9EeW5hbWljUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_EventCreatePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FdmVudENyZWF0ZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Shared/_UserCreatePartial.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_UserCreatePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Vc2VyQ3JlYXRlUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_UserLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Vc2VyTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Ticket/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Ticket/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/Fail.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/Fail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGYWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/Index.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/Payment.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/Payment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQYXltZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/Registration.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/PdfView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQZGZWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/Registration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3RyYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/Success.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/Success.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/ThanksPage.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/ThanksPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxUaGFua3NQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/User/UserView.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/UserRegistration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyUmVnaXN0cmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/UserView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/_ViewImports.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/User/UserViewRegistration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyVmlld1JlZ2lzdHJhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/_ViewStart.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DELL/Source/Repos/BIzfest_event/BIZFEST_Event/Views/Shared/_Layout.cshtml]
+[C:/Users/DELL/source/repos/BIzfest_event/BIZFEST_Event/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-25avz8b4xq

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<UserEvent>
 
-<button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("Create")">Add Event</button>
+@* <button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event</button> *@
+<button type="button" id="AddEvent" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action("DynamicCreate")">Add Event Dynamic</button>
 <div class="container">
     <br />
     <div style="width:90%; margin:0 auto;">
@@ -17,6 +18,7 @@
                     <td style="width:200px">Registration Link</td>
                     <td style="width:200px">QR Code</td>
                     <td style="width:300px">User Link</td>
+                    <td style="width:400px">Custom Fields List</td>
                     <td style="width:350px">Action</td>
                 </tr>
                 @foreach (var obj in Model)
@@ -29,14 +31,15 @@
                         <td style="width:200px">@obj.Location</td>
                         <td style="width:200px">@obj.City</td>
                         <td style="width:200px">@obj.OrganizerName</td>
-                        <td style="width:200px"><a href="http://bizfest.itfuturz.com/User/UserView?EventId=@obj.Id">click here</a></td>
+                        <td style="width:200px"><a href="https://localhost:5003/User/UserRegistration?EventId=@obj.Id">click here</a></td>
                         <td style="width:200px"><img src="@obj.BrCodeURL" style="width: 100px;"></td>
                         <td style="width:300px"><a href="/Admin/UserDetail?EventId=@obj.Id">User List</a></td>
+                        <td style="width:400px"><a href="https://localhost:5003/Admin/ViewCustomFields?EventId=@obj.Id">click here</a>
                         
                         <td style="width:350px">
                             @*<button type="button" id="AddEventEdit" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" data-url="@Url.Action($"EditUser/{@obj.Id}")">Edit</button>*@
                             <button type="button" id="AddEventEdit" name="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addUser" onclick="EditEvent(@obj.Id)">Edit</button>
-                            <button name="DeleteItem" class="btn btn-danger" onclick="Delete(@obj.Id)" data-id="@obj.Id">DELETE</button>
+                            <button name="DeleteItem" class="btn btn-danger m-1" onclick="Delete(@obj.Id)" data-id="@obj.Id">DELETE</button>
                         </td>
 
                     </tr>

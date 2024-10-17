@@ -1,318 +1,150 @@
-﻿@model UsersRegistration
-@{
-    IEnumerable<States>? State = ViewData["State"] as IEnumerable<States>;
-    IEnumerable<CategoryMaster>? CategoryMaster = ViewData["Category"] as IEnumerable<CategoryMaster>;
-    IEnumerable<UserEvent>? UserEvent = ViewData["Event"] as IEnumerable<UserEvent>;
-
-    Layout = null;
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_UserLayout";
+    string eventName = "BNI DOCTOR'S BIZCON 2.0"; /*"BUSINESS SUPPORT SERVICE LLP";*/
 }
 
-
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BUSINESS SUPPORT SERVICE LLP</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @*    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BIZFEST_Event.styles.css" asp-append-version="true" />*@
-</head>
-<body>
-    <header>
-        <nav class=" navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <Center>
-                <div>
-                    <img src="~/sponsored.png" style="width: 70px;margin-bottom: -12px;" />
-                    <p style="margin: 0;font-size: 13px;font-style: italic;">Presents</p>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div style="border-right: 0.5px solid grey;padding-right: 5px;"><img src="/wefound.jpeg" width="190"></div>
-                     <div style="padding-left: 5px;"><a href="/"><img src="/Logo7.png" width="190"></a> </div>
-                 </div>
-                
-                <div>
-                    <p style="margin: 0;margin-top: 6px;font-size: 13px;font-style: italic;">Powered By</p>
-                    <img src="~/CRMONELogo.png" style="width: 70px;margin-bottom: 8px;">
-                </div>              
-
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                </div>
-            </center>
-        </nav>
-    </header>
-
-    <div class="container">        
-        <div class="container">
-
-            <div class="title"><h3>Registration</h3></div>
-            <div class="content">
-                <form method="post" asp-controller="User" asp-action="AddUser">
-                    <input type="hidden" value="0" asp-for="@Model.Fees" />
-                    @*<input type="hidden" value="@ViewBag.EventId" asp-for="@Model.EventId" />*@
-
-                    @if (TempData["Message"] != null && Convert.ToString(TempData["Message"]) != "")
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @TempData["Message"]
-                        </div>
-                    }
-                      <div class="form-group">
-                        <span class="details">Event Name</span>
-                       @* <select asp-items="@(new SelectList(UserEvent,"Id","EventName","Fees"))" >
-                            <option disabled selected>-- Event Name --</option>
-                        </select>*@
-                        <select class="form-control" required asp-for="@Model.EventId"> 
-                            <option value="" data-description="" data-hidden=""  Fees="" selected>-- Select Event --</option>    
-                                @foreach(var type in UserEvent) {       
-                                    <option value="@type.Id" data-description="@type.Description" data-hidden="@type.IsHiddenField"  Fees="@type.Fees">@type.EventName</option>               
-                              }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="details">Full Name</label>
-                        <input class="form-control" type="text" placeholder="Name" asp-for="@Model.Name" required />
-                    </div>
-                    <div class="form-group">
-                        <span class="details">Contact No</span>
-                        <input class="form-control" type="number" placeholder="Contact No" asp-for="@Model.ContactNo" required />
-                        <span id="mobileNumberError" style="color: red;"></span>
-                    </div>
-                    <div class="form-group">
-                        <span class="details">Email Address</span>
-                        <input class="form-control" type="email" placeholder="Email Id" asp-for="@Model.EmailId" />
-                    </div>
-                    <div class="form-group">
-                        <span class="details">Business Name</span>
-                        <input class="form-control" type="text" placeholder="Business Name" asp-for="@Model.BusinessName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="cars">State</label>
-                        <select asp-items="@(new SelectList(State,"StateId","StateName"))" class="form-control clsState" asp-for="@Model.State">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="cars">City</label>
-                        <select class="form-control" asp-for="@Model.City">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <span class="details">Business Category</span>
-                        <select asp-items="@(new SelectList(CategoryMaster,"Name","Name"))" class="form-control " asp-for="@Model.BusinessCategory">
-                            <option disabled selected>-- Business Category --</option>
-                        </select>
-                    </div>                   
-                        <div id="divChapter">
-                            <div class="form-group">
-
-                                <label for="html">Are you a bni member</label><br>
-                            </div>
-                            <div class="form-group">
-                                <input type="radio" asp-for="@Model.IsBNIMember" value="Yes">
-                                <label for="html">Yes</label>
-                                <input type="radio" asp-for="@Model.IsBNIMember" value="No">
-                                <label for="html">No</label><br>
-                            </div>
-                            <div class="form-group clsBNIChapter" style="display:none;">
-                                <label for="cars">Chapter Name</label>
-                                <select class="form-control" asp-for="@Model.ChapterName">
-                                    <option value="" selected>-- Select chapter--</option>
-                                    <option value="Alchemist">Alchemist</option>
-                                    <option value="Ashoka">Ashoka</option>
-                                    <option value="Benchmark">Benchmark</option>
-                                    <option value="Bahubali">Bahubali</option>
-                                    <option value="Chanakya">Chanakya</option>
-                                    <option value="Champions">Champions</option>
-                                    <option value="Diamond">Diamond</option>
-                                    <option value="Drona">Drona</option>
-                                    <option value="Elite">Elite</option>
-                                    <option value="Falcon">Falcon</option>
-                                    <option value="Gladiators">Gladiators</option>
-                                    <option value="Hallmark">Hallmark</option>
-                                    <option value="Icon">Icon</option>
-                                    <option value="Jupiter">Jupiter</option>
-                                    <option value="Karma">Karma</option>
-                                    <option value="Kuber">Kuber</option>
-                                    <option value="Marvel">Marvel</option>
-                                    <option value="Napoleon">Napoleon</option>
-                                    <option value="Passion">Passion</option>
-                                    <option value="Quantum">Quantum</option>
-                                    <option value="Royale">Royale</option>
-                                    <option value="Swastik">Swastik</option>
-                                    <option value="Swaraj">Swaraj</option>
-                                    <option value="Sardar">Sardar</option>
-                                    <option value="Titans">Titans</option>
-                                    <option value="Tata ">Tata</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group clsInvitedByBNIMember" style="display:none;">
-                                <label for="html">Are you invited by bni member?</label><br>
-                            </div>
-                            <div class="form-group clsInvitedByBNIMember" id="InvitedByBNIMember" style="display:none;">
-                                <input type="radio" asp-for="@Model.IsInvitedByBNIMember" value="Yes">
-                                <label for="html">Yes</label>
-                                <input type="radio" asp-for="@Model.IsInvitedByBNIMember" value="No">
-                                <label for="html">No</label><br>
-                            </div>
-                            <div id="chapterMember" style="display: none">
-                                <div class="form-group">
-                                    <span class="details">Invited Member Name</span>
-                                    <input class="form-control" type="text" placeholder="Invited Member Name" asp-for="@Model.InvitedMemberName" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="cars">Invited By Chapter Name</label>
-                                    <select class="form-control" asp-for="@Model.InvitedByChapter">
-                                        <option value="" selected>-- Select chapter--</option>
-                                        <option value="Alchemist">Alchemist</option>
-                                        <option value="Ashoka">Ashoka</option>
-                                        <option value="Benchmark">Benchmark</option>
-                                        <option value="Bahubali">Bahubali</option>
-                                        <option value="Chanakya">Chanakya</option>
-                                        <option value="Champions">Champions</option>
-                                        <option value="Diamond">Diamond</option>
-                                        <option value="Drona">Drona</option>
-                                        <option value="Elite">Elite</option>
-                                        <option value="Falcon">Falcon</option>
-                                        <option value="Gladiators">Gladiators</option>
-                                        <option value="Hallmark">Hallmark</option>
-                                        <option value="Icon">Icon</option>
-                                        <option value="Jupiter">Jupiter</option>
-                                        <option value="Karma">Karma</option>
-                                        <option value="Kuber">Kuber</option>
-                                        <option value="Marvel">Marvel</option>
-                                        <option value="Napoleon">Napoleon</option>
-                                        <option value="Passion">Passion</option>
-                                        <option value="Quantum">Quantum</option>
-                                        <option value="Royale">Royale</option>
-                                        <option value="Swastik">Swastik</option>
-                                        <option value="Swaraj">Swaraj</option>
-                                        <option value="Sardar">Sardar</option>
-                                        <option value="Titans">Titans</option>
-                                        <option value="Tata ">Tata</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>                   
-                            <div id="FeeDetail" style="display:none;" >
-                                <div  class="form-group">                                   
-                                        <span id="SpanFee"></span>                                                                      
-                                        <span id="SpanFeesDescription"></span>                                 
-                                    <br />
-                                    <span id="SpanTotalFee">Total:</span>
-                                </div>
-                            </div>
-                
-                    <div class="form-group">
-                        <br />
-                        <input type="submit" class="btn btn-primary" value="Register">
-                    </div>
-                </form>
-            </div>
-            <br />
- <nav class=" navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-</nav>
-       <Center>
-                 <h7 class="page-title">
-
-                        <div style="margin-top:2px;">Developed By <a href="http://www.itfuturz.com/" target="_blank">itfuturz.com</a></div>
-                    </h7>
-                    <h7 class="page-title">
-
-                        <div style="margin-top:2px;">Contact us <a href="https://wa.me/919879208321" target="_blank">919879208321</a> </div>
-                    </h7>
-            </center>
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel">
+     <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>*@
+<div class="row">
+    <div class="col-4 d-none d-md-block">
+        <div class=" justify-content-center align-items-center d-flex" style="height: 100%;">
+            <!-- Add these classes -->
+            <img class="img-thumbnail" src="/BNI.jpeg" alt="@eventName">
         </div>
     </div>
+    <div class="col-12 col-md-4">
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="4" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="5" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="6" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="7" aria-label="Slide 3"></button>                
+            </div
+            <br>
+            <div class="carousel-inner">
+                <br />
+                <div class="carousel-item active">
+                    <img src="/img1.png" class="d-block w-100 img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img2.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img3.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img4.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img5.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img6.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img7.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img8.png" class="d-block w-100  img-fluid" alt="...">
+                </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script>
-        document.getElementById("ContactNo").addEventListener("input", function () {
-            validateMobileNumber();
-        });
-        function validateMobileNumber() {
-            const mobileNumber = document.getElementById("ContactNo").value;
-            const mobileNumberError = document.getElementById("mobileNumberError");
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="text-left mt-2">
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <a class="btn btn-lg btn-primary" href="/User/UserRegistration" role="button">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 d-none d-md-block" style="margin-top: 103px;">
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+            <!-- Add these classes -->
+            <img class="img-thumbnail" src="/SideImage.png" alt="@eventName">
+        </div>
 
-            const regex = /^(\+?\d{1,2}[- ]?)?\d{10}$/;
-            const isValid = regex.test(mobileNumber);
+    </div>
+</div>
+<hr class="featurette-divider">
+<div class="container marketing">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">
+                @eventName
+                <span class="text-muted fs-5">
+                    <br />
+                    Initiative Of BNI Greater Surat.
+                </span>
+            </h2>
+            <p class="lead">
 
-            if (!isValid) {
-                mobileNumberError.textContent = "Please enter a valid mobile number.";
-            } else {
-                mobileNumberError.textContent = "";
-            }
+                "After Success of first BNI DOC BIZCON is back again to empower the Doctor's community by imparting excellence in Delegation,Marketing and using Technology in the best way.@* It's an annual event by BNI Greater Surat where entrepreneurs accross India are invited to the diamond city Surat to exchange and foster business opportunities.*@
 
-            return isValid;
-        }
+                The knowledge will flow straight from the eminent achievers and speakers from the fraternity as well as the business world.@*It is planned in a way to support BNI Members, share knowledge about business and provide ample opportunities for bright future.*@
 
-        document.querySelector("form").addEventListener("submit", function (event) {
-            if (!validateMobileNumber()) {
-                event.preventDefault();
-            }
-        });
-        $(document).on('change', '.clsState', function (e) {
-            $.get("/User/GetCityList", { StateId: $('.clsState').find(":selected").val() }, function (data) {
-                $("#City").empty();
-                $.each(data, function (index, row) {
-                    $("#City").append("<option value='" + row.city + "'>" + row.city + "</option>")
-                });
-            });
-        });
+                Whether you are starting an enterprise handling multiple responsibilities within company or an experienced and seasoned entrepreneur, @eventName is an event you should not miss out.
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" src="/BizconImg.jpg" alt="...">
+        </div>
+    </div>
+</div>
+<style>
+    /* Custom CSS styles for sidebar carousel controls */
+    .carousel-indicators [data-bs-target] {
+        background-color:red;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        color: red;
+        background-color: red;
+        opacity: 0.5;
+    }
 
-        $(document).on('change', '#IsBNIMember', function (e) {
-            if ($('input[name="IsBNIMember"]:checked').val() == "No") {
-                $(".clsBNIChapter").css("display", "none");
+    .btn-primary {
+        color: #fff !important;
+        background-color: #bf1f1f !important;
+        border-color: #bf1f1f !important;
+    }
 
-                $(".clsInvitedByBNIMember").css("display", "block");
-                if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "Yes") {
-                    $("#chapterMember").css("display", "block");
-                }
-                //if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
-                //    $("#FeeDetail").css("display", "block");
-                //}
-            }
-            else {
-                $(".clsBNIChapter").css("display", "block");
-                $(".clsInvitedByBNIMember").css("display", "none");
-                $("#chapterMember").css("display", "none");               
-            }
-        });
+    .img-fluid {
+        height: 100% !important;
+    }
+    .custom-main {
+        overflow-x:hidden;
+    }
 
-        $(document).on('change', '#IsInvitedByBNIMember', function (e) {
-            if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
-                $("#chapterMember").css("display", "none");              
+    /*.carousel-item {
+        height: 50rem !important;
+    }*/
 
-            } else {
-                $("#chapterMember").css("display", "block");               
-            }
-        });
+    .img-thumbnail {
+        border: none !important;
+    }
+</style>
 
-        $(document).on('change', '#EventId', function (e) {            
-           
-            $("#FeeDetail").css("display", "block");
-            $("#SpanFee").html($('option:selected', this).attr('Fees') +" + GST");    
-            $("#Fees").val($('option:selected', this).attr('Fees'));                
-            $("#SpanFeesDescription").html($('option:selected', this).attr('data-description'));              
-           
-            //fees GST Count
-            var FeeS = parseFloat($('option:selected', this).attr('Fees'));
-            var TotalAmount = FeeS + (FeeS * 18 / 100);
-            $("#SpanTotalFee").html("Total: "+TotalAmount)
-            debugger
-            //hidden field
-            if($('option:selected', this).attr('data-hidden') == "Yes")
-            {
-                 $("#divChapter").css("display","none");
-                
-            }else{
-               $("#divChapter").css("display","block");
-            }
-            
-        });
 
-    </script>
 
-</body>
+
 
 

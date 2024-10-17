@@ -1,0 +1,182 @@
+﻿@model BIZFEST_Event.Models.CustomFields
+
+<div class="container-fluid mt-4">
+    <div class="card-body m-4 p-4">
+        <div class="row">
+            <div class="col-7">
+                <h2 class="mb-3 mt-3">Add Custom Field</h2>
+                <form class="form-control" asp-action="CreateCustomField" method="post" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="LabelName" class="form-label">Label Name:</label>
+                        <input type="text" id="LabelName" name="LabelName" class="form-control" asp-for="LabelName" required />
+                        <div class="invalid-feedback">
+                            Please provide a label name.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="TypeName" class="form-label">Input Type:</label>
+                        <select id="TypeName" name="TypeName" class="form-select" asp-for="TypeName" required>
+                            <option value="text">Text</option>
+                            <option value="email">Email</option>
+                            <option value="number">Number</option>
+                            <option value="password">Password</option>
+                            <option value="dropdown">Dropdown</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select an input type.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" id="IsMandatory" name="IsMandatory" class="form-check-input" asp-for="IsMandatory" />
+                        <label for="IsMandatory" class="form-check-label">Is Mandatory?</label>
+                    </div>
+
+                    <div class="mb-3" id="dropdownOptionsContainer" style="display: none;">
+                        <label for="Options" class="form-label">Dropdown Options:</label>
+                        <div id="optionsList" class="mb-2"></div>
+                        <div class="input-group mb-2">
+                            <input type="text"  id="DropdownOptions" class="form-control" placeholder="e.g. Option 1" />
+                            <input type="hidden" name="Options" id="OptionsHidden" />
+                            <button class="btn btn-outline-secondary" id="addOptionButton" type="button">Add</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Field</button>
+                </form>
+            </div>
+            <div class="col-5">
+                <h2 class="mb-3 mt-3">Preview</h2>
+                <div class="form-control" id="previewContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const form = document.querySelector('form');
+        const labelNameInput = document.getElementById('LabelName');
+        const typeNameSelect = document.getElementById('TypeName');
+        const isMandatoryCheckbox = document.getElementById('IsMandatory');
+        const previewContainer = document.getElementById('previewContainer');
+        const dropdownOptionsContainer = document.getElementById('dropdownOptionsContainer');
+        const dropdownOptionsInput = document.getElementById('DropdownOptions');
+        const optionsList = document.getElementById('optionsList');
+
+        function updatePreview() {
+            const labelName = labelNameInput.value;
+            const typeName = typeNameSelect.value;
+            const isMandatory = isMandatoryCheckbox.checked;
+
+            let html = `<div class="form-group">`;
+            html += `<label class="form-label">${labelName} <span class="text-danger">${isMandatory ? "*" : ''}</span></label>`;
+
+            if (typeName === "dropdown") {
+                const options = Array.from(optionsList.children).map(optionDiv => optionDiv.querySelector('.option-label').textContent);
+                html += `<select class="form-select" id="${labelName}" name="${labelName}" ${isMandatory ? 'required' : ''}>`;
+                options.forEach(option => {
+                    html += `<option value="${option}">${option}</option>`;
+                });
+                html += `</select>`;
+            } else {
+                html += `<input type="${typeName}" class="form-control" id="${labelName}" name="${labelName}" ${isMandatory ? 'required' : ''} />`;
+            }
+            html += `</div>`;
+
+            previewContainer.innerHTML = html;
+        }
+
+        function toggleDropdownOptions() {
+            dropdownOptionsContainer.style.display = typeNameSelect.value === "dropdown" ? "block" : "none";
+            if (typeNameSelect.value !== "dropdown") {
+                optionsList.innerHTML = "";
+            }
+            updatePreview();
+        }
+
+        function updateHiddenOptions() {
+            const options = Array.from(optionsList.children)
+                .map(optionDiv => optionDiv.querySelector('.option-label').textContent.trim())
+                .filter(opt => opt);
+            document.getElementById('OptionsHidden').value = options.join(',');
+        }
+
+        document.getElementById('addOptionButton').addEventListener('click', function () {
+            const optionValue = dropdownOptionsInput.value.trim();
+            const errorContainer = document.getElementById('errorContainer');
+
+            if (errorContainer) {
+                errorContainer.remove();
+            }
+
+            if (optionValue) {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'input-group mb-2';
+
+                const optionLabel = document.createElement('span');
+                optionLabel.className = 'form-control option-label';
+                optionLabel.textContent = optionValue;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-outline-danger';
+                deleteButton.textContent = 'Remove';
+
+                deleteButton.addEventListener('click', function () {
+                    optionsList.removeChild(optionDiv);
+                    updateHiddenOptions(); // Update hidden input on delete
+                    updatePreview();
+                });
+
+                optionDiv.appendChild(optionLabel);
+                optionDiv.appendChild(deleteButton);
+                optionsList.appendChild(optionDiv);
+
+                dropdownOptionsInput.value = '';
+                updateHiddenOptions(); // Update hidden input on add
+                updatePreview();
+            } else {
+                const error = document.createElement('span');
+                error.id = 'errorContainer';
+                error.className = 'form-label mt-1 text-danger';
+                error.textContent = "Please enter an option.";
+
+                dropdownOptionsContainer.appendChild(error);
+            }
+        });
+
+        form.addEventListener('submit', function (event) {
+            let isValid = true;
+            const labelNameError = document.getElementById('labelNameError');
+
+            if (!labelNameInput.value.trim()) {
+                isValid = false;
+                if (!labelNameError) {
+                    const error = document.createElement('span');
+                    error.id = 'labelNameError';
+                    error.className = 'form-label mt-1 text-danger';
+                    error.textContent = "Label Name is required.";
+                    labelNameInput.parentNode.appendChild(error);
+                }
+            } else {
+                const existingError = document.getElementById('labelNameError');
+                if (existingError) {
+                    existingError.remove();
+                }
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        labelNameInput.addEventListener('input', updatePreview);
+        typeNameSelect.addEventListener('change', () => {
+            toggleDropdownOptions();
+            updatePreview();
+        });
+        isMandatoryCheckbox.addEventListener('change', updatePreview);
+        dropdownOptionsInput.addEventListener('input', updatePreview);
+
+    </script>
+}

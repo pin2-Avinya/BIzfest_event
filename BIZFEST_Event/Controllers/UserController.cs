@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using QRCoder;
 using Razorpay.Api;
 using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Text;
@@ -31,46 +32,76 @@ namespace BIZFEST_Event.Controllers
             _configuration = configuration;
         }
 		public IActionResult UserView()
-		{			
-   
-			ViewBag.State = _db.States.ToList();
-			ViewBag.Category = _db.CategoryMaster.ToList();
-            ViewBag.Event = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
+		{	
             return View();
 		}
 
-		public JsonResult GetCityList(int StateId)
+        public IActionResult UserRegistration()
+        {
+
+            //ViewBag.State = _db.States.ToList();
+            ViewBag.Category = _db.CategoryMaster.ToList();
+            ViewBag.Event = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
+            return View();
+        }
+
+        public JsonResult GetCityList(int StateId)
 		{
 			List<Cities> StateList = _db.Cities.Where(x => x.StateId == StateId).ToList();
 			return Json(StateList);
 
 		}
+
 		public IActionResult Registration()
 		{
 			return View();
 		}
+
+        //public IActionResult PdfView()
+        //{
+        //    string webRootPath = _HostEnvironment.WebRootPath;
+        //    string relativePath = "Video/Brochure - with Link.pdf";
+        //    string pdfpath = System.IO.Path.Combine(webRootPath, relativePath);
+        //    return File(pdfpath, "application/pdf");
+        //}
+
 		public IActionResult UserDetail()
 		{
 			int? EventId = Convert.ToInt32(HttpContext.Request.Query["EventId"]);
 			List<UsersRegistration> response = _db.UserRegistration.Where(x => x.EventId== EventId).ToList();
 			return View(response);
 		}
-
-		[HttpPost]
+        [HttpPost]
 		public async Task<IActionResult> AddUser(UsersRegistration userModel)
 		{
 			Helper.Helper _helper = new Helper.Helper();
 			var user = _db.UserRegistration.Where(x => x.ContactNo == userModel.ContactNo && x.EventId == userModel.EventId).FirstOrDefault();
 			var events = _db.UserEvent.Where(x => x.Id == userModel.EventId).FirstOrDefault();
-
-			if (user != null)
+            if (userModel.PaymentMode == "No" && userModel.ScreenShot == null)
+            {
+                TempData["Message"] = "Upload Payment ScreenShot is required!";
+                ViewBag.State = _db.States.ToList();
+                ViewBag.Category = _db.CategoryMaster.ToList();
+                ViewBag.Event = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
+                return View("UserRegistration", userModel);
+            }
+                if (user != null)
 			{
                 userModel.Id= user.Id;
                 if (user.PaymentStatus != "success")
 				{
-                    TempData["Message"]="Your number is already registered with us but payment is pending, please click on the pay now button to complete the payment and confirm the registration.";
-                    var razorPayOptionModel = await ProcessPayment(events, user);
-                    return View("Payment", razorPayOptionModel);
+                    if (userModel.PaymentMode == "Yes")
+                    {
+                        TempData["Message"] = "Your number is already registered with us but payment is pending, please click on the pay now button to complete the payment and confirm the registration.";
+
+                        var razorPayOptionModel = await ProcessPayment(events, user);
+                        return View("Payment", razorPayOptionModel);
+                    }
+                    else
+                    {
+                        TempData["SucessMsg"] = "Congratulations!! Your Registration is successful";
+                        return View("Success");
+                    }
                 }
 				else 
 				{
@@ -78,47 +109,75 @@ namespace BIZFEST_Event.Controllers
                     await _helper.SendSms(_configuration["baseUrl"].ToString(), user.ContactNo, events.StartDate?.ToString("dd-MMM-yyyy"), user, events.EventName, events.Location, events.City);
                 }
 
+
                 ViewBag.State = _db.States.ToList();
 				ViewBag.Category = _db.CategoryMaster.ToList();
                 ViewBag.Event = _db.UserEvent.Where(x=> x.IsDeleted == false).ToList();
-
-				return View("UserView", userModel);
+                return View("UserRegistration", userModel);
+               
 			}
 			else
 			{
 				TempData["Message"] = "";
                 var amount = events.Fees + (events.Fees * 18 / 100);
-
+                
                 userModel.IsActive = true;
                 userModel.PaymentStatus = "initiated";
-				userModel.Fees = amount;
+                userModel.Fees = amount;
+
+
+                #region image save 
+                string FileName = null;
+                string filePath = null;
+                if (userModel.ScreenShot != null)
+                {
+                    string Uploaddr = Path.Combine(_HostEnvironment.WebRootPath, "Image");
+                     FileName = Guid.NewGuid().ToString() + "_" + userModel.ScreenShot.FileName;
+                     filePath = Path.Combine(Uploaddr, FileName);
+
+                    using (var filestream = new FileStream(filePath, FileMode.Create))
+                    {
+                        userModel.ScreenShot.CopyTo(filestream);
+                    }
+                }
+
+                #endregion
+                userModel.PaymentScreenShot = FileName;
                 await _userRepository.CreateUser(userModel);
 
 
                 #region Payment
+                RazorPayOptionModel razorPayOptionModel = new RazorPayOptionModel();
                 if (events.Fees > 0)
 				{
-                  
-                    var razorPayOptionModel = await ProcessPayment(events, userModel);                    
-					return View("Payment", razorPayOptionModel);
-					
-				}
-				else
-				{
-					TempData["Message"]="Something went wrong, please try again!";
-                    userModel.Id= user.Id;
+                    if (userModel.PaymentMode == "Yes")
+                    {
+                        razorPayOptionModel = await ProcessPayment(events, userModel);
+                        
+                        return View("Payment", razorPayOptionModel);
+                    }
+                    else
+                    {
+                        TempData["SucessMsg"] = "Congratulations!! Your Registration is successful";
+                        return View("Success");
+                    }
+
+                }
+                else
+                {
+                    TempData["Message"] = "Something went wrong, please try again!";
                     //await _helper.SendSms(userModel.ContactNo, events.StartDate?.ToString("dd-MMM-yyyy"), user);
 
                     ViewBag.State = _db.States.ToList();
                     ViewBag.Category = _db.CategoryMaster.ToList();
                     ViewBag.Event = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
 
-                    return View("UserView", userModel);
-				}
-				#endregion
-			}
+                    return View("UserRegistration", userModel);
+                }
+                #endregion
+            }
 		}
-
+        
 		private async Task<RazorPayOptionModel> ProcessPayment(UserEvent events, UsersRegistration userModel)
 		{
             var amount = events.Fees + (events.Fees * 18 / 100);
@@ -133,6 +192,7 @@ namespace BIZFEST_Event.Controllers
             input.Add("receipt", userModel.Id.ToString());
             RazorpayClient client = new RazorpayClient(key, secret);
 
+            //Razorpay.Api.Order order = client.Order.Create(input);
             Razorpay.Api.Order order = client.Order.Create(input);
             orderId = order["id"].ToString();
 

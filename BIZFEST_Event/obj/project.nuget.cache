@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ox19kzw5QmU=",
+  "dgSpecHash": "qG90tbESQeU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\BIZFEST_Event.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\source\\repos\\BIzfest_event\\BIZFEST_Event\\BIZFEST_Event.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

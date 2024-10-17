@@ -4201,11 +4201,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\BIZFEST_Event.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\BIzfest_event\\BIZFEST_Event\\BIZFEST_Event.csproj",
       "projectName": "BIZFEST_Event",
-      "projectPath": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\BIZFEST_Event.csproj",
+      "projectPath": "C:\\Users\\DELL\\source\\repos\\BIzfest_event\\BIZFEST_Event\\BIZFEST_Event.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Downloads\\BIZFEST_Event (1)\\BIZFEST_Event\\BIZFEST_Event\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\source\\repos\\BIzfest_event\\BIZFEST_Event\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

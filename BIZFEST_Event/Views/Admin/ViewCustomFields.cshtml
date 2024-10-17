@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CustomFields>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <form id="eventForm" method="post" asp-controller="Admin" asp-action="AddEvent" class="card shadow p-4 border-0 rounded">
+                <h4 class="text-center mb-4">Created Fields</h4>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var field in Model)
+                    {
+                        <div class="form-group mb-4">
+                            <label class="form-label fw-bold">
+                                @field.LabelName
+                                @if (field.IsMandatory)
+                                {
+                                    <span class="text-danger">*</span>
+                                }
+                            </label>
+
+                            @if (field.TypeName == "text" || field.TypeName == "number" || field.TypeName == "date" || field.TypeName == "email")
+                            {
+                                <input class="form-control shadow-sm" type="@field.TypeName" name="@field.LabelName" data-mandatory="@field.IsMandatory" />
+                            }
+
+                            @if (field.TypeName == "textarea")
+                            {
+                                <textarea class="form-control shadow-sm" name="@field.LabelName" rows="4" data-mandatory="@field.IsMandatory"></textarea>
+                            }
+
+                            @if (field.Options != null)
+                            {
+                                var options = field.Options.Split(",");
+                                <select name="@field.LabelName" class="form-select shadow-sm" data-mandatory="@field.IsMandatory">
+                                    @foreach (var option in options)
+                                    {
+                                        <option value="@option.Trim()">@option.Trim()</option>
+                                    }
+                                </select>
+                            }
+
+                            <div class="text-danger mt-1" id="error-@field.LabelName" style="display:none;">This field is required.</div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted text-center">No fields available.</p>
+                }
+
+                @* <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-primary col-md-3 shadow-sm">Submit</button>
+                </div> *@
+            </form>
+        </div>
+    </div>
+</div>

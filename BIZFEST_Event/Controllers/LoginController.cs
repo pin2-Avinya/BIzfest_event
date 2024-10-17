@@ -22,9 +22,10 @@ namespace BIZFEST_Event.Controllers
         public async Task<IActionResult> UserLogin(AdminLogin AdminLoginModel)
         {
             bool IsSuccess = await _LoginRepository.LoginUser(AdminLoginModel.UserName, AdminLoginModel.Pasword);
-
+            
             if (IsSuccess)
-            {                
+            {
+                HttpContext.Session.SetString("UserName", AdminLoginModel.UserName);
                 return RedirectToAction("Index", "Admin");
             }
             else

@@ -1,0 +1,222 @@
+﻿@model IEnumerable<DynamicFields> 
+@{
+    var customFields = ViewBag.Custom as List<CustomFields>; // Casting ViewBag.Custom
+}
+<style>
+    .modal-body {
+        height: 465px;
+        display: block;
+        overflow: scroll;
+    }
+
+    .hidden-field {
+        display: none;
+    }
+</style>
+
+<div class="container">
+    <div class="title modal" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Event</h2>
+                    <button id="btnUserClose" type="button" class="clsUserClose">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm" method="post" >
+                        <!-- Display Model Fields -->
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var field in Model)
+                            {
+                                <div class="form-group mb-3 field-container">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="form-label">
+                                            @field.Name @if (field.IsMandatory)
+                                            {
+                                                <span class="text-danger">*</span>
+                                            }
+                                        </label>
+                                        <div>
+                                            <input type="checkbox" class="toggle-field" data-field="@field.Name" checked />
+                                            <label>Show/Hide</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                        @if (field.Type == "text" || field.Type == "number" || field.Type == "date" || field.Type == "email")
+                                        {
+                                            <input class="form-control" type="@field.Type" name="@field.Name" data-mandatory="@field.IsMandatory" />
+                                        }
+
+                                        @if (field.Type == "textarea")
+                                        {
+                                            <textarea class="form-control" name="@field.Name" data-mandatory="@field.IsMandatory"></textarea>
+                                        }
+
+                                        @if (field.Options != null)
+                                        {
+                                            var options = field.Options.Split(",");
+                                            <select name="@field.Name" class="form-select" data-mandatory="@field.IsMandatory">
+                                                @foreach (var option in options)
+                                                {
+                                                    <option value="@option.Trim()">@option.Trim()</option>
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+
+                                    <div class="text-danger" id="error-@field.Name" style="display:none;">This field is required.</div>
+                                </div>
+                            }
+                        }
+
+                        <!-- Display Custom Fields from ViewBag -->
+                        @if (customFields != null && customFields.Any())
+                        {
+                            foreach (var customField in customFields)
+                            {
+                                <div class="form-group mb-3 field-container">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="form-label">
+                                            @customField.LabelName @if (customField.IsMandatory)
+                                            {
+                                                <span class="text-danger">*</span>
+                                            }
+                                        </label>
+                                        <div>
+                                            <input type="checkbox" class="toggle-field" data-field="@customField.LabelName" checked />
+                                            <label>Show/Hide</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                        @if (customField.TypeName == "text" || customField.TypeName == "number" || customField.TypeName == "date" || customField.TypeName == "email")
+                                        {
+                                            <input class="form-control" id="customField-@customField.LabelName" type="@customField.TypeName" name="customField_@customField.LabelName" data-mandatory="@customField.IsMandatory" />
+                                        }
+
+                                        @if (customField.TypeName == "textarea")
+                                        {
+                                            <textarea class="form-control" id="customField-@customField.LabelName" name="customField_@customField.LabelName" data-mandatory="@customField.IsMandatory"></textarea>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(customField.Options))
+                                        {
+                                            var options = customField.Options.Split(",");
+                                            <select id="customField-@customField.LabelName" name="customField_@customField.LabelName" class="form-select" data-mandatory="@customField.IsMandatory">
+                                                @foreach (var option in options)
+                                                {
+                                                    <option value="@option.Trim()">@option.Trim()</option>
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+
+                                    <div class="text-danger" id="error-@customField.LabelName" style="display:none;">This field is required.</div>
+                                </div>
+                            }
+                        }
+
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#eventForm').submit(function (event) {
+            event.preventDefault();
+
+            var formData = {
+                userEvent: {},
+                CustomForm: [] // Updated to CustomFields
+            };
+                                                                            
+            // 1. Collect standard fields for userEvent:
+            $('input:not([name^="customField"]), select:not([name^="customField"]), textarea:not([name^="customField"])').each(function () {
+                var input = $(this);
+                var fieldId = input.attr('name');
+
+                if (fieldId) {
+                    var fieldValue = input.val();
+                    formData.userEvent[fieldId] = fieldValue; // Add field value to userEvent
+                }
+            });
+
+            // 2. Collect Custom Fields:
+            $('input[name^="customField_"], select[name^="customField_"], textarea[name^="customField_"]').each(function () {
+                var input = $(this);
+                var customFieldId = input.attr('name').replace('customField_', ''); // Strip 'customField_' prefix
+                var customFieldValue = input.val();
+
+                formData.CustomForm.push({
+                    LabelName: customFieldId,
+                    Value: customFieldValue
+                });
+            });
+
+            // 3. Send data via AJAX
+            $.ajax({
+                url: '@Url.Action("AddEvent", "Admin")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    alert('Event added successfully!');
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            });
+        });
+    });
+
+
+</script>
+<script>
+    // Form validation for both Model and Custom fields
+    document.getElementById('eventForm').addEventListener('submit', function (event) {
+        let isValid = true;
+
+        document.querySelectorAll('#eventForm [data-mandatory="True"]').forEach(function (input) {
+            const fieldContainer = input.closest('.input-field');
+            if (fieldContainer && fieldContainer.style.display !== 'none' && !fieldContainer.classList.contains('hidden-field')) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    document.getElementById('error-' + input.name).style.display = 'block';
+                } else {
+                    document.getElementById('error-' + input.name).style.display = 'none';
+                }
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    // Show/hide logic for fields
+    document.querySelectorAll('.toggle-field').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const fieldName = this.getAttribute('data-field');
+            const fieldContainer = this.closest('.field-container').querySelector('.input-field');
+            const fieldInput = fieldContainer.querySelector('input, select, textarea');
+
+            if (this.checked) {
+                fieldContainer.classList.remove('hidden-field');
+                fieldInput.required = true;
+            } else {
+                fieldContainer.classList.add('hidden-field');
+                fieldInput.required = false;
+                document.getElementById('error-' + fieldName).style.display = 'none';
+            }
+        });
+    });
+
+</script>

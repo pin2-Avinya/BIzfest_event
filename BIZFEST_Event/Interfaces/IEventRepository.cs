@@ -7,6 +7,7 @@ namespace BIZFEST_Event.Interfaces
         Task<int> CreateEvent(UserEvent Event);
         IEnumerable<UserEvent> GetAllEvents();
 
-        Task<int> SoftDeleteEvent(int id);
+        Task<int> DeleteUser(int id);
+        Task<int> AddCustom(EventCustomForm model);
     }
 }

@@ -20,9 +20,9 @@ namespace BIZFEST_Event.Repository
 
         public Task<int> CreateEvent(UserEvent Event)
         {
-       
-            if(Event.Id > 0)
-            {              
+
+            if (Event.Id > 0)
+            {
                 _db.UserEvent.Update(Event);
                 _db.SaveChanges();
             }
@@ -52,31 +52,46 @@ namespace BIZFEST_Event.Repository
                 _db.UserEvent.Update(Event);
                 _db.SaveChanges();
             }
-          
+
             return Task.FromResult(0);
         }
 
+        public Task<int> AddCustom(EventCustomForm model)
+        {
+            if (model.EventId > 0)
+            {
+                _db.EventCustomForm.Update(model);
+                _db.SaveChanges();
+            }
+            else
+            {
+                _db.EventCustomForm.Add(model);
+                _db.SaveChanges();
+            }
+            return Task.FromResult(0);
+        }
         public IEnumerable<UserEvent> GetAllEvents()
         {
-            List<UserEvent> response = _db.UserEvent.Where(x => x.IsDeleted== false).ToList();
+            List<UserEvent> response = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
             return response;
         }
 
-        public async Task<int> SoftDeleteEvent(int Id)
+        public async Task<int> DeleteUser(int Id)
         {
-            var objEvent = new UserEvent();
-            objEvent = _db.UserEvent.Where(x => x.Id == Id).First();
-            objEvent.IsDeleted = true;
-            _db.UserEvent.Update(objEvent);
-            _db.SaveChanges();
+            
+           var  objuser = _db.UserRegistration.Where(x => x.Id == Id).First();
+            if (objuser != null) {
+                _db.UserRegistration.Remove(objuser);
+                _db.SaveChanges();
+            }
+          
             return (0);
             //using (var connection = _DB.CreateConnection())
             //{
             //  var response=  await connection.ExecuteScalarAsync<int>(@"UPDATE UserEvent SET IsDelete =1 Where Id = @Id", new {Id = Id});
             //}
         }
+
     }
-
-
 }
 

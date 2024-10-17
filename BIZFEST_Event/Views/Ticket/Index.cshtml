@@ -41,31 +41,26 @@
                                 <div class="white-box" style="background: #ffffff00; box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0.0);">
 
                                     <div class="row bg-title" id="div_print" style="padding: 15px 15px 0px; margin-bottom: 0px;">
-                                        <div class="col-lg-12" style="margin-bottom: 10px; border-left: groove; border-right: groove; border-top: groove; border-bottom: groove">
+                                        <div class="col-lg-12" style="margin-bottom: 10px; border-left: groove; border-right: groove; border-top: groove; border-bottom: groove; padding: 0">
                                             <center>
                                                 <div>
-                                                    <div>
-                                                        <img src="~/sponsored.png" style="width: 70px;margin-bottom: -12px;" />
-                                                        <p style="margin: 0;font-size: 13px;font-style: italic;">Presents</p>
-                                                    </div>
-                                                    <img src="~/Logo7.png" width="230" />
-                                                    <div>
-                                                        <p style="margin: 0;margin-top: 6px;font-size: 13px;font-style: italic;">Powered By</p>
-                                                        <img src="~/CRMONELogo.png" style="width: 70px;margin-bottom: 8px;">
-                                                    </div>
+                                                    <br />
+                                                    <img src="~/Spon1.jpeg" class="w-75" style="border: none;" />
+                                                    <br />
+                                                    <br />
                                                     <h4 class="page-title" style="font-size:20px">
                                                         <i class="fa fa-user"></i>&nbsp;
                                                         <span id="txtname">@Model.Name</span>
                                                     </h4>
 
-                                                    <h4 class="page-title" style="font-size:15px;margin-top:3px">
+                                                   @* <h4 class="page-title" style="font-size:15px;margin-top:3px">
                                                         <span id="date">@Model.StartDate?.ToString("dd-MMM-yyyy")</span>
                                                     </h4>
 
 
                                                     <h4 class="page-title" style="font-size: 15px; margin-top: 3px">
                                                         <span id="companyname">@Model.EventName</span>
-                                                    </h4>
+                                                    </h4>*@
                                                     <h4 class="page-title" style="font-size: 15px; margin-top: 3px">
                                                         <i class="fa fa-phone"></i>&nbsp;
                                                         <span id="contact">@Model.ContactNo</span>
@@ -85,27 +80,28 @@
                                                     <h4 class="page-title" style="font-size: 15px; margin-top: 3px;">
                                                         <span id="txtchapter"></span>
                                                     </h4>
-
-                                                    <img src="@Model.BrCodeURL" style="height:140px;width:140px;" />
+                                                    <img src="@Model.BrCodeURL" style="height:200px;width:200px;" />
                                                 </div>
                                                 <div class=" footer" style="bottom:0% !important">
+                                                    <hr class="mb-0" />
                                                     <h7 class="page-title" style="border-top-style: ridge;">
-                                                        &nbsp;
-                                                        <div style="margin-top:2px;border-top-style: ridge;">Event Venue</div>
+                                                        <img src="~/Foot.jpg" style="width: -webkit-fill-available;" />
+                                                        @*&nbsp;
+                                                        <div style="margin-top:2px;border-top-style: ridge;">Event Venue</div>*@
                                                     </h7>
-                                                    <h7 class="page-title">
+                                                    @*<h7 class="page-title">
                                                         <span id="Label2">@Model.Location</span>
                                                         <label></label>
                                                     </h7>
 
                                                     <h7 class="page-title">
-
+                                                        
                                                         <div style="margin-top:2px;">Developed By <a href="http://www.itfuturz.com/" target="_blank">itfuturz.com</a></div>
                                                     </h7>
                                                     <h7 class="page-title">
 
                                                         <div style="margin-top:2px;">Contact us <a href="https://wa.me/919879208321" target="_blank">919879208321</a> </div>
-                                                    </h7>
+                                                    </h7>*@
                                                 </div>
 
                                             </center>

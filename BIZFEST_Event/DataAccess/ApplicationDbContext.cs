@@ -14,6 +14,23 @@ namespace BIZFEST_Event.DataAccess
         public DbSet<States> States { get; set;}
         public DbSet<CategoryMaster> CategoryMaster { get; set;}
         public DbSet<ResponsePayment> ResponsePayment { get; set;}
-        
+        public DbSet<CustomFields> CustomFields { get; set; }
+        public DbSet<DynamicFields> DynamicFields { get; set; }
+
+        public DbSet<EventCustomForm> EventCustomForm { get; set; }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+
+        //    modelBuilder.Entity<CustomFieldType>().HasNoKey();
+
+        //    modelBuilder.Entity<CustomFields>()
+        //        .HasMany(c => c.Types)
+        //        .WithOne(t => t.CustomFields)
+        //        .HasForeignKey(t => t.CustomFieldsId);
+
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
     }
 }

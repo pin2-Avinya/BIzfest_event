@@ -5,6 +5,7 @@ using BIZFEST_Event.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -15,7 +16,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
-builder.Services.AddScoped<IAttendedUserRepository, AttendedUserRepository>(); 
+builder.Services.AddScoped<IAttendedUserRepository, AttendedUserRepository>();
+//builder.Services.AddScoped<IConfiguration>();
+
+builder.Services.AddSession(opt =>
+{
+    opt.IdleTimeout = TimeSpan.FromDays(1);
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.IsEssential = true;
+});
 
 builder.Services.AddAuthentication(o => {
     o.DefaultScheme = "BasicAuthentication";
@@ -29,6 +38,7 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+app.UseSession();
 
 app.UseDeveloperExceptionPage();
 // Configure the HTTP request pipeline.
@@ -39,6 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

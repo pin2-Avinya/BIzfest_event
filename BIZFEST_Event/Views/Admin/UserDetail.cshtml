@@ -10,15 +10,23 @@
                 <td style="width:200px">Email</td>
                 <td style="width:200px">Register Date</td>
                 <td style="width:200px">BusinessName</td>
-                <td style="width:200px">City</td>
-                <td style="width:200px">Business Category</td>
+                @*<td style="width:200px">City</td>*@
+                <td style="width:200px">Category/Speciality</td>
+                <td style="width:200px">Medical Council Registration Number</td>
+                <td style="width:200px">From Where Do You know</td>
+                <td style="width:200px">Referred Doctor</td>
+                <td style="width:200px">Payment Mode</td>
                 <td style="width:200px">Payment Status</td>
+                <td style="width:200px">Payment ScreenShot</td>
                 <td style="width:200px">Fees</td>
                 <td style="width:200px">BNI Member?</td>
+                <td style="width:200px">Student?</td>
                 <td style="width:200px">Chapter Name</td>
-                <td style="width:200px">Invited By BNI Member?</td>
+                @*<td style="width:200px">Invited By BNI Member?</td>
                 <td style="width:200px">Invited By Chapter</td>
-                <td style="width:200px">Invited By Member</td>
+                <td style="width:200px">Invited By Member</td>*@
+                <td style="width:200px">Sent Message</td>
+                <td style="width:200px">Action</td>
 
             </tr>
         </thead>
@@ -31,15 +39,43 @@
                     <td style="width:200px">@obj.EmailId</td>
                     <td style="width:200px">@obj.RegistereDate</td>
                     <td style="width:200px">@obj.BusinessName</td>
-                    <td style="width:200px">@obj.City</td>
+                    @*<td style="width:200px">@obj.City</td>*@
                     <td style="width:200px">@obj.BusinessCategory</td>
-                    <td style="width:200px">@obj.PaymentStatus</td>
+                    <td style="width:200px">@obj.RegistrationNumber</td>
+                    <td style="width:200px">@obj.WhereDoYouKnow</td>
+                    <td style="width:200px">@obj.InvitedMemberName</td>
+                    <td style="width:200px">@obj.PaymentMode</td>
+                    <td style="width:200px">
+                        @if(obj.PaymentMode =="Paytm") {
+                            <select asp-for="@obj.PaymentStatus" id="PaymentStatus" onchange="fnUpdatePaymentStatus(this,@obj.Id,@obj.EventId)">
+                                <option value="initiated">Initiated</option>
+                                <option value="success">Success</option>
+                            </select>
+                        }
+                        else {
+                            @obj.PaymentStatus
+                        }                        
+                    </td>
+                    <td style="width:200px">
+                        <img src="/Image/@obj.PaymentScreenShot" style="width: 100px;">
+                    </td>
+
                     <td style="width:200px"><a target="_blank" href="/Admin/PaymentHistory?eventId=@obj.EventId&userId=@obj.Id">@obj.Fees</a> </td>
                     <td style="width:200px">@obj.IsBNIMember</td>
+                    <td style="width:200px">@obj.IsStudent</td>
                     <td style="width:200px">@obj.ChapterName</td>
-                    <td style="width:200px">@obj.IsInvitedByBNIMember</td>
+                    @*<td style="width:200px">@obj.IsInvitedByBNIMember</td>
                     <td style="width:200px">@obj.InvitedByChapter</td>
-                    <td style="width:200px">@obj.IsInvitedByBNIMember</td>
+                    <td style="width:200px">@obj.IsInvitedByBNIMember</td>*@
+                    <td style="width:200px">  <button type="button" id="UserSentMsg" name="button" class="btn btn-primary"  onclick="UserSentMSg(@obj.Id,@obj.EventId)">Resend Sms</button></td>
+                    
+                        <td style="width:200px">
+                            @if (obj.PaymentStatus != "success")
+                            {
+                                <button type="button" id="DeleteRecord" name="button" class="btn btn-danger" onclick="DeleteRecord(@obj.Id)">Delete</button>
+                            }
+                        </td>
+                    
                 </tr>
             }
         </tbody>
@@ -60,6 +96,23 @@
     <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
 
     <script>
+        function fnUpdatePaymentStatus(ctrl, Id, EventId) {
+            debugger
+            var paymentStatus = $(ctrl).val();
+            $.ajax({
+                type: "POST",
+                url: "/Admin/UpdatePaymentStatus",
+                data: { Id: Id, EventId: EventId, paymentStatus: paymentStatus },
+                success: function () {
+                    alert("Status Updated Successfully");
+                    location.reload();
+                },
+                error: function (data) {
+                    alert("Error: " + data.responseText);
+                }
+            });
+        }
+
         $(document).ready(function ()
         {
             $('#demoGrid').DataTable({
@@ -71,6 +124,53 @@
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50,100, "All"]],
 
             });
+
+           
         });
+        
+        function UserSentMSg(Id, EventId) {
+            debugger
+            console.log(EventId);
+            $.ajax({
+                type: "POST",
+                url: "/Admin/UserSentMSg",
+                data: { Id: Id, EventId: EventId },
+                success: function () {
+                    alert("Message sent Successfully");
+                    location.reload();
+                },
+                error: function (data) {
+                    alert("Error: " + data.id);
+                }
+            });
+        }
+
+        
+
+
+        function DeleteRecord(Id){
+            var confirmDelete=confirm("Are you sure want to delete this record?");
+            if(confirmDelete){
+                console.log(Id);
+                debugger;
+                $.ajax({
+                    type: "DELETE",
+                    url: "/Admin/DeleteCustomer",
+                    data: { Id: Id },
+                    success: function () {
+                        alert("Data Deleted Successfully");
+                        location.reload();
+                    },
+                    error: function (data) {
+                        alert("Error: " + data.Id);
+                    }
+                });
+            }
+            else{
+                //user clicked "Cancel," do nothing//
+            }
+            
+        }
     </script>
+
 }

@@ -14,8 +14,6 @@ namespace BIZFEST_Event.Controllers
          public AttendedController(IAttendedUserRepository repository)
         {
             _repository=repository;
-
-
         }
         [HttpPost]
         public async Task<ReturnStatus<UserAttended>> AttendedUser([FromBody] UserAttended user)

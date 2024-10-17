@@ -47,13 +47,14 @@ namespace BIZFEST_Event.Authentication
             var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
             var authSplit = authBase64.Split(Convert.ToChar(":"), 2);
             var authUsername = authSplit[0];
+            
             var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
 
             if (!await _LoginRepository.LoginUser(authUsername, authPassword))
             {
                 return await Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
             }
-
+            Context.Session.SetString("UserName", authUsername);
             var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, authUsername);
             var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
 

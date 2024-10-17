@@ -1,0 +1,594 @@
+﻿@* @model CustomFields
+
+@{
+
+    Layout = null;
+}
+
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Custom Field</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        @*  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
+
+
+        <style>
+            .form-group {
+                margin-bottom: 10px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row d-flex h-100">
+                <div class="col-14">
+
+                    <div class="clearfix">&nbsp;</div>
+
+                    <div class="title" id="titlerow">
+                        <h3><b>New Custom Field</b></h3>
+                    </div>
+
+                    <div class="clearfix">&nbsp;</div>
+
+                    <div class="content">
+                        <form method="post" asp-controller="Admin" asp-action="CustomFields" enctype="multipart/form-data">
+
+                            <div class="form-group row" id="labelrow">
+                                <label class="col-3 col-form-label"><b>Label Name :</b></label>
+                                <div class="col-11">
+                                    <input class="form-control" type="text" asp-for="@Model.LabelName" placeholder="Enter Label Name" required />
+                                </div>
+                            </div>
+
+                            <div class="clearfix">&nbsp;</div>
+
+                            <div class="form-group row" id="typerow">
+                                <label class="col-3 col-form-label"><b>Type :</b></label>
+                                <div class="col-11">
+                                    <select id="TypeDropDown" class="form-select" asp-for="@Model.TypeName" required>
+                                        <option value="" disabled selected hidden>-- Select Type --</option>
+                                        <option value="textbox">Text Box</option>
+                                        <option value="number">Mobile Number</option>
+                                        <option value="email">Email</option>
+                                        <option value="checkbox">Check Box</option>
+                                        <option value="radiobutton">Radio Button</option>
+                                        <option value="dropdown">Drop Down</option>
+                                        <option value="attachment">Attachment</option>
+                                        @* <option value="amount">Amount</option> 
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- FOR TEXT BOX -->
+                            <div id="textField" style="display: none;" class="form-group row">
+                                <div class="clearfix">&nbsp;</div>
+                                <label class="col-3 col-form-label"><b>Text Field : </b></label>
+                                <div class="col-11">
+                                    <input type="text" class="form-control" placeholder="Enter Your Text">
+                                </div>
+                            </div>
+
+
+                            <!-- FOR MOBILE NUMBER -->
+                            <div id="mobileNumberField" style="display: none;" class="form-group row">
+                                <div class="clearfix">&nbsp;</div>
+                                <label class="col-3 col-form-label"><b>Mobile Number : </b></label>
+                                <div class="col-11">
+                                    <input type="text" class="form-control" placeholder="Enter Mobile Number">
+                                </div>
+                            </div>
+
+
+                            <!-- FOR EMAIL -->
+                            <div id="emailField" style="display: none;" class="form-group row">
+                                <div class="clearfix">&nbsp;</div>
+                                <label class="col-3 col-form-label"><b>Email : </b></label>
+                                <div class="col-11">
+                                    <input type="text" class="form-control" placeholder="Enter Your Email">
+                                </div>
+                            </div>
+
+
+                            <!-- FOR CHECK BOX -->
+                            <div id="additionalOptionsCheckbox" style="display: none;">
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label mt-1"><b>Check Box : </b></label>
+                                    <div class="col-10 mt-2">
+                                        <input type="checkbox" id="option1" name="option1">
+                                        <label for="option1">Option 1</label>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- FOR RADIO BUTTON -->
+                            <div id="radioButtonContainer" style="display: none;">
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label"><b>Radio Button :</b></label>
+                                    <div class="col-9 mt-2">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioButtonOption1">
+                                        <label class="form-check-label" for="radioButtonOption1"> Option 1 </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- FOR ATTACHMENT -->
+                            <div id="additionalOptionsAttachment" style="display: none;">
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label"><b>Attachment:</b></label>
+                                    <div class="col-11">
+                                        <div class="custom-file">
+                                            <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- FOR AMOUNT -->
+                            @* <div id="emailField" style="display: none;" class="form-group row">
+                                <label class="col-3 col-form-label"><b>Email : </b></label>
+                                <div class="col-11">
+                                    <input type="text" class="form-control" placeholder="Enter Your Email">
+                                </div>
+                            </div> 
+
+
+                            <!-- FOR DROP DOWN OPTION -->
+                            <div id="additionalOptionsHide" style="display: none;">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label"><b>How many fields do you Add ? : </b></label>
+                                    <div class="col-7">
+                                        <input class="form-control" type="number" id="fieldCount" min="1" value="1">
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-primary" id="addFieldsBtn">Add Fields</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="dynamicFieldsContainer"></div>
+
+                            <div id="additionalOptionsAddFields" style="display: none;">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label"><b>Do You Add More Field ? : </b></label>
+                                    <div class="col-9 mt-2">
+                                        <input class="form-check-input" type="radio" name="IsMandatory" id="clickYes">
+                                        <label class="form-check-label" for="IsMandatory"> Yes </label>
+                                        <input class="form-check-input" type="radio" name="IsMandatory" id="clickNo" checked>
+                                        <label class="form-check-label" for="IsMandatory"> No </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix">&nbsp;</div>
+
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label class="col-form-label"><b> Is Mandatory : </b></label>
+                                </div>
+                                <div class="col-10 mt-2">
+                                    <div class="form-group" id="Mandatory" required>
+                                        <input class="from-check-input" type="radio" asp-for="@Model.IsMandatory" value="Yes" checked />
+                                        <label class="from-check-label" for="html">Yes</label>
+                                        <input class="from-check-input" type="radio" asp-for="@Model.IsMandatory" value="No" />
+                                        <label class="from-check-label" for="html">No</label><br>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#listModal">Show List</button>
+
+                                @* <input type="submit" class="btn btn-outline-primary" id="submitFormBtn" value="Add More">
+                                <button type="button" class="btn btn-outline-success">Success</button> 
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="listModalLabel">List Modal</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Content will be loaded here dynamically -->
+                                    <div id="listModalContent"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- Add any other modal footer buttons as needed -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                            integrity="sha384-JjSmVgydY4pFXo3Gp8r+UVjs2HdRfQx4a7PdFwOKUx2GsRqjl9Xp9SVlLA0xVnpn" crossorigin="anonymous"></script>
+
+                    <script>
+
+                        $('#listModal').on('show.bs.modal', function (event) {
+                            var modal = $(this);
+                            var modalContent = modal.find('#listModalContent');
+
+                            // Use AJAX to fetch your list content (replace the URL with your actual endpoint)
+                            $.get('/YourController/GetListContent', function (data) {
+                                modalContent.html(data);
+                            });
+                        });
+
+                        // FOR TEXT BOX
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'textbox') {
+                                    $('#textField').show();
+                                } else {
+                                    $('#textField').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR MOBILE NUMBER
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'number') {
+                                    $('#mobileNumberField').show();
+                                } else {
+                                    $('#mobileNumberField').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR Email
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'email') {
+                                    $('#emailField').show();
+                                } else {
+                                    $('#emailField').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR CHECK BOX 
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'checkbox') {
+                                    $('#additionalOptionsCheckbox').show();
+                                } else {
+                                    $('#additionalOptionsCheckbox').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR RADIO BUTTON
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'radiobutton') {
+                                    $('#radioButtonContainer').show();
+                                } else {
+                                    $('#radioButtonContainer').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR ATTACHMENT
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                                if (selectedType === 'attachment') {
+                                    $('#additionalOptionsAttachment').show();
+                                } else {
+                                    $('#additionalOptionsAttachment').hide();
+                                }
+                            });
+                        });
+
+
+                        // FOR DROP DOWN
+                        $(document).ready(function () {
+                            $('#TypeDropDown').change(function () {
+                                var selectedType = $(this).val();
+
+                            if (selectedType === 'dropdown') {
+                                $('#additionalOptionsHide').show();
+                            } 
+                            else {
+                                    $('#additionalOptionsHide').hide();
+                                }
+                            });
+
+                            $('#addFieldsBtn').click(function () {
+                                var fieldCount = $('#fieldCount').val();
+
+                                $('#dynamicFieldsContainer').empty();
+
+                                for (var i = 1; i <= fieldCount; i++) {
+                                    var label = $('<label>').addClass('col-3 col-form-label').html('<b>Option ' + i + ' :</b>');
+                                    var input = $('<input>').attr({
+                                        type: 'text',
+                                        class: 'form-control col-11',
+                                        placeholder: 'Enter Option ' + i
+                                    });
+
+                                    var row = $('<div>').addClass('form-group row');
+                                    row.append(label);
+                                    row.append($('<div>').addClass('col-11').append(input));
+
+                                    $('#dynamicFieldsContainer').append(row);
+                                    $('#additionalOptionsAddFields').show();
+                                }
+                            });
+                        });
+
+                        $('#addFieldsBtn').click(function () {
+                            $('#additionalOptionsHide').hide();
+                        });
+
+                        
+                        // FOR CLICK YES BUTTON
+                        $('#clickYes').click(function () {
+                            $('#additionalOptionsHide').show();
+
+
+                            $('#addFieldsBtn').click(function () {
+                                var fieldCount = $('#fieldCount').val();
+
+                                $('#dynamicFieldsContainer').empty();
+
+                                for (var i = 1; i <= fieldCount; i++) {
+                                    var label = $('<label>').addClass('col-3 col-form-label').html('<b>Option ' + i + ' :</b>');
+                                    var input = $('<input>').attr({
+                                        type: 'text',
+                                        class: 'form-control col-11',
+                                        placeholder: 'Enter Option ' + i
+                                    });
+
+                                    var row = $('<div>').addClass('form-group row');
+                                    row.append(label);
+                                    row.append($('<div>').addClass('col-11').append(input));
+
+                                    $('#dynamicFieldsContainer').append(row);
+                                    $('#additionalOptionsAddFields').show();
+                                }
+                            });
+                        });
+
+
+                        // FOR CLICK NO BUTTON
+                        $('#clickNo').click(function () {
+                            $('#additionalOptionsHide').hide();
+                        });
+
+
+                        // FOR SQL
+                        function submitFormData() {
+                            var labelName = $('#LabelNameInput').val();
+                            var isMandatory = $('#IsMandatoryInput').val();
+
+                            var types = [];
+                            $('.type-input').each(function () {
+                                types.push($(this).val());
+                            });
+
+                            var data = {
+                                labelName: labelName,
+                                isMandatory: isMandatory,
+                                types: types
+                            };
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/YourController/AddCustomFields',
+                                contentType: 'application/json',
+                                data: JSON.stringify(data),
+                                success: function (response) {
+                                    if (response.success) {
+                                        Submit Success
+                                    } else {
+                                        Submit Not Success
+                                    }
+                                },
+                                error: function (error) {
+                                    // Handle AJAX error
+                                }
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html> *@
+
+
+
+
+
+
+
+
+@model List<BIZFEST_Event.Models.CustomFields>
+
+@{
+    ViewData["Title"] = "Custom Field List";
+}
+
+<h2>Custom Field List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Label Name</th>
+            <th>Type Name</th>
+            <th>Is Mandatory</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customField in Model)
+        {
+            <tr>
+                <td>@customField.LabelName</td>
+                <td>@customField.TypeName</td>
+                <td>@customField.IsMandatory</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <div id="additionalOptionsDropDown" style="display: none;"></div>
+
+
+                        <div id="additionalOptionsNumber" style="display: none;">
+                            <!-- Additional options will be dynamically added here based on the selection -->
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label"><b>Default Value : </b></label>
+                                <div class="col-11">
+                                    <input class="form-control" type="text" placeholder="Enter Your Number" />
+                                </div>
+                            </div>
+
+                            <!-- Add more additional options as needed -->
+                        </div>
+
+
+
+                        <div id="additionalOptionsCheckBox" style="display: none;"></div>
+
+
+
+                        <div id="additionalOptionsRadioButton" style="display: none;">
+                            <!-- Additional options will be dynamically added here based on the selection -->
+                            <div class="form-group row" id="radioButtonOptions">
+                                <label class="col-3 col-form-label"><b>Default Value : </b></label>
+                                <div class="col-11">
+                                    <input class="form-control" type="text" placeholder="Radio Button" />
+                                </div>
+                            </div>
+                            <!-- Add more additional options as needed -->
+                        </div>
+
+
+
+                        <div id="additionalOptionsEmail" style="display: none;">
+                            <!-- Additional options will be dynamically added here based on the selection -->
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label"><b>Default Value : </b></label>
+                                <div class="col-11">
+                                    <input class="form-control" type="text" placeholder="Enter Your Email" />
+                                </div>
+                            </div>
+                            <!-- Add more additional options as needed -->
+                        </div>
+
+
+                        <div id="additionalOptionsAttachment" style="display: none;">
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label"><b>Attachment:</b></label>
+                                <div class="col-11">
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label class="col-form-label"><b> Is Mandatory : </b></label>
+                            </div>
+                            <div class="col-11">
+                                <div class="form-group" id="Mandatory" required>
+                                    <input type="radio" asp-for="@Model.IsMandatory" value="Yes" />
+                                    <label for="html">Yes</label>
+                                    <input type="radio" asp-for="@Model.IsMandatory" value="No" />
+                                    <label for="html">No</label><br>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> *@
+

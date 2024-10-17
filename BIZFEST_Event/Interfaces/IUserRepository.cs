@@ -6,6 +6,7 @@ namespace BIZFEST_Event.Interfaces
     {
         Task<int> CreateUser(UsersRegistration Event);
         IEnumerable<UsersRegistration> GetAllUser();
-        //Task<int> SoftDeleteUser(int id);
+        Task<int> SoftDeleteUser(int id);
+        
     }
 }
