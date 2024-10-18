@@ -58,12 +58,7 @@ namespace BIZFEST_Event.Repository
 
         public Task<int> AddCustom(EventCustomForm model)
         {
-            if (model.EventId > 0)
-            {
-                _db.EventCustomForm.Update(model);
-                _db.SaveChanges();
-            }
-            else
+            if (model != null)
             {
                 _db.EventCustomForm.Add(model);
                 _db.SaveChanges();

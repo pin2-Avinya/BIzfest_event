@@ -65,8 +65,8 @@
                                     <th style="width: 10%;"> Start Date </th>
                                     <th style="width: 10%;"> End Date </th>
                                     <th style="width: 10%;"> Location </th>
-                                    <th style="width: 10%;"> City </th>
-                                    <th style="width: 10%;"> Organizer Name </th>
+                                    <th style="width: 08%;"> City </th>
+                                    <th style="width: 12%;"> Organizer Name </th>
                                     <th style="width: 10%;"> QR Code </th>
                                     <th style="width: 10%;"> User Link </th>
                                     <th style="width: 10%;"> Action </th>
@@ -75,16 +75,16 @@
                             <tbody>
                                @foreach( var obj in Model)
                                {
-                                   <tr>
+                                    <tr>
                                         <td>@obj.EventName</td>
                                         <td>@obj.Description</td>
-                                        <td>@obj.StartDate</td>
-                                       <td>@obj.EndDate</td>
+                                        <td>@(obj.StartDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
+                                        <td>@(obj.EndDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
                                         <td>@obj.Location</td>
                                        <td>@obj.City</td>
                                        <td>@obj.OrganizerName</td>
-                                       <td>@obj.BrCodeURL</td>
-                                        <td><a href="https://localhost:5003/User/UserRegistration?EventId=@obj.Id"/></td>
+                                        <td class="pl-0 "><img src="@obj.BrCodeURL" style="width: 100px; height: 100px; border-radius:0px !important;"></td>
+                                        <td><a href="https://localhost:5003/User/UserRegistration?EventId=@obj.Id"> Click Here</a></td>
                                         <td></td>
                                    </tr>
                                }

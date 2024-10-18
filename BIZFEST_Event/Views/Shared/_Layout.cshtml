@@ -33,6 +33,12 @@
         .downlable{
             margin:0px; 
         }
+
+        .error-message {
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+        }
+
     </style>
 
     <!-- Meta Pixel Code -->
@@ -152,6 +158,12 @@
                         <span class="menu-title">Add Custom Field</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="" asp-action="">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">View Custom Field</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -159,10 +171,9 @@
             <div class="content-wrapper">
                 @RenderBody()
             </div>
-          @*   <footer class="footer">
+            @* <footer class="footer">
                 <div class="container-fluid clearfix">
-                    &copy; 2023 - BUSINESS SUPPORT SERVICE LLP - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    &middot; <a asp-controller="Home" asp-action="Terms">Terms & Conditions</a>
+                    <span>&copy; 2023 - BUSINESS SUPPORT SERVICE LLP</span>
                 </div>
             </footer> *@
         </div>

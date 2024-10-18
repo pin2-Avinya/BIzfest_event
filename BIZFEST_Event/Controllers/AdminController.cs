@@ -156,26 +156,40 @@ namespace BIZFEST_Event.Controllers
         //}
 
         [HttpPost]
-        public IActionResult AddEvent([FromBody]EventViewModel formData)
+        public IActionResult AddEvent(EventViewModel formData)
         {
             UserEvent userevent = formData.userEvent;
             _IEventRepository.CreateEvent(userevent);
-            int eventId = userevent.EventId;
-            if (formData.CustomForm != null)
-            {
-                var customForm = new EventCustomForm
-                {
-                    EventId = eventId,
-                    LabelName = formData.CustomForm.LabelName,
-                    Type = formData.CustomForm.Type,
-                    value = formData.CustomForm.value,
-                    IsMandatory = formData.CustomForm.IsMandatory
-                };
+            int eventId = userevent.Id;
 
-                _IEventRepository.AddCustom(customForm);
+            if (formData.CustomForm != null && formData.CustomForm.Any())
+            {
+                foreach (var customField in formData.CustomForm)
+                {
+                    // Only process if IsChecked is true
+                    if (customField.IsChecked)
+                    {
+                        if (!string.IsNullOrEmpty(customField.LabelName))
+                        {
+                            var customForm = new EventCustomForm
+                            {
+                                EventId = eventId,
+                                LabelName = customField.LabelName,
+                                Type = customField.Type,
+                                value = customField.value,
+                                IsMandatory = customField.IsMandatory,
+                                IsChecked = customField.IsChecked
+                            };
+                            _IEventRepository.AddCustom(customForm);
+                        }
+                    }
+                }
             }
+
             return RedirectToAction("Index");
         }
+
+
 
         [HttpPost]
         public IActionResult EditEvent(UserEvent Event)

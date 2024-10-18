@@ -1,4 +1,4 @@
-﻿@model UserEvent
+﻿@model EventViewModel
 @{
     var customFields = ViewBag.Custom as List<CustomFields>; // Casting ViewBag.Custom
 }
@@ -7,21 +7,21 @@
         <div class="card mt-3">
             <div class="card-body">
                 <h4 class="card-title">Add Event</h4>
-                <form id="eventForm" class="form-sample" asp-controller="Admin" asp-action="AddEvent" method="post">
+                <form id="eventForm" class="form-sample">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="EventName" class="col-sm-3 col-form-label">Event Name</label>
+                                <label asp-for="userEvent.EventName" class="col-sm-3 col-form-label">Event Name</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="EventName" type="text" class="form-control" required />
+                                    <input asp-for="userEvent.EventName" type="text" class="form-control"  />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="Description" class="col-sm-3 col-form-label">Description</label>
+                                <label asp-for="userEvent.Description" class="col-sm-3 col-form-label">Description</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="Description" type="text" class="form-control" required />
+                                    <input asp-for="userEvent.Description" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -29,35 +29,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="StartDate" class="col-sm-3 col-form-label">Start Date</label>
+                                <label asp-for="userEvent.StartDate" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="StartDate" type="date" class="form-control" required />
+                                    <input asp-for="userEvent.StartDate" type="date" class="form-control" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="EndDate" class="col-sm-3 col-form-label">End Date</label>
+                                <label asp-for="userEvent.EndDate" class="col-sm-3 col-form-label">End Date</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="EndDate" type="date" class="form-control" required />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="Location" class="col-sm-3 col-form-label">Location</label>
-                                <div class="col-sm-9">
-                                    <input asp-for="Location" type="text" class="form-control" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="City" class="col-sm-3 col-form-label">City</label>
-                                <div class="col-sm-9">
-                                    <input asp-for="City" type="text" class="form-control" required />
+                                    <input asp-for="userEvent.EndDate" type="date" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -65,17 +47,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="OrganizerName" class="col-sm-3 col-form-label">Organizer Name</label>
+                                <label asp-for="userEvent.Location" class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="OrganizerName" type="text" class="form-control" required />
+                                    <input asp-for="userEvent.Location" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="Fees" class="col-sm-3 col-form-label">Fees</label>
+                                <label asp-for="userEvent.City" class="col-sm-3 col-form-label">City</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="Fees" type="text" class="form-control" required />
+                                    <input asp-for="userEvent.City" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -83,9 +65,46 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="FeesDescription" class="col-sm-3 col-form-label">Fees Description</label>
+                                <label asp-for="userEvent.OrganizerName" class="col-sm-3 col-form-label">Organizer Name</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="FeesDescription" type="text" class="form-control" />
+                                    <input asp-for="userEvent.OrganizerName" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Fees</label>
+                                <div class="col-sm-4">
+                                    <div class="form-radio">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="feesRadios" id="membershipRadios1" value="Free" checked> Free
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-radio">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="feesRadios" id="feesRadios2" value="Paid"> Paid
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fees-details" style="display:none">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Fees Amt</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.Fees" type="number" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.FeesDescription" class="col-sm-3 col-form-label">Fees Description</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.FeesDescription" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -93,8 +112,9 @@
                     <div class="row">
                         @if (customFields != null && customFields.Any())
                         {
-                            foreach (var customField in customFields)
+                            for (int i = 0; i < customFields.Count; i++)
                             {
+                                var customField = customFields[i];
                                 <div class="col-md-6" style="margin-bottom: 1rem;">
                                     <div class="form-group row align-items-center">
                                         <label class="form-label col-sm-8">
@@ -105,19 +125,26 @@
                                             }
                                         </label>
                                         <div class="col-sm-2" style="display: flex; align-items: center;">
-                                            <input type="checkbox" class="toggle-field" data-field="@customField.LabelName" checked style="margin-right: 0.5rem;" />
+                                            <input type="checkbox" class="toggle-field" data-index="@i" onclick="toggleCheckboxValue(this, @i)" style="margin-right: 0.5rem;" />
                                             <label class="downlable">Show/Hide</label>
                                         </div>
                                         <div class="col-sm-12 input-field">
-                                            <input type="text" name="customField_@customField.LabelName" class="form-control" style="display: none;" />
-                                            <div class="text-danger" id="error-@customField.LabelName" style="display:none; margin-top: 0.5rem;">This field is required.</div>
+                                            <div class="field-wrapper" id="field-@i">
+                                                @* <input type="text" name="CustomForm[@i].value" class="form-control custom-input" style="display:none;" /> *@
+                                                <input type="hidden" name="CustomForm[@i].LabelName" value="@customField.LabelName" />
+                                                <input type="hidden" name="CustomForm[@i].Type" value="@customField.TypeName" />
+                                                <input type="hidden" name="CustomForm[@i].IsMandatory" value="@customField.IsMandatory" />
+                                                <input type="hidden" name="CustomForm[@i].IsChecked" value="false" />
+                                                @* <div class="text-danger" id="error-@customField.LabelName" style="display:none; margin-top: 0.5rem;">This field is required.</div> *@
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             }
                         }
                     </div>
-                    <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+
+                    <button type="submit" class="btn btn-success col-md-2">Submit</button>
                 </form>
             </div>
         </div>
@@ -127,99 +154,103 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('#eventForm').submit(function (event) {
+            $('#eventForm').on('submit', function (event) {
                 event.preventDefault();
 
-                var formData = {
-                    userEvent: {},
-                    CustomForm: []
-                };
-
-                // Collect standard fields for userEvent:
-                $('#eventForm input:not([name^="customField_"]), select:not([name^="customField_"]), textarea:not([name^="customField_"])').each(function () {
-                    var input = $(this);
-                    var fieldId = input.attr('name');
-
-                    if (fieldId) {
-                        var fieldValue = input.val();
-                        formData.userEvent[fieldId] = fieldValue; // Add field value to userEvent
-                    }
-                });
-
-                // Collect Custom Fields:
-                $('#eventForm input[name^="customField_"]').each(function () {
-                    var input = $(this);
-                    var customFieldId = input.attr('name').replace('customField_', ''); // Strip 'customField_' prefix
-                    var customFieldValue = input.val();
-
-                    formData.CustomForm.push({
-                        LabelName: customFieldId,
-                        Value: customFieldValue
-                    });
-                });
-
-                // Send data via AJAX
-                $.ajax({
-                    url: '@Url.Action("AddEvent", "Admin")',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function (response) {
-                        alert('Event added successfully!');
-                    },
-                    error: function (xhr, status, error) {
-                        alert('Error: ' + error);
-                    }
-                });
-            });
-
-            // Form validation for both Model and Custom fields
-            $('#eventForm').on('submit', function (event) {
                 let isValid = true;
 
-                // Validate mandatory fields
-                $('#eventForm [required]').each(function () {
+                $('.error-message').remove();
+                $('.is-invalid').removeClass('is-invalid');
+
+                $('#eventForm input[type="text"], #eventForm input[type="date"], #eventForm input[type="number"]').each(function () {
                     if (!this.value.trim()) {
                         isValid = false;
                         $(this).addClass('is-invalid');
-                    } else {
-                        $(this).removeClass('is-invalid');
-                    }
-                });
-
-                // Validate custom fields
-                $('#eventForm .toggle-field').each(function () {
-                    const fieldName = $(this).data('field');
-                    const fieldInput = $(this).closest('.form-group').find('input[name="customField_' + fieldName + '"]');
-
-                    if ($(this).is(':checked') && !fieldInput.val().trim()) {
-                        isValid = false;
-                        $('#error-' + fieldName).show();
-                    } else {
-                        $('#error-' + fieldName).hide();
+                        $(this).after('<div class="error-message text-danger">This field is required.</div>');
                     }
                 });
 
                 if (!isValid) {
-                    event.preventDefault();
+                    debugger;
+                    return;
                 }
-            });
 
-            // Show/hide logic for fields
-            $('.toggle-field').each(function () {
-                $(this).change(function () {
-                    const fieldName = $(this).data('field');
-                    const fieldInput = $(this).closest('.form-group').find('input[name="customField_' + fieldName + '"]');
-                    const errorMsg = $('#error-' + fieldName);
+                const formData = new FormData();
 
-                    if (this.checked) {
-                        fieldInput.show().prop('required', true);
+                $(this).find('input[type="text"], input[type="date"], input[type="number"]').each(function () {
+                    if (this.name) {
+                        formData.append(this.name, this.value);
+                    }
+                });
+
+                let index = 0; 
+                $('.toggle-field').each(function () {
+                    const isChecked = $(this).is(':checked');
+                    const inputField = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".value"]');
+                    const labelName = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".LabelName"]').val();
+                    const typeName = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".Type"]').val();
+
+                    if (isChecked) {
+                        formData.append(`CustomForm[${index}].LabelName`, labelName);
+                        formData.append(`CustomForm[${index}].Type`, typeName);
+                        formData.append(`CustomForm[${index}].IsChecked`, 'true');
+
+                        if (inputField.length && inputField.val().trim()) {
+                            formData.append(`CustomForm[${index}].value`, inputField.val().trim());
+                        }
+                        index++; 
                     } else {
-                        fieldInput.hide().prop('required', false).val(''); // Clear value when hidden
-                        errorMsg.hide();
+                        formData.append(`CustomForm[${index}].IsChecked`, 'false');
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("AddEvent", "Admin")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        window.location.href = '@Url.Action("Index")';
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('An error occurred:', error);
+                        alert('An error occurred: ' + error);
                     }
                 });
             });
+
+
+            $('input[name="feesRadios"]').on('change', function () {
+                if ($('#feesRadios2').is(':checked')) {
+                    $('.row.fees-details').show(); 
+                } else {
+                    $('.row.fees-details').hide(); 
+                }
+            });
         });
+
+        function toggleCheckboxValue(checkbox, index) {
+            const inputField = document.querySelector(`input[name="CustomForm[${index}].value"]`);
+            const checkedStatusInput = document.querySelector(`input[name="CustomForm[${index}].IsChecked"]`);
+
+            if (checkbox.checked) {
+                if (inputField) {
+                    inputField.style.display = 'block';
+                    inputField.setAttribute('name', `CustomForm[${index}].value`);
+                    checkedStatusInput.value = 'true';
+                    inputField.setAttribute('required', 'required');
+                }
+            } else {
+                if (inputField) {
+                    inputField.style.display = 'none';
+                    inputField.value = '';
+                    checkedStatusInput.value = 'false';
+                    inputField.removeAttribute('name');
+                    inputField.removeAttribute('required');
+                }
+            }
+        }
     </script>
 }
+
