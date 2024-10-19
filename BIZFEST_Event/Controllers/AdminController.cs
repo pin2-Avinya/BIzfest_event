@@ -40,7 +40,6 @@ namespace BIZFEST_Event.Controllers
         {
             string? userName = HttpContext.Session.GetString("UserName");
             int? userid = await GetUserId(userName);
-            var fields = _db.DynamicFields.ToList();
             var custFields = _db.CustomFields.Where(u => u.UserID == userid).ToList();
             ViewBag.Custom = custFields;
             return View();
@@ -124,7 +123,8 @@ namespace BIZFEST_Event.Controllers
                 TypeName = model.TypeName,
                 IsMandatory = isMandatory,
                 Options = options ,
-                UserID = userid
+                UserID = userid,
+                FieldType = "Custom"
             };
 
             _db.CustomFields.Add(formField);
@@ -148,17 +148,48 @@ namespace BIZFEST_Event.Controllers
             return PartialView("_EventCreatePartial", objEvent);
         }
 
-        //[HttpPost]
-        //public IActionResult AddEvent(UserEvent Event)
-        //{
-        //    _IEventRepository.CreateEvent(Event);
-        //    return RedirectToAction("Index");
-        //}
-
         [HttpPost]
-        public IActionResult AddEvent(EventViewModel formData)
+        public IActionResult AddEvent(EventViewModel formData, IFormFile logo,
+                                          IFormFile sponsorFile,
+                                          IFormFile banner,
+                                          IFormFile footerimg)
         {
             UserEvent userevent = formData.userEvent;
+            if (logo != null && logo.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                     logo.CopyToAsync(memoryStream);
+                    userevent.Logo = memoryStream.ToArray();
+                }
+            }
+
+            if (sponsorFile != null && sponsorFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                     sponsorFile.CopyToAsync(memoryStream);
+                    userevent.SponsoredBy = memoryStream.ToArray();
+                }
+            }
+
+            if (banner != null && banner.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                     banner.CopyToAsync(memoryStream);
+                    userevent.Banner = memoryStream.ToArray();
+                }
+            }
+
+            if (footerimg != null && footerimg.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    footerimg.CopyToAsync(memoryStream);
+                    userevent.Footer = memoryStream.ToArray();
+                }
+            }
             _IEventRepository.CreateEvent(userevent);
             int eventId = userevent.Id;
 
@@ -185,11 +216,8 @@ namespace BIZFEST_Event.Controllers
                     }
                 }
             }
-
             return RedirectToAction("Index");
         }
-
-
 
         [HttpPost]
         public IActionResult EditEvent(UserEvent Event)

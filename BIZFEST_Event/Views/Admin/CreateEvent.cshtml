@@ -1,6 +1,6 @@
 ﻿@model EventViewModel
 @{
-    var customFields = ViewBag.Custom as List<CustomFields>; // Casting ViewBag.Custom
+    var customFields = ViewBag.Custom as List<CustomFields>; 
 }
 <div class="container-scroller mt-3">
     <div class="col-12 grid-margin">
@@ -110,6 +110,42 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Logo</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.Fees" id="logo" type="file" class="form-control form-control-sm pt-1" accept=".jpg,.jpeg,.png,.gif" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.FeesDescription" class="col-sm-3 col-form-label">Upload Sponsor by</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.FeesDescription" id="sponsorFile" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Banner </label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.Fees" type="file" id="banner" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Footer </label>
+                                <div class="col-sm-9">
+                                    <input asp-for="userEvent.Fees" id="footerimg" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         @if (customFields != null && customFields.Any())
                         {
                             for (int i = 0; i < customFields.Count; i++)
@@ -143,7 +179,6 @@
                             }
                         }
                     </div>
-
                     <button type="submit" class="btn btn-success col-md-2">Submit</button>
                 </form>
             </div>
@@ -177,13 +212,23 @@
 
                 const formData = new FormData();
 
+                const logo = $('#logo')[0].files[0];
+                const sponsorFile = $('#sponsorFile')[0].files[0];
+                const banner = $('#banner')[0].files[0];
+                const footer = $('#footerimg')[0].files[0];
+
+                if (logo) formData.append('logo', logo);
+                if (sponsorFile) formData.append('sponsorFile', sponsorFile);
+                if (banner) formData.append('banner', banner);
+                if (footer) formData.append('footerimg', footer);
+
                 $(this).find('input[type="text"], input[type="date"], input[type="number"]').each(function () {
                     if (this.name) {
                         formData.append(this.name, this.value);
                     }
                 });
 
-                let index = 0; 
+                let index = 0;
                 $('.toggle-field').each(function () {
                     const isChecked = $(this).is(':checked');
                     const inputField = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".value"]');
@@ -198,12 +243,10 @@
                         if (inputField.length && inputField.val().trim()) {
                             formData.append(`CustomForm[${index}].value`, inputField.val().trim());
                         }
-                        index++; 
-                    } else {
-                        formData.append(`CustomForm[${index}].IsChecked`, 'false');
+                        index++;
                     }
                 });
-
+                
                 $.ajax({
                     url: '@Url.Action("AddEvent", "Admin")',
                     type: 'POST',

@@ -13,5 +13,7 @@ namespace BIZFEST_Event.Models
         public bool IsMandatory { get; set; }
         public string? Options { get; set; }
         public int UserID { get; set; }
+        public string? FieldType { get; set; }
+        public bool IsHidden { get; set; }
     }
 }

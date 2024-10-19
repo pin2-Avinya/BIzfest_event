@@ -66,10 +66,24 @@
     </header> 
         <div class="col-12 grid-margin">
             <div class="col-12 row">
-                <div class="col-4"><img src="~/Logo.png" class="img-fluid" alt="Responsive image"></div>
-                <div class="col-4"><img src="~/Logo1.png" class="img-fluid" alt="Responsive image"></div>
-                <div class="col-4"><img src="~/Logo.png" class="img-fluid" alt="Responsive image"></div>
-               
+                @foreach (var userEvent in UserEvent)
+                    {
+                    if (userEvent.Logo != null)
+                    {
+                        string base64Logo = Convert.ToBase64String(userEvent.Logo);
+                        string base64banner = Convert.ToBase64String(userEvent.Banner);
+                        string base64Sponsor = Convert.ToBase64String(userEvent.Banner);
+                         <div class="col-4">
+                            <img src="data:image/png;base64,@base64Logo" alt="Logo"  class="img-fluid"/>
+                        </div>
+                         <div class="col-4">
+                            <img src="data:image/png;base64,@base64banner" alt="Banner"  class="img-fluid"/>
+                        </div>
+                         <div class="col-4">
+                            <img src="data:image/png;base64,@base64Sponsor" alt="Sponsor"  class="img-fluid"/>
+                        </div>
+                    }
+                 }
             </div>
             <div class="card">
                 <div class="card-body">

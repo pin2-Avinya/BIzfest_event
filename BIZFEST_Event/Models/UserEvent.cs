@@ -18,7 +18,10 @@
         public string? FeesDescription { get; set; }
         public string? IsHiddenField { get; set; }  
         public int EventId { get; set; }
-        
+        public byte[] Logo { get; set; }         
+        public byte[] SponsoredBy { get; set; }   
+        public byte[] Banner { get; set; }        
+        public byte[] Footer { get; set; }
     }
    
 }
