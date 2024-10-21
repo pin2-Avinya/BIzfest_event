@@ -36,13 +36,14 @@ namespace BIZFEST_Event.Controllers
             return View();
 		}
 
-        public IActionResult UserRegistration()
+        public IActionResult UserRegistration(int eventId)
         {
-
-            //ViewBag.State = _db.States.ToList();
-            ViewBag.Category = _db.CategoryMaster.ToList();
-            ViewBag.Event = _db.UserEvent.Where(x => x.IsDeleted == false).ToList();
-            return View();
+            var viewmodel = new UserRegistrationViewModel
+            {
+                userEvent = _userRepository.Getevent(eventId), 
+                EventCustom = _userRepository.GetEventCustomFields(eventId)
+            };
+            return View(viewmodel); 
         }
 
         public JsonResult GetCityList(int StateId)

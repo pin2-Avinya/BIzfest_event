@@ -101,5 +101,14 @@ namespace BIZFEST_Event.Repository
             //}
         }
 
+        public List<UserEvent> Getevent(int id)
+        {
+            return _db.UserEvent.Where(x => x.IsDeleted == false && x.Id == id).ToList();
+        }
+
+        public List<EventCustomForm> GetEventCustomFields(int id)
+        {
+            return _db.EventCustomForm.Where(x => x.IsChecked == true && x.EventId == id).ToList();
+        }
     }
 }
