@@ -16,8 +16,8 @@ namespace BIZFEST_Event.DataAccess
         public DbSet<ResponsePayment> ResponsePayment { get; set;}
         public DbSet<CustomFields> CustomFields { get; set; }
         public DbSet<DynamicFields> DynamicFields { get; set; }
-
         public DbSet<EventCustomForm> EventCustomForm { get; set; }
+        public DbSet<UserRegistrationCustomForm> UserRegistrationCustomForm { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

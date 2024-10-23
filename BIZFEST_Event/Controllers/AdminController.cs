@@ -275,6 +275,7 @@ namespace BIZFEST_Event.Controllers
         }
 
 
+
         public IActionResult PaymentHistory(int eventId, int userId)
         {
             var response = _db.ResponsePayment.Where(x => x.EvenId == eventId && x.UserId == userId).OrderByDescending(x => x.ResponseDate);

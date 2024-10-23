@@ -110,5 +110,25 @@ namespace BIZFEST_Event.Repository
         {
             return _db.EventCustomForm.Where(x => x.IsChecked == true && x.EventId == id).ToList();
         }
+
+        public async Task RegisterUser(UsersRegistration model)
+        {
+            var user = new UsersRegistration
+            {
+                EventId = model.EventId
+            };
+            _db.UserRegistration.Add(user);
+            await _db.SaveChangesAsync();
+        }
+
+        public Task<int> RegisterCustom(UserRegistrationCustomForm model)
+        {
+            if (model != null)
+            {
+                _db.UserRegistrationCustomForm.Add(model);
+                _db.SaveChanges();
+            }
+            return Task.FromResult(0);
+        }
     }
 }

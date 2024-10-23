@@ -87,14 +87,14 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Registration</h2>
-                    <form class="form-sample">
+                    <form id="customForm" class="form-sample">
                         <div class="row">
                            <div class="col-md-6">
                              <div class="form-group row">
                                  <label class="col-sm-3 col-form-label">Event Name</label>
                                  <div class="col-sm-9">
-                                    <select class="form-control" required  disabled> 
-                                        <option  value="" data-description="" data-hidden=""  fees="">-- select event --</option>    
+                                        <select id="eventSelect" name="EventId" class="form-control" required disabled>
+                                            <option  value="" data-description="" data-hidden=""  fees="">-- select event --</option>    
                                             @foreach(var type in Model.userEvent)
                                             {       
                                                <option selected value="@type.Id" data-description="@type.Description" data-hidden="@type.IsHiddenField"  Fees="@type.Fees" >@type.EventName</option>               
@@ -122,13 +122,13 @@
                                             @switch (Model.EventCustom[i].Type)
                                             {
                                                 case "text":
-                                                    <input type="text"  class="form-control" placeholder="@Model.EventCustom[i].LabelName"/>
+                                                    <input type="text" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                     break;
                                                 case "number":
-                                                    <input type="number"  class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                    <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                     break;
                                                 case "email":
-                                                    <input type="number" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                    <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                     break;
                                                 @* case "select":
                                                      <select  class="form-control" >
@@ -140,6 +140,8 @@
                                                     </select> 
                                                     break; *@
                                             }
+                                            <input type="hidden" name="UserRegCusForm[@i].LabelName" value="@Model.EventCustom[i].LabelName" />
+                                            <input type="hidden" name="UserRegCusForm[@i].Type" value="@Model.EventCustom[i].Type" />
                                         </div>
                                     </div>
                                 </div>
@@ -153,13 +155,13 @@
                                                 @switch (Model.EventCustom[i + 1].Type)
                                                 {
                                                     case "text":
-                                                        <input type="text"  class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName"  />
+                                                        <input type="text" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
                                                         break;
                                                     case "number":
-                                                        <input type="number" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName"  />
+                                                        <input type="number" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
                                                         break;
                                                     case "email":
-                                                        <input type="number" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                        <input type="email" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                         break;
                                                    @*  case "select":
                                                          <select name="@Model.EventCustom[i + 1].Name" class="form-control" required="@Model.EventCustom[i + 1].IsRequired">
@@ -171,6 +173,8 @@
                                                         </select> 
                                                         break; *@
                                                 }
+                                                <input type="hidden" name="UserRegCusForm[@(i+1)].LabelName" value="@Model.EventCustom[i + 1].LabelName" />
+                                                <input type="hidden" name="UserRegCusForm[@(i+1)].Type" value="@Model.EventCustom[i + 1].Type" />
                                             </div>
                                         </div>
                                     </div>
@@ -496,10 +500,6 @@
             return true;
         });
 
-
-
-
-
         $(document).on('change', '#IsBNIMember', function (e) {
             if ($('input[name="IsBNIMember"]:checked').val() == "No") {
                 $(".clsBNIChapter").css("display", "none");
@@ -530,7 +530,7 @@
 
 
         $(document).ready(function() {
-            debugger                                            // For Page Load// 
+            debugger                                           
             onEventChange();
             OnshowPayment();
         });
@@ -569,6 +569,64 @@
         $(document).on('change','#Fee')
 
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#customForm').on('submit', function (e) {
+                e.preventDefault();
 
+                // Gather predefined fields
+                var userRegister = {
+                    EventId: $('#eventSelect').val()
+                };
+
+                // Gather custom form data
+                var formData = [];
+
+                $('input[name^="UserRegCusForm"]').each(function () {
+                    var index = $(this).attr('name').match(/\d+/)[0]; // Get the index from the input name
+                    var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
+                    var type = $(this).siblings('input[name^="UserRegCusForm"][name$="Type"]').val();
+                    var value = $(this).val();
+
+                    // Check for duplicates and nulls
+                    if (labelName && value) {
+                        var existingEntry = formData.find(item => item.LabelName === labelName);
+                        if (!existingEntry) {
+                            formData.push({
+                                LabelName: labelName,
+                                Type: type,
+                                Value: value,
+                                EventId: $('#eventSelect').val()
+                            });
+                        }
+                    }
+                });
+
+                // Payload object to be sent to the server
+                var payload = {
+                    userRegister: userRegister,
+                    UserRegCusForm: formData
+                };
+
+                console.log(payload);
+
+                // Send the AJAX request
+                $.ajax({
+                    url: '/api/AddUser',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(payload),
+                    success: function (response) {
+                      
+                    },
+                    error: function (error) {
+                        console.error('Error submitting form:', error);
+                    }
+                });
+            });
+        });
+
+
+    </script>
 </body>
 </html>

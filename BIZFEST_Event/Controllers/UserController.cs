@@ -2,11 +2,13 @@
 using BIZFEST_Event.Helper;
 using BIZFEST_Event.Interfaces;
 using BIZFEST_Event.Models;
+using BIZFEST_Event.Repository;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using Microsoft.SqlServer.Server;
 using QRCoder;
 using Razorpay.Api;
 using System;
@@ -58,6 +60,30 @@ namespace BIZFEST_Event.Controllers
 			return View();
 		}
 
+        [HttpPost]
+        [Route("api/AddUser")]
+        public async Task<IActionResult> AddUsers([FromBody]RegisterUser formData)
+        {
+            UsersRegistration userRegister = formData.userRegister;
+                 await _userRepository.RegisterUser(userRegister);
+
+            if (formData.UserRegCusForm != null )
+            {
+                foreach ( var userReg in formData.UserRegCusForm)
+                {
+                    var userCusForm = new UserRegistrationCustomForm
+                    {
+                        LabelName = userReg.LabelName,
+                        Type = userReg.Type,
+                        Value = userReg.Value,
+                        EventId = userReg.EventId
+                    };
+
+                    await _userRepository.RegisterCustom(userCusForm);
+                }
+            }
+            return RedirectToAction("UserRegistration");
+        }
         //public IActionResult PdfView()
         //{
         //    string webRootPath = _HostEnvironment.WebRootPath;
@@ -167,7 +193,6 @@ namespace BIZFEST_Event.Controllers
                 else
                 {
                     TempData["Message"] = "Something went wrong, please try again!";
-                    //await _helper.SendSms(userModel.ContactNo, events.StartDate?.ToString("dd-MMM-yyyy"), user);
 
                     ViewBag.State = _db.States.ToList();
                     ViewBag.Category = _db.CategoryMaster.ToList();
@@ -252,7 +277,7 @@ namespace BIZFEST_Event.Controllers
             var objPayment = _db.ResponsePayment.Where(x => x.OrderId ==OrderId).FirstOrDefault();
 
             if (validSignature)
-			{				
+			{	
                 objPayment.Status ="Success";
 				objPayment.ResponsePaymentId = PaymentId;
 				objPayment.SignatureId = SignatureId;
