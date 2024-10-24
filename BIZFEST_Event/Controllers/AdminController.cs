@@ -51,6 +51,10 @@ namespace BIZFEST_Event.Controllers
             return View();
         }
 
+        public async Task<IActionResult> RegisteredUsers()
+        {
+            return View();
+        }
         public async Task<IActionResult> DynamicCreate()
         {
             string? userName = HttpContext.Session.GetString("UserName");
