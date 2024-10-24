@@ -49,45 +49,31 @@
     </div>
 </div>
 <div id="PalceHolderHere"></div> *@
-<div class="container-scroller mt-4">
+
+<div class="container mt-4">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Event List</h4>
                     <div class="table-responsive">
-                        <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
-                            <thead>
+                        <table id="eventTable" class="table table-bordered table-hover ">
+                            <thead class="">
                                 <tr>
-                              
-                                    <th style="width: 10%;"> Event Name </th>
-                                    <th style="width: 10%;"> Description </th>
-                                    <th style="width: 10%;"> Start Date </th>
-                                    <th style="width: 10%;"> End Date </th>
-                                    <th style="width: 10%;"> Location </th>
-                                    <th style="width: 08%;"> City </th>
-                                    <th style="width: 12%;"> Organizer Name </th>
-                                    <th style="width: 10%;"> QR Code </th>
-                                    <th style="width: 10%;"> User Link </th>
-                                    <th style="width: 10%;"> Action </th>
+                                    <th scope="col">Event Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Organizer Name</th>
+                                    <th scope="col">QR Code</th>
+                                    <th scope="col">User Link</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach( var obj in Model)
-                               {
-                                    <tr>
-                                        <td>@obj.EventName</td>
-                                        <td>@obj.Description</td>
-                                        <td>@(obj.StartDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
-                                        <td>@(obj.EndDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
-                                        <td>@obj.Location</td>
-                                       <td>@obj.City</td>
-                                       <td>@obj.OrganizerName</td>
-                                        <td class="pl-0 "><img src="@obj.BrCodeURL" style="width: 100px; height: 100px; border-radius:0px !important;"></td>
-                                        <td><a href="https://localhost:5003/User/UserRegistration?EventId=@obj.Id"> Click Here</a></td>
-                                        <td></td>
-                                   </tr>
-                               }
+                                <!-- Dynamic rows here -->
                             </tbody>
                         </table>
                     </div>
@@ -97,53 +83,87 @@
     </div>
 </div>
 
-   
-
 @section Scripts {
     <script>
-        $(document).on('click', '#btnUserClose', function (e) {
-            $('#PalceHolderHere').find('.modal').modal('hide');
-        });
 
-        $("#AddEvent").click(function () {
-            var url = $(this).data('url');
-            var decodeurl = decodeURIComponent(url);
-            $.get(decodeurl).done(function (data) {
-                $('#PalceHolderHere').html(data);
-                $('#PalceHolderHere').find('.modal').modal('show');
-            })
-        });
-
+        // Delete function
         function Delete(Id) {
-            $.ajax({
-                type: "DELETE",
-                url: "/Admin/DeleteCustomer",
-                data: { id: Id },
-                success: function () {
-                    alert("Delete success!");
-                    location.reload();
-                },
-                error: function (data) {
-                    alert("Error: " + data.id);
-                }
-            });
-        }
-        function EditEvent(Id) {
-            $.ajax({
-                type: "POST",
-                url: "/Admin/EditUser",
-                data: { id: Id },
-                success: function (response) {
-                    debugger
-                    console.log(response);
-                    $('#PalceHolderHere').html(response);
-                    $('#PalceHolderHere').find('.modal').modal('show');
-                },
-                error: function (data) {
-                    alert("Error: " + data.id);
-                }
-            });
+            if (confirm("Are you sure you want to delete this event?")) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/Admin/DeleteEvent",
+                    data: { id: Id },
+                    success: function () {
+                        alert("Delete success!");
+                         window.location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data.responseText);
+                        alert("Error: " + data.responseText);
+                    }
+                });
+            }
         }
 
+        $(document).ready(function () {
+            var table = $('#eventTable').DataTable({
+                ajax: {
+                    url: '/Admin/GetEvents',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'eventName', 'autoWidth': true },
+                    { data: 'description', 'autoWidth': true },
+                    { data: 'startDate', 'autoWidth': true, render: function (data) { return data ? moment(data).format('DD-MM-YYYY') : 'N/A'; } },
+                    { data: 'endDate', 'autoWidth': true, render: function (data) { return data ? moment(data).format('DD-MM-YYYY') : 'N/A'; } },
+                    { data: 'location', 'autoWidth': true },
+                    { data: 'city', 'autoWidth': true },
+                    { data: 'organizerName', 'autoWidth': true },
+                    { data: 'brCodeURL', 'autoWidth': true, render: function (data) { return `<img src="${data}" style="width: 100px; height: 100px; border-radius:0px !important;">`; } },
+                    { data: 'id', 'autoWidth': true , render: function (data) { return `<a href="https://localhost:5003/User/UserRegistration?EventId=${data}">Click Here</a>`; } },
+                    {
+                        data: null, render: function (data, type, row) {
+                            console.log(data);
+                            return `  <a href="#" class="btn btn-sm" title="Delete" onclick="Delete(${data.id});">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                     <a href="/Admin/EventDetail?id=${data.id}" class="btn btn-sm" title="Edit">
+                                     <i class="fas fa-edit"></i>
+                                    </a>`;
+                        }
+                    }
+                ],
+                
+            });
+            // Close modal
+            $(document).on('click', '#btnUserClose', function (e) {
+                $('#PalceHolderHere').find('.modal').modal('hide');
+            });
+
+            $("#AddEvent").click(function () {
+                var url = $(this).data('url');
+                var decodeurl = decodeURIComponent(url);
+                $.get(decodeurl).done(function (data) {
+                    $('#PalceHolderHere').html(data);
+                    $('#PalceHolderHere').find('.modal').modal('show');
+                });
+            });
+
+            function EditEvent(Id) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/EditUser",
+                    data: { id: Id },
+                    success: function (response) {
+                        console.log(response);
+                        $('#PalceHolderHere').html(response);
+                        $('#PalceHolderHere').find('.modal').modal('show');
+                    },
+                    error: function (data) {
+                        alert("Error: " + data.id);
+                    }
+                });
+            }
+        });
     </script>
 }

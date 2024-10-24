@@ -130,15 +130,20 @@
                                                 case "email":
                                                     <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                     break;
-                                                @* case "select":
+                                                case "dropdown":
                                                      <select  class="form-control" >
                                                         <option value="">-- Select --</option>
-                                                        @foreach (var option in Model.EventCustom[i].Options)
+                                                        @if (Model.EventCustom[i].value != null)
                                                         {
-                                                            <option value="@option.Value">@option.Text</option>
+                                                            string opt = Model.EventCustom[i].value;
+                                                            var newopt = opt.Split(",");
+                                                            for (int j = 0; j < newopt.Length; j++)
+                                                            {
+                                                                <option value="@newopt[j].Trim()">@newopt[j].Trim()</option>
+                                                            }
                                                         }
                                                     </select> 
-                                                    break; *@
+                                                    break;
                                             }
                                             <input type="hidden" name="UserRegCusForm[@i].LabelName" value="@Model.EventCustom[i].LabelName" />
                                             <input type="hidden" name="UserRegCusForm[@i].Type" value="@Model.EventCustom[i].Type" />

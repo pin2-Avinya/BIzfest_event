@@ -26,8 +26,14 @@ namespace BIZFEST_Event.Controllers
         }
         public IActionResult Index()
         {
-            var response = _IEventRepository.GetAllEvents();
-            return View(response);
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetEvents()
+        {
+            var resp = _IEventRepository.GetAllEvents();
+            return Json(resp);
         }
 
         public IActionResult Create()
@@ -218,11 +224,24 @@ namespace BIZFEST_Event.Controllers
             }
             return RedirectToAction("Index");
         }
+        
+        public IActionResult EventDetail(int id)
+        {
+            var eventDetail = _IEventRepository.GetEventById(id);
+            return View(eventDetail);
+        }
 
         [HttpPost]
         public IActionResult EditEvent(UserEvent Event)
         {
             _IEventRepository.CreateEvent(Event);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateEvent(UserEvent Event)
+        {
+            _IEventRepository.updateEvent(Event);
             return RedirectToAction("Index");
         }
 
@@ -233,6 +252,12 @@ namespace BIZFEST_Event.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteEvent(int id)
+        {
+            await _IEventRepository.DeleteEvent(id);
+            return Json(new { Message = "Event removed succesfullt"});
+        }
 
         public IActionResult UserDetail()
         

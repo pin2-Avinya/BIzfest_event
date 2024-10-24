@@ -1,0 +1,276 @@
+﻿@model List<UserEvent>
+@using System.Globalization
+
+<div class="container-scroller mt-3">
+    <div class="col-12 grid-margin">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Edit Event</h4>
+                <form method="post" asp-action="UpdateEvent" class="form-sample">
+                    @foreach (var data in Model)
+                    {
+                        string startDateFormatted = "";
+                        if (data.StartDate.HasValue)
+                        {
+                            DateTime startDate;
+                            if (DateTime.TryParseExact(data.StartDate.Value.ToString("dd-MM-yyyy"), "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+                            {
+                                startDateFormatted = startDate.ToString("yyyy-MM-dd");
+                            }
+                        }
+
+                        string endDateFormatted = "";
+                        if (data.EndDate.HasValue)
+                        {
+                            DateTime endDate;
+                            if (DateTime.TryParseExact(data.EndDate.Value.ToString("dd-MM-yyyy"), "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
+                            {
+                                endDateFormatted = endDate.ToString("yyyy-MM-dd");
+                            }
+                        }
+                        <input name="Id" value="@data.Id" type="hidden" class="form-control" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Event Name</label>
+                                    <div class="col-sm-9">
+                                        <input name="EventName" value="@data.EventName" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <input name="Description" value="@data.Description" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Start Date</label>
+                                    <div class="col-sm-9">
+                                        <input name="StartDate" value="@startDateFormatted" type="date" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">End Date</label>
+                                    <div class="col-sm-9">
+                                        <input name="EndDate" value="@endDateFormatted" type="date" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Location</label>
+                                    <div class="col-sm-9">
+                                        <input name="Location" value="@data.Location" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">City</label>
+                                    <div class="col-sm-9">
+                                        <input name="City" value="@data.City" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Organizer Name</label>
+                                    <div class="col-sm-9">
+                                        <input name="OrganizerName" value="@data.OrganizerName" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Fees</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-radio">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="feesRadios" id="membershipRadios1" value="Free" checked> Free
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-radio">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="feesRadios" id="feesRadios2" value="Paid"> Paid
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row fees-details" style="display:none">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Fees Amt</label>
+                                    <div class="col-sm-9">
+                                        <input name="Fees" value="@data.Fees" type="number" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Fees Description</label>
+                                    <div class="col-sm-9">
+                                        <input name="FeesDescription" value="@data.FeesDescription" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      @*   <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Upload Logo</label>
+                                    <div class="col-sm-9">
+                                        <input id="logo" value="@data.Logo" type="file" class="form-control form-control-sm pt-1" accept=".jpg,.jpeg,.png,.gif" />
+                                        <div id="imgerror" class="text-danger" style="display:none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Upload Sponsor by</label>
+                                    <div class="col-sm-9">
+                                        <input id="sponsorFile" value="@data.SponsoredBy" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                        <div id="imgerror" class="text-danger" style="display:none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Upload Banner </label>
+                                    <div class="col-sm-9">
+                                        <input type="file" value="@data.Banner" id="banner" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                        <div id="imgerror" class="text-danger" style="display:none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Upload Footer </label>
+                                    <div class="col-sm-9">
+                                        <input id="footerimg" value="@data.Footer" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> *@
+                    }
+                    <button type="submit" class="btn btn-success col-md-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#eventForm').on('submit', function (event) {
+                event.preventDefault();
+
+                let isValid = true;
+
+                $('.error-message').remove();
+                $('.is-invalid').removeClass('is-invalid');
+
+                $('#eventForm input[type="text"], #eventForm input[type="date"], #eventForm input[type="number"]').each(function () {
+                    if (!this.value.trim()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid');
+                        $(this).after('<div class="error-message text-danger">This field is required.</div>');
+                    }
+                });
+
+                if (!isValid) {
+                    debugger;
+                    return;
+                }
+
+                const formData = new FormData();
+
+                const logo = $('#logo')[0].files[0];
+                const sponsorFile = $('#sponsorFile')[0].files[0];
+                const banner = $('#banner')[0].files[0];
+                const footer = $('#footerimg')[0].files[0];
+
+                if (logo) formData.append('logo', logo);
+                if (sponsorFile) formData.append('sponsorFile', sponsorFile);
+                if (banner) formData.append('banner', banner);
+                if (footer) formData.append('footerimg', footer);
+
+                $(this).find('input[type="text"], input[type="date"], input[type="number"]').each(function () {
+                    if (this.name) {
+                        formData.append(this.name, this.value);
+                        console.log(this.name);
+                    }
+                });
+
+                $(this).find('input[type="dropdown"]').each(function () {
+                    if (this.name) {
+                        formData.append(this.name, this.value);
+                    }
+                });
+
+                let index = 0;
+                $('.toggle-field').each(function () {
+                    const isChecked = $(this).is(':checked');
+                    const inputField = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".value"]');
+                    const labelName = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".LabelName"]').val();
+                    const typeName = $(this).closest('.form-group').find('input[name^="CustomForm["][name$=".Type"]').val();
+
+                    if (isChecked) {
+                        formData.append(`CustomForm[${index}].LabelName`, labelName);
+                        formData.append(`CustomForm[${index}].Type`, typeName);
+                        formData.append(`CustomForm[${index}].IsChecked`, 'true');
+
+                        if (inputField.length && inputField.val().trim()) {
+                            formData.append(`CustomForm[${index}].value`, inputField.val().trim());
+                        }
+                        index++;
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("AddEvent", "Admin")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        window.location.href = '@Url.Action("Index")';
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('An error occurred:', error);
+                        alert('An error occurred: ' + error);
+                    }
+                });
+            });
+
+
+            $('input[name="feesRadios"]').on('change', function () {
+                if ($('#feesRadios2').is(':checked')) {
+                    $('.row.fees-details').show();
+                } else {
+                    $('.row.fees-details').hide();
+                }
+            });
+        });
+
+    </script>
+}

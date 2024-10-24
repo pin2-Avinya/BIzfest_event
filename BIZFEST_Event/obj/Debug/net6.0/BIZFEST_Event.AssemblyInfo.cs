@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BIZFEST_Event")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea3eec4130e3f909070c098a1309099d051f3491")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b766b1a8753582980416842a4d1431b846f0d372")]
 [assembly: System.Reflection.AssemblyProductAttribute("BIZFEST_Event")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BIZFEST_Event")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

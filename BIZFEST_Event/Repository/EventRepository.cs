@@ -20,7 +20,7 @@ namespace BIZFEST_Event.Repository
 
         public Task<int> CreateEvent(UserEvent Event)
         {
-
+               
             if (Event.Id > 0)
             {
                 _db.UserEvent.Update(Event);
@@ -56,6 +56,27 @@ namespace BIZFEST_Event.Repository
             return Task.FromResult(0);
         }
 
+        public Task<int> updateEvent(UserEvent Event)
+        {
+            var eventdata = _db.UserEvent.Find(Event.Id);
+            if (eventdata != null)
+            {
+                eventdata.EventName = Event.EventName;
+                eventdata.Description = Event.Description;
+                eventdata.StartDate = Event.StartDate;
+                eventdata.EndDate = Event.EndDate;
+                eventdata.Location = Event.Location;
+                eventdata.City = Event.City;
+                eventdata.OrganizerName = Event.OrganizerName;
+                eventdata.Fees = Event.Fees;
+                eventdata.FeesDescription = Event.FeesDescription;
+
+                _db.UserEvent.Update(eventdata);
+            }
+            _db.SaveChanges();
+            return Task.FromResult(0);
+        }
+
         public Task<int> AddCustom(EventCustomForm model)
         {
             if (model != null)
@@ -71,9 +92,14 @@ namespace BIZFEST_Event.Repository
             return response;
         }
 
+        public List<UserEvent> GetEventById(int id) 
+        {
+            var Event = _db.UserEvent.Where(x => x.Id == id).ToList();
+            return Event;
+        }
+
         public async Task<int> DeleteUser(int Id)
         {
-            
            var  objuser = _db.UserRegistration.Where(x => x.Id == Id).First();
             if (objuser != null) {
                 _db.UserRegistration.Remove(objuser);
@@ -87,6 +113,18 @@ namespace BIZFEST_Event.Repository
             //}
         }
 
+        public async Task<int> DeleteEvent(int id)
+        {
+            var Event = _db.UserEvent.Find(id);
+            
+            if (Event != null)
+            {
+                Event.IsDeleted = true;
+                _db.UserEvent.Update(Event);
+            };
+            await _db.SaveChangesAsync();
+            return 0;
+        }
     }
 }
 

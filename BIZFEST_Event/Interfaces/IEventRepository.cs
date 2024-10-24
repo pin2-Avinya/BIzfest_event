@@ -1,4 +1,5 @@
 ﻿using BIZFEST_Event.Models;
+using System.Threading.Tasks;
 
 namespace BIZFEST_Event.Interfaces
 {
@@ -9,5 +10,8 @@ namespace BIZFEST_Event.Interfaces
 
         Task<int> DeleteUser(int id);
         Task<int> AddCustom(EventCustomForm model);
+        Task<int> DeleteEvent(int id);
+        List<UserEvent> GetEventById(int id);
+        Task<int> updateEvent(UserEvent Event);
     }
 }

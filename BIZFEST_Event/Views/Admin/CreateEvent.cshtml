@@ -112,17 +112,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Logo</label>
+                                <label class="col-sm-3 col-form-label">Upload Logo</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="userEvent.Fees" id="logo" type="file" class="form-control form-control-sm pt-1" accept=".jpg,.jpeg,.png,.gif" />
+                                    <input id="logo" type="file" class="form-control form-control-sm pt-1" accept=".jpg,.jpeg,.png,.gif" />
+                                    <div id="imgerror" class="text-danger" style="display:none" ></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="userEvent.FeesDescription" class="col-sm-3 col-form-label">Upload Sponsor by</label>
+                                <label class="col-sm-3 col-form-label">Upload Sponsor by</label>
                                 <div class="col-sm-9">
-                                    <input asp-for="userEvent.FeesDescription" id="sponsorFile" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    <input id="sponsorFile" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    <div id="imgerror" class="text-danger" style="display:none"></div>
                                 </div>
                             </div>
                         </div>
@@ -130,17 +132,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Banner </label>
+                                <label class="col-sm-3 col-form-label">Upload Banner </label>
                                 <div class="col-sm-9">
-                                    <input asp-for="userEvent.Fees" type="file" id="banner" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    <input type="file" id="banner" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    <div id="imgerror" class="text-danger" style="display:none"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="userEvent.Fees" class="col-sm-3 col-form-label">Upload Footer </label>
+                                <label class="col-sm-3 col-form-label">Upload Footer </label>
                                 <div class="col-sm-9">
-                                    <input asp-for="userEvent.Fees" id="footerimg" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
+                                    <input id="footerimg" type="file" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.gif" />
                                 </div>
                             </div>
                         </div>
@@ -171,6 +174,7 @@
                                                 <input type="hidden" name="CustomForm[@i].Type" value="@customField.TypeName" />
                                                 <input type="hidden" name="CustomForm[@i].IsMandatory" value="@customField.IsMandatory" />
                                                 <input type="hidden" name="CustomForm[@i].IsChecked" value="false" />
+                                                <input type="hidden" name="CustomForm[@i].value" value="@customField.Options" />
                                                 @* <div class="text-danger" id="error-@customField.LabelName" style="display:none; margin-top: 0.5rem;">This field is required.</div> *@
                                             </div>
                                         </div>
@@ -223,6 +227,13 @@
                 if (footer) formData.append('footerimg', footer);
 
                 $(this).find('input[type="text"], input[type="date"], input[type="number"]').each(function () {
+                    if (this.name) {
+                        formData.append(this.name, this.value);
+                        console.log(this.name);
+                    }
+                });
+
+                $(this).find('input[type="dropdown"]').each(function () {
                     if (this.name) {
                         formData.append(this.name, this.value);
                     }
@@ -291,6 +302,34 @@
                     checkedStatusInput.value = 'false';
                     inputField.removeAttribute('name');
                     inputField.removeAttribute('required');
+                }
+            }
+        }
+
+        document.getElementById('logo').addEventListener('change', function (){
+            ValidateImage(this, 400, 300);
+        });
+
+        documet.getElementById('sponsorFile').addEventListener('change', function () {
+            ValidateImage(this, 400, 300);
+        });
+
+        document.getElementById('banner').addEventListener('change', function () {
+            ValidateImage(this, 400, 300);
+        });
+
+        function ValidateImage(input,requiredWidth,requiredHeight){
+            const errorElement = document.getElementById('imgerror');
+            errorElement.style.display = 'none';
+            if(input.files && input.files[0]){
+                var img = new Image();
+                img.src = URL.createObjectURL(input.files[0]);
+                img.onload = function(){
+                    if (this.width !== requiredWidth || this.height !== requiredHeight){
+                        errorElement.textContent = `Image must be ${requiredWidth}x${requiredHeight} pixels.`;
+                        errorElement.style.display = 'block';
+                        input.value = '';
+                    }
                 }
             }
         }

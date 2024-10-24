@@ -16,7 +16,9 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="~/assets/css/shared/style.css">
     <link rel="stylesheet" href="~/assets/css/demo_1/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="shortcut icon" href="~/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
     @RenderSection("Styles", false)
 
@@ -40,7 +42,25 @@
         }
 
     </style>
+    <style>
+    @@media (max-width: 768px) {
+        #eventTable {
+            table-layout: fixed; 
+        }
+        #eventTable th, #eventTable td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 
+    @@media (max-width: 576px) {
+        #eventTable th, #eventTable td {
+            font-size: 0.8rem;
+            padding: 0.5rem;
+        }
+    }
+</style>
     <!-- Meta Pixel Code -->
     <script>
         !function (f, b, e, v, n, t, s) {
@@ -195,6 +215,9 @@
     <script src="~/assets/js/shared/off-canvas.js"></script>
     <script src="~/assets/js/shared/misc.js"></script>
     <script src="~/assets/js/demo_1/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <script src="~/js/holder.min.js"></script>
