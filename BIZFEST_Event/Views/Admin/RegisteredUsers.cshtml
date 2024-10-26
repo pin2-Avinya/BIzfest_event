@@ -1,5 +1,129 @@
-﻿\@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model List<UserEvent>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <!-- Form to select an event -->
+            <div class="card mb-1">
+                <div class="card-body">
+                    <form id="searchForm">
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Event Name</label>
+                            <div class="col-10">
+                                <div class="input-group gap-1">
+                                    <select id="eventSelect" name="EventId" class="form-control">
+                                        <option value="">-- select event --</option>
+                                        @foreach (var type in Model)
+                                        {
+                                            <option value="@type.Id">@type.EventName</option>   
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group gap-1">
+                                    <button type="button" id="searchButton" class="btn btn-primary px-4 py-2">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Table to display event data -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Event List</h4>
+                    <div class="table-responsive">
+                        <table id="eventTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr id="tableHeader">
+                                    <!-- Headers will be populated dynamically -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var table;
+
+            $('#searchButton').click(function () {
+                var eventId = $('#eventSelect').val();
+                if (eventId) {
+                    fetchData(eventId);
+                } else {
+                    alert('Please select an event.');
+                }
+            });
+
+            function fetchData(eventId) {
+                $.ajax({
+                    url: `/Admin/GetRegisteredUsers?EventId=${eventId}`,
+                    type: 'GET',
+                    success: function (responseData) {
+                        if (responseData.length > 0) {
+                            const headers = [...new Set(responseData.map(item => item.labelName))];
+                            const groupedData = groupDataByEventId(responseData, headers);
+
+                            var thead = $('#tableHeader').empty();
+                            headers.forEach(header => {
+                                thead.append(`<th scope="col">${header}</th>`);
+                            });
+
+                            if (table) {
+                                table.clear().destroy();
+                            }
+                            initializeDataTable(groupedData, headers);
+                        } else {
+                            alert('No data found for the selected event.');
+                        }
+                    },
+                    error: function () {
+                        console.log("Failed to fetch data.");
+                    }
+                });
+            }
+
+            function groupDataByEventId(data, headers) {
+                const grouped = {};
+                data.forEach(item => {
+                    if (!grouped[item.eventId]) {
+                        grouped[item.eventId] = {};
+                    }
+                    grouped[item.eventId][item.labelName] = item.value;
+                });
+
+                return Object.values(grouped).map(eventData => {
+                    const row = {};
+                    headers.forEach(header => {
+                        row[header] = eventData[header] || 'N/A';
+                    });
+                    return row;
+                });
+            }
+
+            function initializeDataTable(data, headers) {
+                table = $('#eventTable').DataTable({
+                    data: data,
+                    columns: headers.map(header => ({
+                        data: header,
+                        title: header,
+                        autoWidth: true
+                    })),
+                    destroy: true,
+                    responsive: true
+                });
+            }
+        });
+    </script>
 }

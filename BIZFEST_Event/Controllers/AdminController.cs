@@ -53,7 +53,15 @@ namespace BIZFEST_Event.Controllers
 
         public async Task<IActionResult> RegisteredUsers()
         {
-            return View();
+            var viewModel = await _IEventRepository.GetRegisteredUsers();
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetRegisteredUsers(int EventId)
+        {
+            var usersData = await _IEventRepository.GetRegisteredCustFields(EventId);
+            return Json(usersData);
         }
         public async Task<IActionResult> DynamicCreate()
         {
@@ -73,14 +81,14 @@ namespace BIZFEST_Event.Controllers
             if (userid.HasValue)
             {
                 var fields = _db.CustomFields
-                                .Where(f => f.UserID == userid.Value) 
+                                .Where(f => f.UserID == userid.Value)
                                 .ToList();
 
                 return View(fields);
             }
             else
             {
-                return View(new List<CustomFields>()); 
+                return View(new List<CustomFields>());
             }
         }
 
@@ -132,7 +140,7 @@ namespace BIZFEST_Event.Controllers
                 LabelName = model.LabelName,
                 TypeName = model.TypeName,
                 IsMandatory = isMandatory,
-                Options = options ,
+                Options = options,
                 UserID = userid,
                 FieldType = "Custom"
             };
@@ -154,7 +162,7 @@ namespace BIZFEST_Event.Controllers
         public IActionResult EditUser(int Id)
         {
             UserEvent objEvent = new UserEvent();
-            objEvent =_db.UserEvent.Where(x => x.Id == Id).FirstOrDefault();
+            objEvent = _db.UserEvent.Where(x => x.Id == Id).FirstOrDefault();
             return PartialView("_EventCreatePartial", objEvent);
         }
 
@@ -169,7 +177,7 @@ namespace BIZFEST_Event.Controllers
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                     logo.CopyToAsync(memoryStream);
+                    logo.CopyToAsync(memoryStream);
                     userevent.Logo = memoryStream.ToArray();
                 }
             }
@@ -178,7 +186,7 @@ namespace BIZFEST_Event.Controllers
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                     sponsorFile.CopyToAsync(memoryStream);
+                    sponsorFile.CopyToAsync(memoryStream);
                     userevent.SponsoredBy = memoryStream.ToArray();
                 }
             }
@@ -187,7 +195,7 @@ namespace BIZFEST_Event.Controllers
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                     banner.CopyToAsync(memoryStream);
+                    banner.CopyToAsync(memoryStream);
                     userevent.Banner = memoryStream.ToArray();
                 }
             }
@@ -228,7 +236,7 @@ namespace BIZFEST_Event.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
         public IActionResult EventDetail(int id)
         {
             var eventDetail = _IEventRepository.GetEventById(id);
@@ -260,11 +268,11 @@ namespace BIZFEST_Event.Controllers
         public async Task<IActionResult> DeleteEvent(int id)
         {
             await _IEventRepository.DeleteEvent(id);
-            return Json(new { Message = "Event removed succesfullt"});
+            return Json(new { Message = "Event removed succesfullt" });
         }
 
         public IActionResult UserDetail()
-        
+
         {
             int? EventId = Convert.ToInt32(HttpContext.Request.Query["EventId"]);
             var events = _db.UserEvent.FirstOrDefault(x => x.Id == EventId);
@@ -282,11 +290,11 @@ namespace BIZFEST_Event.Controllers
                 ContactNo = x.ContactNo,
                 EmailId = x.EmailId,
                 BusinessName = x.BusinessName,
-               // City = x.City,
+                // City = x.City,
                 //State = x.State,
                 BusinessCategory = x.BusinessCategory,
                 RegistrationNumber = x.RegistrationNumber,
-                WhereDoYouKnow= x.WhereDoYouKnow,
+                WhereDoYouKnow = x.WhereDoYouKnow,
                 EventId = x.EventId,
                 RegistereDate = x.RegistereDate.HasValue ? Convert.ToDateTime(x.RegistereDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
                 IsBNIMember = x.IsBNIMember,
@@ -297,7 +305,7 @@ namespace BIZFEST_Event.Controllers
                 InvitedMemberName = x.InvitedMemberName,
                 Fees = x.Fees,
                 PaymentStatus = x.PaymentStatus,
-                PaymentScreenShot=x.PaymentScreenShot,
+                PaymentScreenShot = x.PaymentScreenShot,
                 PaymentMode = x.PaymentMode == "No" ? "Paytm" : "RazorPay"
             });
             return View(response);
@@ -317,9 +325,9 @@ namespace BIZFEST_Event.Controllers
             Helper.Helper _helper = new Helper.Helper();
             var user = _db.UserRegistration.Where(x => x.Id == Id && x.EventId == EventId).FirstOrDefault();
             var events = _db.UserEvent.Where(x => x.Id == EventId).FirstOrDefault();
-           
+
             await _helper.SendSms(_configuration["baseUrl"].ToString(), user.ContactNo, events.StartDate?.ToString("dd-MMM-yyyy"), user, events.EventName, events.Location, events.City);
-            
+
             return RedirectToAction("Index");
         }
 
@@ -328,9 +336,9 @@ namespace BIZFEST_Event.Controllers
         {
             Helper.Helper _helper = new Helper.Helper();
             var user = _db.UserRegistration.Where(x => x.Id == Id && x.EventId == EventId).FirstOrDefault();
-            if(user != null)
+            if (user != null)
             {
-                user.PaymentStatus = paymentStatus;                
+                user.PaymentStatus = paymentStatus;
                 _db.UserRegistration.Update(user);
                 _db.SaveChanges();
                 return Ok();
@@ -340,8 +348,69 @@ namespace BIZFEST_Event.Controllers
 
         public IActionResult CustomFieldList()
         {
-            var customFieldsList = _db.CustomFields.ToList();
-            return View(customFieldsList);
+            return View();
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetCustomFields()
+        {
+            var fields = await _IEventRepository.GetCustomFields();
+            return Json(fields);
+        }
+
+        [HttpDelete]
+        public async Task<JsonResult> DeleteCustomField(int id)
+        {
+            var field = await _IEventRepository.DeleteCustomField(id);
+            return Json(new { StatusCode = 201, Message = "Field Removed Succesfully" });
+        }
+
+        public async Task<IActionResult> CustomFieldDetails(int id)
+        {
+            var field = await _IEventRepository.GetCustomFieldById(id);
+            return View(field);
+        }
+        [HttpGet]
+        public async Task<JsonResult> ViewFieldDetails(int id)
+        {
+            var field = await _IEventRepository.GetCustomFieldById(id);
+            return Json(new { data = field});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCustomField(CustomFields model)
+        {
+            bool updated = await _IEventRepository.UpdateCustomField(model);
+            if (updated)    
+            {
+                return RedirectToAction("CustomFieldList");
+            }
+            return View();
+
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetCustomFieldsData()
+        {
+            int draw = Convert.ToInt32(Request.Query["draw"]);
+            int start = Convert.ToInt32(Request.Query["start"]); 
+            int length = Convert.ToInt32(Request.Query["length"]); 
+            string searchValue = Request.Query["search[value]"]; 
+
+            var customFields = await _IEventRepository.GetCustomFields(start,length,searchValue);
+            var totalRecords = await _IEventRepository.GetCustomFields();
+
+            int filteredRecords = await _IEventRepository.GetFilteredCustomFieldCount(searchValue);
+
+            return Json(new
+            {
+                draw = draw,
+                recordsTotal = totalRecords,
+                recordsFiltered = filteredRecords,
+                data = customFields 
+            });
+        }
+
+
     }
 }

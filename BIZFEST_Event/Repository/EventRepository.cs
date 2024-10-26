@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using QRCoder;
 using System.Drawing.Imaging;
 using System.Drawing;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BIZFEST_Event.Repository
 {
@@ -124,6 +126,93 @@ namespace BIZFEST_Event.Repository
             };
             await _db.SaveChangesAsync();
             return 0;
+        }
+
+        public async Task<List<UserEvent>> GetRegisteredUsers()
+        {
+            var userEvents = await _db.UserEvent
+                .GroupBy(x => x.EventName)
+                .Select(g => g.FirstOrDefault())
+                .ToListAsync();
+
+            var registeredUsers = new List<UserEvent>(userEvents);
+
+            return registeredUsers;
+        }
+
+
+        public async Task<List<UserRegistrationCustomForm>> GetRegisteredCustFields(int eventId)
+        {
+            var custFields = await _db.UserRegistrationCustomForm
+                                       .Where(x => x.EventId == eventId)
+                                       .ToListAsync();
+            return custFields;
+        }
+
+        public async Task<List<CustomFields>> GetCustomFields()
+        {
+            var fields = await _db.CustomFields.ToListAsync();
+            return fields;
+        }
+
+        public async Task<int> DeleteCustomField(int id)
+        {
+            var field = await _db.CustomFields.FindAsync(id);
+            if (field != null)
+            {
+                _db.CustomFields.Remove(field);
+                return await _db.SaveChangesAsync();
+            }
+            return 0;
+        }
+
+        public async Task<CustomFields> GetCustomFieldById(int id)
+        {
+            var field = await _db.CustomFields.FindAsync(id);
+            return field;
+        }
+
+        public async Task<bool> UpdateCustomField(CustomFields model)
+        {
+            var existingField = await _db.CustomFields.FindAsync(model.Id);
+            if (existingField != null)
+            {
+                existingField.LabelName = model.LabelName;
+                existingField.TypeName = model.TypeName;
+                existingField.Options = model.Options;
+                existingField.IsMandatory = model.IsMandatory;
+
+                _db.CustomFields.Update(existingField);
+            }
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<CustomFields>> GetCustomFields(int start, int length, string searchValue)
+        {
+            IQueryable<CustomFields> query = _db.CustomFields;
+
+            // Apply search filter
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(cf => cf.LabelName.Contains(searchValue) || cf.TypeName.Contains(searchValue));
+            }
+
+            // Apply pagination
+            return await query.Skip(start).Take(length).ToListAsync();
+        }
+
+        public async Task<int> GetFilteredCustomFieldCount(string searchValue)
+        {
+            IQueryable<CustomFields> query = _db.CustomFields;
+
+            // Apply search filter
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(cf => cf.LabelName.Contains(searchValue) || cf.TypeName.Contains(searchValue));
+            }
+
+            return await query.CountAsync();
         }
     }
 }
