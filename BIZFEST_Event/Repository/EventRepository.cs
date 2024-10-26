@@ -192,21 +192,17 @@ namespace BIZFEST_Event.Repository
         {
             IQueryable<CustomFields> query = _db.CustomFields;
 
-            // Apply search filter
             if (!string.IsNullOrEmpty(searchValue))
             {
                 query = query.Where(cf => cf.LabelName.Contains(searchValue) || cf.TypeName.Contains(searchValue));
             }
 
-            // Apply pagination
             return await query.Skip(start).Take(length).ToListAsync();
         }
 
         public async Task<int> GetFilteredCustomFieldCount(string searchValue)
         {
             IQueryable<CustomFields> query = _db.CustomFields;
-
-            // Apply search filter
             if (!string.IsNullOrEmpty(searchValue))
             {
                 query = query.Where(cf => cf.LabelName.Contains(searchValue) || cf.TypeName.Contains(searchValue));

@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Linq;
-
 
 namespace BIZFEST_Event.Controllers
 {
@@ -351,13 +348,6 @@ namespace BIZFEST_Event.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetCustomFields()
-        {
-            var fields = await _IEventRepository.GetCustomFields();
-            return Json(fields);
-        }
-
         [HttpDelete]
         public async Task<JsonResult> DeleteCustomField(int id)
         {
@@ -390,7 +380,7 @@ namespace BIZFEST_Event.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetCustomFieldsData()
+        public async Task<JsonResult> GetCustomFields()
         {
             int draw = Convert.ToInt32(Request.Query["draw"]);
             int start = Convert.ToInt32(Request.Query["start"]); 

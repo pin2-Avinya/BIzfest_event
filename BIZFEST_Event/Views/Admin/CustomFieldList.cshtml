@@ -632,44 +632,12 @@
             });
         }
 
-        // $(document).ready(function () {
-        //     var table = $('#customFieldTable').DataTable({
-        //         ajax: {
-        //             url: '/Admin/GetCustomFields',
-        //             dataSrc: ''
-        //         },
-        //         columns: [
-        //             { data: 'labelName', autoWidth: true },
-        //             { data: 'typeName', autoWidth: true },
-        //             { data: 'isMandatory', render: function (data) {
-        //                 return data ? 'Yes' : 'No'; 
-        //             }, autoWidth: true },
-        //             { data: 'options', autoWidth: true },
-        //             { 
-        //                 data: 'id',  
-        //                 render: function (data, type, row) {
-        //                     return `<a href="#" class="btn btn-sm" title="View" onclick="loadCustomFieldDetails(${data});">
-        //                                 <i class="fa fa-eye"></i>
-        //                             </a>
-        //                             <a href="#" class="btn btn-sm" title="Delete" onclick="Delete(${data});">
-        //                                 <i class="fa fa-trash"></i>
-        //                             </a>
-        //                             <a href="/Admin/CustomFieldDetails?id=${data}" class="btn btn-sm" title="Edit" >
-        //                                 <i class="fas fa-edit"></i>
-        //                             </a>`;
-        //                 },
-        //                 autoWidth: true 
-        //             }
-        //         ],
-        //         responsive: true 
-        //     });
-        // });
         $(document).ready(function () {
             $('#customFieldTable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '/Admin/GetCustomFieldsData',
+                    url: '/Admin/GetCustomFields',
                     type: 'GET'
                 },
                 columns: [
