@@ -44,9 +44,8 @@
     </noscript>
     <!-- End Meta Pixel Code -->
     <style>
-        .form-group
-        {
-            margin-bottom:10px;
+        .form-group {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -58,27 +57,18 @@
         </nav>
     </header>
     <div class="container-fluid mt-4 page-body-wrapper">
-       
+
         <div class="col-12 grid-margin">
             <div class="col-12 row">
-                @*  @foreach (var userEvent in Model)
-                {
-                    if (userEvent.Logo != null)
-                    {
-                        string base64Logo = Convert.ToBase64String(userEvent.Logo);
-                        string base64banner = Convert.ToBase64String(userEvent.Banner);
-                        string base64Sponsor = Convert.ToBase64String(userEvent.Banner);
-                        <div class="col-4">
-                            <img src="data:image/png;base64,@base64Logo" alt="Logo" class="img-fluid" />
-                        </div>
-                        <div class="col-4">
-                            <img src="data:image/png;base64,@base64banner" alt="Banner" class="img-fluid" />
-                        </div>
-                        <div class="col-4">
-                            <img src="data:image/png;base64,@base64Sponsor" alt="Sponsor" class="img-fluid" />
-                        </div>
-                    }
-                }  *@
+                <div class="col-4">
+                    <img id="logo" alt="Event Logo" class="img-fluid" />
+                </div>
+                <div class="col-4">
+                    <img id="banner" alt="Event Banner" class="img-fluid" />
+                </div>
+                <div class="col-4">
+                    <img id="sponsoredBy" alt="Sponsored By" class="img-fluid" />
+                </div>
             </div>
             <div class="card mt-5">
                 <div class="card-body">
@@ -89,107 +79,28 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Event Name</label>
                                     <div class="col-sm-9">
-                                        <select id="eventSelect" name="EventId" class="form-control" required disabled>
-                                            <option value="" data-description="" data-hidden="" fees="">-- select event --</option>
-                                           @*  @foreach (var type in Model.userEvent)
+                                        <select id="eventSelect" name="EventId" class="form-control" required>
+                                            <option value="" data-description="" data-hidden="" fees="" sele>-- select event --</option>
+                                            @if (Model != null)
                                             {
-                                                <option selected value="@type.Id" data-description="@type.Description" data-hidden="@type.IsHiddenField" Fees="@type.Fees">@type.EventName</option>
-                                            } *@
+                                                foreach (var type in Model)
+                                                {
+                                                    <option value="@type.Id" data-description="@type.Description" data-hidden="@type.IsHiddenField" Fees="@type.Fees">@type.EventName</option>
+                                                }
+                                            }
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Enter Name" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @* @for (int i = 0; i < Model.EventCustom.Count; i += 2)
-                        {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">@Model.EventCustom[i].LabelName</label>
-                                        <div class="col-sm-9">
-                                            @switch (Model.EventCustom[i].Type)
-                                            {
-                                                case "text":
-                                                    <input type="text" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
-                                                    break;
-                                                case "number":
-                                                    <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
-                                                    break;
-                                                case "email":
-                                                    <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
-                                                    break;
-                                                case "dropdown":
-                                                    <select class="form-control">
-                                                        <option value="">-- Select --</option>
-                                                        @if (Model.EventCustom[i].value != null)
-                                                        {
-                                                            string opt = Model.EventCustom[i].value;
-                                                            var newopt = opt.Split(",");
-                                                            for (int j = 0; j < newopt.Length; j++)
-                                                            {
-                                                                <option value="@newopt[j].Trim()">@newopt[j].Trim()</option>
-                                                            }
-                                                        }
-                                                    </select>
-                                                    break;
-                                            }
-                                            <input type="hidden" name="UserRegCusForm[@i].LabelName" value="@Model.EventCustom[i].LabelName" />
-                                            <input type="hidden" name="UserRegCusForm[@i].Type" value="@Model.EventCustom[i].Type" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @if (i + 1 < Model.EventCustom.Count) // Check if there's a second field
-                                {
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">@Model.EventCustom[i + 1].LabelName</label>
-                                            <div class="col-sm-9">
-                                                @switch (Model.EventCustom[i + 1].Type)
-                                                {
-                                                    case "text":
-                                                        <input type="text" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
-                                                        break;
-                                                    case "number":
-                                                        <input type="number" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
-                                                        break;
-                                                    case "email":
-                                                        <input type="email" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
-                                                        break;
-                                                        @*  case "select":
-                                        <select name="@Model.EventCustom[i + 1].Name" class="form-control" required="@Model.EventCustom[i + 1].IsRequired">
-                                        <option value="">-- Select --</option>
-                                        @foreach (var option in Model.EventCustom[i + 1].Options)
-                                        {
-                                        <option value="@option.Value">@option.Text</option>
-                                        }
-                                        </select>
-                                        break; 
-                                                }
-                                                <input type="hidden" name="UserRegCusForm[@(i+1)].LabelName" value="@Model.EventCustom[i + 1].LabelName" />
-                                                <input type="hidden" name="UserRegCusForm[@(i+1)].Type" value="@Model.EventCustom[i + 1].Type" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        } *@
-
+                        <div id="customFieldsContainer"></div>
                         <button type="submit" class="btn btn-success col-md-2">Submit</button>
                     </form>
                 </div>
             </div>
             <div class="col-12">
                 <footer class="mt-2">
-                    <img src="~/Footer.png" class="img-fluid" alt="Footer" />
+                    <img id="footer" class="img-fluid" alt="Event Footer" />
                 </footer>
             </div>
         </div>
@@ -206,212 +117,156 @@
     <script src="~/assets/js/demo_1/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('#eventSelect').change(function () {
+                var eventId = $(this).val();
 
-        function OnPageLoad(){
-            document.getElementById("FeeDetail").style.display="inline block";
-            OnshowPayment();
-        }
+                if (!eventId) {
+                    $('#customFieldsContainer').empty();
+                    $('#logo, #banner, #sponsoredBy, #footer').attr('src', '');
+                    return;
+                }
 
-        function showHide() {
+                $.ajax({
+                    url: '@Url.Action("GetFieldsByEvent")',
+                    type: 'GET',
+                    data: { id: eventId },
+                    success: function (response) {
+                        $('#customFieldsContainer').empty();
 
-            if($("#WhereDoYouKnow").val() == 'referred'){
-                $("#divDoctorName").show();
-            }
-            else {
-                $("#divDoctorName").hide();
-            }
-        }
+                        if (response.userEvent.length > 0) {
+                            var event = response.userEvent[0];
+                            $('#logo').attr('src', 'data:image/png;base64,' + event.logo);
+                            $('#banner').attr('src', 'data:image/png;base64,' + event.banner);
+                            $('#sponsoredBy').attr('src', 'data:image/png;base64,' + event.sponsoredBy);
+                            $('#footer').attr('src', 'data:image/png;base64,' + event.footer);
+                        }
 
-        function OnshowPayment()
-        {
-           if($(".Paytm").is(':checked'))
-           $('.fileUploadBox').show();
-           else
-           $('.fileUploadBox').hide();
-        }
+                        if (Array.isArray(response.eventCustom) && response.eventCustom.length > 0) {
+                            var rowHtml = '<div class="row">'; 
+                            var fieldCount = 0;
 
+                            response.eventCustom.forEach(function (field, index) {
+                                var isRequired = field.isMandatory ? 'required' : '';
+                                var fieldHtml = `
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" name="${field.labelName}" for="field-${index}">${field.labelName}</label>
+                                            <div class="col-sm-9">`; 
 
-        document.getElementById("ContactNo").addEventListener("input", function () {
-            validateMobileNumber();
-        });
-        function validateMobileNumber() {
-            const mobileNumber = document.getElementById("ContactNo").value;
-            const mobileNumberError = document.getElementById("mobileNumberError");
+                                switch (field.type) {
+                                    case 'text':
+                                    case 'email':
+                                    case 'date':
+                                    case 'number':
+                                        fieldHtml += `
+                                                <input type="${field.type}" id="field-${index}" name="UserRegCusForm[${index}].Value" class="form-control" placeholder="${field.labelName}" ${isRequired} />`;
+                                        break;
+                                    case 'dropdown':
+                                        var options = field.value ? field.value.split(',').map(function (opt) {
+                                            return `<option value="${opt.trim()}">${opt.trim()}</option>`;
+                                        }).join('') : '';
 
-            const regex = /^(\+?\d{1,2}[- ]?)?\d{10}$/;
-            const isValid = regex.test(mobileNumber);
+                                        fieldHtml += `
+                                                <select id="field-${index}" name="UserRegCusForm[${index}].Value" class="form-control" ${isRequired}>
+                                                    <option value="">-- Select --</option>
+                                                    ${options}
+                                                </select>`;
+                                        break;
+                                    case 'date':
+                                        fieldHtml += `
+                                                <input type="date" id="field-${index}" name="UserRegCusForm[${index}].Value" class="form-control" ${isRequired} />`;
+                                        break;
+                                    default:
+                                        console.warn('Unknown field type:', field.type);
+                                }
 
-            if (!isValid) {
-                mobileNumberError.textContent = "Please enter a valid mobile number.";
-            } else {
-                mobileNumberError.textContent = "";
-            }
+                                fieldHtml += `
+                                            </div>
+                                        </div>
+                                    </div>`;
 
-            return isValid;
-        }
+                                rowHtml += fieldHtml;
+                                fieldCount++;
 
-        document.querySelector("form").addEventListener("submit", function (event) {
-            if (!validateMobileNumber()) {
-                event.preventDefault();
-            }
-        });
-        $(document).on('change', '.clsState', function (e) {
-            $.get("/User/GetCityList", { StateId: $('.clsState').find(":selected").val() }, function (data) {
-                $("#City").empty();
-                $.each(data, function (index, row) {
-                    $("#City").append("<option value='" + row.city + "'>" + row.city + "</option>")
+                                if (fieldCount % 2 === 0) {
+                                    rowHtml += '</div>'; 
+                                    $('#customFieldsContainer').append(rowHtml); 
+                                    rowHtml = '<div class="row">'; 
+                                }
+                            });
+
+                            if (fieldCount % 2 !== 0) {
+                                rowHtml += '</div>'; 
+                                $('#customFieldsContainer').append(rowHtml);
+                            }
+                        } else {
+                            console.warn('No custom fields available for this event.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error: ', status, error);
+                    }
                 });
             });
-        });
 
-
-        $(document).on('change', '#IsStudent', function (e) {
-            if ($('input[name="IsStudent"]:checked').val() == "No") {
-                $(".clsStudent").css("display", "none");
-
-                $(".clsInvitedByStudent").css("display", "block");
-                if ($('input[name="clsInvitedByStudent"]:checked').val() == "Yes") {
-                    $("#chapterMember").css("display", "block");
-                }
-            }
-            else {
-                $(".clsStudent").css("display", "block");
-                $(".clsInvitedByStudent").css("display", "none");
-                $("#chapterMember").css("display", "none");
-            }
-        });
-
-
-        $('#Save').submit(function () {
-            return true;
-        });
-
-        $(document).on('change', '#IsBNIMember', function (e) {
-            if ($('input[name="IsBNIMember"]:checked').val() == "No") {
-                $(".clsBNIChapter").css("display", "none");
-
-                $(".clsInvitedByBNIMember").css("display", "block");
-                if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "Yes") {
-                    $("#chapterMember").css("display", "block");
-                }
-                //if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
-                //    $("#FeeDetail").css("display", "block");
-                //}
-            }
-            else {
-                $(".clsBNIChapter").css("display", "block");
-                $(".clsInvitedByBNIMember").css("display", "none");
-                $("#chapterMember").css("display", "none");
-            }
-        });
-
-        $(document).on('change', '#IsInvitedByBNIMember', function (e) {
-            if ($('input[name="IsInvitedByBNIMember"]:checked').val() == "No") {
-                $("#chapterMember").css("display", "none");
-
-            } else {
-                $("#chapterMember").css("display", "block");
-            }
-        });
-
-
-        $(document).ready(function() {
-            debugger
-            onEventChange();
-            OnshowPayment();
-        });
-
-        function onEventChange() {
-            debugger
-            var ctrl = $("#EventId");
-            $("#FeeDetail").css("display", "block");
-            $("#SpanFee").html($('option:selected', $(ctrl)).attr('Fees') +" + GST");
-            $("#Fees").val($('option:selected', $(ctrl)).attr('Fees'));
-            $("#SpanFeesDescription").html($('option:selected', $(ctrl)).attr('data-description'));
-
-            //fees GST Count
-            var FeeS = parseFloat($('option:selected', $(ctrl)).attr('Fees'));
-            var TotalAmount = Math.round(FeeS + (FeeS * 18 / 100));
-            $("#SpanTotalFee").html("Total: "+TotalAmount)
-            debugger
-            //hidden field
-            if($('option:selected', $(ctrl)).attr('data-hidden') == "Yes")
-            {
-                 $("#divChapter").css("display","none");
-                 //$("#divStudent").css("display","none");
-
-            }else{
-               $("#divChapter").css("display","block");
-               //$("#divStudent").css("display","block");
-            }
-        }
-
-        $(document).on('change', '#EventId', function (e) {
-           debugger;
-            onEventChange();
-
-        });
-
-        $(document).on('change','#Fee')
-
-    </script>
-    <script>
-        $(document).ready(function () {
             $('#customForm').on('submit', function (e) {
                 e.preventDefault();
 
-                // Gather predefined fields
                 var userRegister = {
                     EventId: $('#eventSelect').val()
                 };
 
-                // Gather custom form data
                 var formData = [];
+                var existingLabels = new Set();
 
-                $('input[name^="UserRegCusForm"]').each(function () {
-                    var index = $(this).attr('name').match(/\d+/)[0]; // Get the index from the input name
-                    var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
-                    var type = $(this).siblings('input[name^="UserRegCusForm"][name$="Type"]').val();
+                $('input[name^="UserRegCusForm"], select[name^="UserRegCusForm"]').each(function () {
+                    debugger
+                    var index = $(this).attr('name').match(/\d+/)[0];
+                    var labelName = $(this).closest('.form-group').find('label').attr('name');
                     var value = $(this).val();
+                    var type = $(this).is('input[type="text"]') ? 'text' :
+                        $(this).is('input[type="number"]') ? 'number' :
+                            $(this).is('select') ? 'dropdown' : '';
 
-                    // Check for duplicates and nulls
-                    if (labelName && value) {
-                        var existingEntry = formData.find(item => item.LabelName === labelName);
-                        if (!existingEntry) {
-                            formData.push({
-                                LabelName: labelName,
-                                Type: type,
-                                Value: value,
-                                EventId: $('#eventSelect').val()
-                            });
-                        }
+                    console.log(`Index: ${index}, Label: ${labelName}, Value: ${value}, Type: ${type}`);
+
+                    if (labelName && value && !existingLabels.has(labelName)) {
+                        existingLabels.add(labelName);
+                        formData.push({
+                            LabelName: labelName,
+                            Type: type,
+                            Value: value,
+                            EventId: userRegister.EventId
+                        });
                     }
                 });
 
-                // Payload object to be sent to the server
+                console.log('Form Data:', formData);
                 var payload = {
                     userRegister: userRegister,
                     UserRegCusForm: formData
                 };
 
-                console.log(payload);
+                console.log('Payload:', payload);
 
-                // Send the AJAX request
                 $.ajax({
                     url: '/api/AddUser',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(payload),
                     success: function (response) {
-
+                        alert('Registration successful!');
                     },
                     error: function (error) {
                         console.error('Error submitting form:', error);
+                        alert('There was an error submitting your form. Please try again.');
                     }
                 });
             });
-        });
 
+
+        });
 
     </script>
 </body>

@@ -130,10 +130,7 @@ namespace BIZFEST_Event.Repository
 
         public async Task<List<UserEvent>> GetRegisteredUsers()
         {
-            var userEvents = await _db.UserEvent
-                .GroupBy(x => x.EventName)
-                .Select(g => g.FirstOrDefault())
-                .ToListAsync();
+            var userEvents = await _db.UserEvent.Where(x => x.IsDeleted == false).ToListAsync();
 
             var registeredUsers = new List<UserEvent>(userEvents);
 
