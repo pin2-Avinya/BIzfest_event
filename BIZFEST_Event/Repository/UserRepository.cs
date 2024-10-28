@@ -116,6 +116,20 @@ namespace BIZFEST_Event.Repository
             return _db.EventCustomForm.Where(x => x.IsChecked == true && x.EventId == id).ToList();
         }
 
+        public UserRegistrationViewModel GetEventById(int id)
+        {
+            UserRegistrationViewModel model = new UserRegistrationViewModel
+            {
+                userEvent = _db.UserEvent.Where(x => x.Id == id).ToList(),
+
+                EventCustom = _db.EventCustomForm
+                    .Where(x => x.IsChecked == true && x.EventId == id)
+                    .ToList()
+            };
+
+            return model;
+        }
+
         public async Task RegisterUser(UsersRegistration model)
         {
             var user = new UsersRegistration

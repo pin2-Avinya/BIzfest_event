@@ -54,6 +54,13 @@ namespace BIZFEST_Event.Controllers
             return View(userEvent);
         }
 
+        [HttpGet]
+        public JsonResult GetFieldsByEvent(int id)
+        {
+            var fields = _userRepository.GetEventById(id);
+            return Json(fields);
+        }
+
         public JsonResult GetCityList(int StateId)
         {
             List<Cities> StateList = _db.Cities.Where(x => x.StateId == StateId).ToList();

@@ -168,8 +168,8 @@
                                                     case "email":
                                                         <input type="email" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
                                                         break;
-                                                   @*  case "select":
-                                                         <select name="@Model.EventCustom[i + 1].Name" class="form-control" required="@Model.EventCustom[i + 1].IsRequired">
+                                                    @* case "select":
+                                                         <select name="@Model.EventCustom[i + 1].Type" class="form-control" required="@Model.EventCustom[i + 1].IsRequired">
                                                             <option value="">-- Select --</option>
                                                             @foreach (var option in Model.EventCustom[i + 1].Options)
                                                             {
@@ -579,21 +579,18 @@
             $('#customForm').on('submit', function (e) {
                 e.preventDefault();
 
-                // Gather predefined fields
                 var userRegister = {
                     EventId: $('#eventSelect').val()
                 };
 
-                // Gather custom form data
                 var formData = [];
 
                 $('input[name^="UserRegCusForm"]').each(function () {
-                    var index = $(this).attr('name').match(/\d+/)[0]; // Get the index from the input name
+                    var index = $(this).attr('name').match(/\d+/)[0]; 
                     var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
                     var type = $(this).siblings('input[name^="UserRegCusForm"][name$="Type"]').val();
                     var value = $(this).val();
 
-                    // Check for duplicates and nulls
                     if (labelName && value) {
                         var existingEntry = formData.find(item => item.LabelName === labelName);
                         if (!existingEntry) {
@@ -607,15 +604,12 @@
                     }
                 });
 
-                // Payload object to be sent to the server
                 var payload = {
                     userRegister: userRegister,
                     UserRegCusForm: formData
                 };
 
                 console.log(payload);
-
-                // Send the AJAX request
                 $.ajax({
                     url: '/api/AddUser',
                     type: 'POST',

@@ -12,5 +12,6 @@ namespace BIZFEST_Event.Interfaces
         Task RegisterUser(UsersRegistration model);
         Task<int> RegisterCustom(UserRegistrationCustomForm model);
         List<UserEvent> GetAllEvent();
+        UserRegistrationViewModel GetEventById(int id);
     }
 }
