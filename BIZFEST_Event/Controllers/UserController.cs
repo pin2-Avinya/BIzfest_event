@@ -78,7 +78,7 @@ namespace BIZFEST_Event.Controllers
         public async Task<IActionResult> AddUsers([FromBody] RegisterUser formData)
         {
             UsersRegistration userRegister = formData.userRegister;
-            await _userRepository.RegisterUser(userRegister);
+           var newuser = await _userRepository.RegisterUser(userRegister);
 
             if (formData.UserRegCusForm != null)
             {
@@ -87,6 +87,7 @@ namespace BIZFEST_Event.Controllers
                     var userCusForm = new UserRegistrationCustomForm
                     {
                         LabelName = userReg.LabelName,
+                        UserId = newuser.UserId,
                         Type = userReg.Type,
                         Value = userReg.Value,
                         EventId = userReg.EventId

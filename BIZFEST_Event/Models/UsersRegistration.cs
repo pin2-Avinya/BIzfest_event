@@ -20,6 +20,7 @@ namespace BIZFEST_Event.Models
         public string? IsInvitedByBNIMember { get; set; }
         public string? IsStudent { get; set; }
         public string? CollegeName { get; set; }
+        public Guid UserId { get; set; }
 
 
         [NotMapped]

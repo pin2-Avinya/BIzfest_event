@@ -71,9 +71,10 @@
                     url: `/Admin/GetRegisteredUsers?EventId=${eventId}`,
                     type: 'GET',
                     success: function (responseData) {
-                        if (responseData.length > 0) {
-                            const headers = [...new Set(responseData.map(item => item.labelName))];
-                            const groupedData = groupDataByEventId(responseData, headers);
+                        if (responseData && responseData.length > 0) {
+                            const headers = [...new Set(responseData.flatMap(item => item.entries.map(entry => entry.labelName)))];
+
+                            const groupedData = groupDataByEventId(responseData);
 
                             var thead = $('#tableHeader').empty();
                             headers.forEach(header => {
@@ -83,6 +84,7 @@
                             if (table) {
                                 table.clear().destroy();
                             }
+
                             initializeDataTable(groupedData, headers);
                         } else {
                             alert('No data found for the selected event.');
@@ -94,22 +96,18 @@
                 });
             }
 
-            function groupDataByEventId(data, headers) {
-                const grouped = {};
+            function groupDataByEventId(data) {
+                const rows = [];
+
                 data.forEach(item => {
-                    if (!grouped[item.eventId]) {
-                        grouped[item.eventId] = {};
-                    }
-                    grouped[item.eventId][item.labelName] = item.value;
+                    const row = {};
+                    item.entries.forEach(entry => {
+                        row[entry.labelName] = entry.value || 'N/A'; 
+                    });
+                    rows.push(row);
                 });
 
-                return Object.values(grouped).map(eventData => {
-                    const row = {};
-                    headers.forEach(header => {
-                        row[header] = eventData[header] || 'N/A';
-                    });
-                    return row;
-                });
+                return rows;
             }
 
             function initializeDataTable(data, headers) {
@@ -118,6 +116,7 @@
                     columns: headers.map(header => ({
                         data: header,
                         title: header,
+                        defaultContent: 'N/A', 
                         autoWidth: true
                     })),
                     destroy: true,
@@ -125,5 +124,7 @@
                 });
             }
         });
+
+
     </script>
 }

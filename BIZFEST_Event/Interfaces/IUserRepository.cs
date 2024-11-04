@@ -9,7 +9,7 @@ namespace BIZFEST_Event.Interfaces
         Task<int> SoftDeleteUser(int id);
         List<UserEvent> Getevent(int id);
         List<EventCustomForm> GetEventCustomFields(int id);
-        Task RegisterUser(UsersRegistration model);
+        Task<UsersRegistration?> RegisterUser(UsersRegistration model);
         Task<int> RegisterCustom(UserRegistrationCustomForm model);
         List<UserEvent> GetAllEvent();
         UserRegistrationViewModel GetEventById(int id);
