@@ -130,14 +130,17 @@ namespace BIZFEST_Event.Repository
             return model;
         }
 
-        public async Task RegisterUser(UsersRegistration model)
+        public async Task<UsersRegistration?> RegisterUser(UsersRegistration model)
         {
             var user = new UsersRegistration
             {
-                EventId = model.EventId
+                EventId = model.EventId,
+                UserId = Guid.NewGuid()
+
             };
-            _db.UserRegistration.Add(user);
+           var userId =  _db.UserRegistration.Add(user);
             await _db.SaveChangesAsync();
+            return userId.Entity;
         }
 
         public Task<int> RegisterCustom(UserRegistrationCustomForm model)

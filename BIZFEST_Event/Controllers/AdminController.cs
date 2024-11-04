@@ -55,10 +55,20 @@ namespace BIZFEST_Event.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetRegisteredUsers(int EventId)
+        public async Task<JsonResult> GetRegisteredUsers(int eventId)
         {
-            var usersData = await _IEventRepository.GetRegisteredCustFields(EventId);
-            return Json(usersData);
+            var usersData = await _IEventRepository.GetRegisteredCustFields(eventId);
+
+            var groupedData = usersData
+                .GroupBy(x => x.UserId)
+                .Select(g => new UserRegistrationResponse
+                {
+                    UserId = g.Key.ToString(),
+                    Entries = g.ToList()
+                })
+                .ToList();
+
+            return Json(groupedData);
         }
         public async Task<IActionResult> DynamicCreate()
         {

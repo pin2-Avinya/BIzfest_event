@@ -265,11 +265,13 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
+                        toastr.success('Event added successfully.', 'Success');
                         window.location.href = '@Url.Action("Index")';
+                        $('#eventForm')[0].reset();
                     },
                     error: function (xhr, status, error) {
                         console.error('An error occurred:', error);
-                        alert('An error occurred: ' + error);
+                        toastr.error('Error submitting form. Please try again.', 'Error');
                     }
                 });
             });

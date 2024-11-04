@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="~/assets/css/shared/style.css">
     <link rel="stylesheet" href="~/assets/css/demo_1/style.css">
     <link rel="shortcut icon" href="~/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Meta Pixel Code -->
     <script>
@@ -116,6 +117,7 @@
     <script src="~/assets/js/shared/misc.js"></script>
     <script src="~/assets/js/demo_1/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#eventSelect').change(function () {
@@ -218,7 +220,10 @@
                 };
 
                 var formData = [];
+                var isValid = true;
                 var existingLabels = new Set();
+
+                $('.error-message').hide().text('');
 
                 $('input[name^="UserRegCusForm"], select[name^="UserRegCusForm"]').each(function () {
                     debugger
@@ -229,7 +234,25 @@
                         $(this).is('input[type="number"]') ? 'number' :
                             $(this).is('select') ? 'dropdown' : '';
 
-                    console.log(`Index: ${index}, Label: ${labelName}, Value: ${value}, Type: ${type}`);
+                    if ($(this).is(':visible')) {
+                        if (type === "text" && !value) {
+                            showError($(this), labelName + ' is required.');
+                            isValid = false;
+                        } else if (type === "number" && (!value || isNaN(value))) {
+                            showError($(this), labelName + ' must be a valid number.');
+                            isValid = false;
+                        } else if (type === "email" && !validateEmail(value)) {
+                            showError($(this), 'Please enter a valid email for ' + labelName + '.');
+                            isValid = false;
+                        } else {
+                            formData.push({
+                                LabelName: labelName,
+                                Type: type,
+                                Value: value,
+                                EventId: $('#eventSelect').val()
+                            });
+                        }
+                    }
 
                     if (labelName && value && !existingLabels.has(labelName)) {
                         existingLabels.add(labelName);
@@ -242,7 +265,11 @@
                     }
                 });
 
-                console.log('Form Data:', formData);
+                if (!isValid) {
+                    console.log(isValid);
+                    return;
+                }
+
                 var payload = {
                     userRegister: userRegister,
                     UserRegCusForm: formData
@@ -256,11 +283,13 @@
                     contentType: 'application/json',
                     data: JSON.stringify(payload),
                     success: function (response) {
-                        alert('Registration successful!');
+                        toastr.success('Data Added successfully!', 'Success');
+                        $('#customForm')[0].reset();
+                        $('#eventSelect').prop('selectedIndex', 0);
                     },
                     error: function (error) {
                         console.error('Error submitting form:', error);
-                        alert('There was an error submitting your form. Please try again.');
+                        toastr.error('Error submitting form. Please try again.', 'Error');
                     }
                 });
             });

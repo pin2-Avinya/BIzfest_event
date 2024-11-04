@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/assets/css/shared/style.css">
     <link rel="stylesheet" href="~/assets/css/demo_1/style.css">
     <link rel="shortcut icon" href="~/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @*    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BIZFEST_Event.styles.css" asp-append-version="true" />*@
 
@@ -103,14 +104,6 @@
                                   </div>
                              </div>
                            </div>
-                           <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Enter Name" />
-                                    </div>
-                                </div>
-                           </div>
                         </div>
                         @for (int i = 0; i < Model.EventCustom.Count; i += 2)
                         {
@@ -123,12 +116,15 @@
                                             {
                                                 case "text":
                                                     <input type="text" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                    <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                     break;
                                                 case "number":
                                                     <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                    <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                     break;
                                                 case "email":
                                                     <input type="number" name="UserRegCusForm[@i].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                    <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                     break;
                                                 case "dropdown":
                                                      <select  class="form-control" >
@@ -142,7 +138,8 @@
                                                                 <option value="@newopt[j].Trim()">@newopt[j].Trim()</option>
                                                             }
                                                         }
-                                                    </select> 
+                                                    </select>
+                                                    <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                     break;
                                             }
                                             <input type="hidden" name="UserRegCusForm[@i].LabelName" value="@Model.EventCustom[i].LabelName" />
@@ -161,22 +158,31 @@
                                                 {
                                                     case "text":
                                                         <input type="text" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
+                                                        <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                         break;
                                                     case "number":
                                                         <input type="number" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i + 1].LabelName" />
+                                                        <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                         break;
                                                     case "email":
                                                         <input type="email" name="UserRegCusForm[@(i+1)].Value" class="form-control" placeholder="@Model.EventCustom[i].LabelName" />
+                                                        <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
                                                         break;
-                                                    @* case "select":
-                                                         <select name="@Model.EventCustom[i + 1].Type" class="form-control" required="@Model.EventCustom[i + 1].IsRequired">
+                                                    case "dropdown":
+                                                        <select name="UserRegCusForm[@(i + 1)].Value" class="form-control" >
                                                             <option value="">-- Select --</option>
-                                                            @foreach (var option in Model.EventCustom[i + 1].Options)
+                                                            @if (Model.EventCustom[i + 1].value != null)
                                                             {
-                                                                <option value="@option.Value">@option.Text</option>
+                                                                string opt = Model.EventCustom[i + 1].value;
+                                                                var newopt = opt.Split(",");
+                                                                for (int j = 0; j < newopt.Length; j++)
+                                                                {
+                                                                    <option value="@newopt[j].Trim()">@newopt[j].Trim()</option>
+                                                                }
                                                             }
-                                                        </select> 
-                                                        break; *@
+                                                        </select>
+                                                        <span class="text-danger error-message" style="font-size: 0.85em; display: none;"></span>
+                                                        break;
                                                 }
                                                 <input type="hidden" name="UserRegCusForm[@(i+1)].LabelName" value="@Model.EventCustom[i + 1].LabelName" />
                                                 <input type="hidden" name="UserRegCusForm[@(i+1)].Type" value="@Model.EventCustom[i + 1].Type" />
@@ -389,6 +395,7 @@
     <script src="~/assets/js/shared/misc.js"></script>
     <script src="~/assets/js/demo_1/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
        
         function OnPageLoad(){
@@ -574,58 +581,111 @@
         $(document).on('change','#Fee')
 
     </script>
-    <script>
-        $(document).ready(function () {
-            $('#customForm').on('submit', function (e) {
-                e.preventDefault();
+   <script>
+    $(document).ready(function () {
+    $('#customForm').on('submit', function (e) {
+        e.preventDefault();
 
-                var userRegister = {
-                    EventId: $('#eventSelect').val()
-                };
+        var userRegister = {
+            EventId: $('#eventSelect').val()
+        };
 
-                var formData = [];
+        var formData = [];
+        var isValid = true;
 
-                $('input[name^="UserRegCusForm"]').each(function () {
-                    var index = $(this).attr('name').match(/\d+/)[0]; 
-                    var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
-                    var type = $(this).siblings('input[name^="UserRegCusForm"][name$="Type"]').val();
-                    var value = $(this).val();
+        $('.error-message').hide().text('');
 
-                    if (labelName && value) {
-                        var existingEntry = formData.find(item => item.LabelName === labelName);
-                        if (!existingEntry) {
-                            formData.push({
-                                LabelName: labelName,
-                                Type: type,
-                                Value: value,
-                                EventId: $('#eventSelect').val()
-                            });
-                        }
-                    }
-                });
+        if (!userRegister.EventId) {
+            toastr.error('Please select an event.', 'Error');
+            isValid = false;
+        }
 
-                var payload = {
-                    userRegister: userRegister,
-                    UserRegCusForm: formData
-                };
+        $('input[name^="UserRegCusForm"]').each(function () {
+            var index = $(this).attr('name').match(/\d+/)[0];
+            var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
+            var type = $(this).siblings('input[name^="UserRegCusForm"][name$="Type"]').val();
+            var value = $(this).val();
 
-                console.log(payload);
-                $.ajax({
-                    url: '/api/AddUser',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(payload),
-                    success: function (response) {
-                      
-                    },
-                    error: function (error) {
-                        console.error('Error submitting form:', error);
-                    }
-                });
-            });
+            if ($(this).is(':visible')) {
+                if (type === "text" && !value) {
+                    showError($(this), labelName + ' is required.');
+                    isValid = false;
+                } else if (type === "number" && (!value || isNaN(value))) {
+                    showError($(this), labelName + ' must be a valid number.');
+                    isValid = false;
+                } else if (type === "email" && !validateEmail(value)) {
+                    showError($(this), 'Please enter a valid email for ' + labelName + '.');
+                    isValid = false;
+                } else {
+                    formData.push({
+                        LabelName: labelName,
+                        Type: type,
+                        Value: value,
+                        EventId: $('#eventSelect').val()
+                    });
+                }
+            }
         });
 
+        $('select[name^="UserRegCusForm"]').each(function () {
+            var labelName = $(this).siblings('input[name^="UserRegCusForm"][name$="LabelName"]').val();
+            var value = $(this).val();
 
-    </script>
+            if ($(this).is(':visible')) {
+                if (!value) {
+                    showError($(this), 'Please select an option for ' + labelName + '.');
+                    isValid = false;
+                } else {
+                    formData.push({
+                        LabelName: labelName,
+                        Type: 'dropdown',
+                        Value: value,
+                        EventId: $('#eventSelect').val()
+                    });
+                }
+            }
+        });
+
+        if (!isValid) {
+            console.log(isValid);
+            return; 
+        }
+
+        var payload = {
+            userRegister: userRegister,
+            UserRegCusForm: formData
+        };
+
+        console.log(payload);
+        $.ajax({
+            url: '/api/AddUser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(payload),
+            success: function (response) {
+                toastr.success('Data added successfully!', 'Success');
+                $('#customForm')[0].reset();
+                $('#eventSelect').prop('selectedIndex', 0);
+            },
+            error: function (error) {
+                console.error('Error submitting form:', error);
+                toastr.error('Error submitting form. Please try again.', 'Error');
+            }
+        });
+    });
+
+    function validateEmail(email) {
+        var re = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/; 
+        return re.test(email);
+    }
+
+    function showError(inputElement, message) {
+        var errorMessageSpan = inputElement.nextAll('.error-message').first();
+        errorMessageSpan.text(message).show();
+    }
+});
+
+
+</script>
 </body>
 </html>
